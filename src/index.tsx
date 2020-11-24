@@ -57,6 +57,7 @@ const clientApp = () => {
     (process.env.NODE_ENV === 'production' &&
       (window.location.hostname === 'www.mywebsite.com' ||
         window.location.hostname === 'mywebsite.com' ||
+        window.location.hostname === 'react-easy-ssr.herokuapp.com' ||
         window.location.hostname === 'localhost' ||
         window.location.hostname === '192.168.0.20'))
   ) {
