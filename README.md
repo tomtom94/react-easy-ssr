@@ -6,6 +6,8 @@ Webpack 4 installed manually. In dev mode `webpack-dev-server` isn't used. Becau
 
 The app is SSR Server Side Rendering, and we use `redux-saga`, `loadable-component`, `react-jss` and `Typescript` but not a hardcore level of typescript.
 
+Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr.herokuapp.com)
+
 ## Why do we make such a complicated setup ?
 
 Well you can use a Framework to do all of this, but to me you are locking yourself behind walls.
