@@ -29,6 +29,10 @@ const Movies: FC<Props> = props => {
     willMount.current = false
   }
 
+  useEffect(() => {
+    triggerMoviesAction('get')
+  }, [triggerMoviesAction])
+
   if (props.staticContext && Object.prototype.hasOwnProperty.call(props.app.movies, 'error')) {
     props.staticContext.statusCode = props.app.movies.error.status
   }
