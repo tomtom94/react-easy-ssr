@@ -17,11 +17,11 @@ Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr
   - [Start in production mode](#Start-in-production-mode)
     - [With Node.js](#With-Node.js)
     - [With Docker](#With-Docker)
-  - [Must know about the app](#Must-know-about-the-app)
-    - [Checks to do sometimes](#Checks-to-do-sometimes)
-    - [Components](#Components)
-    - [ES6 Imports possible in JSX](#ES6-Imports-possible-in-JSX)
-    - [Disadvantages of redux-saga and react-jss](#Disadvantages-of-redux-saga-and-react-jss)
+- [Must know about the app](#Must-know-about-the-app)
+  - [Checks to do sometimes](#Checks-to-do-sometimes)
+  - [Components](#Components)
+  - [ES6 Imports possible in JSX](#ES6-Imports-possible-in-JSX)
+  - [Disadvantages of redux-saga and react-jss](#Disadvantages-of-redux-saga-and-react-jss)
 - [Notes](#Notes)
 
 ## Motivations
