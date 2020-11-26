@@ -103,7 +103,7 @@ You wanna work on the application ? it's better to use prettier and eslint. Just
 
 ### Components
 
-The main rule is we don't use a frontend framework. All the components come from wherever we need it, but we are not stick to one. We are not stick to Material-ui, we are not stick to Bootstrap etc... However I am used to copy past source code of them. For example I made a copy past of the wonderfull Material-ui `<Grid />` which is so much powerfull [check it out in the repot](https://github.com/tomtom94/react-easy-ssr/blob/master/src/components/Grid.tsx)
+The main rule is we don't use a frontend framework. All the components come from wherever we need it, but we are not stick to one. We are not stick to Material-ui, we are not stick to Bootstrap etc... However I am used to copy past source code of them. For example I made a copy past of the wonderfull Material-ui `<Grid />` which is so much powerful [check it out in this repo](https://github.com/tomtom94/react-easy-ssr/blob/master/src/components/Grid.tsx)
 
 However [Styled-Components](https://styled-components.com/) is also installed if ever you wanna use it.
 
@@ -136,3 +136,6 @@ I am using this frontend architecture for
 - [footlivezone.com](https://www.footlivezone.com)
 - [soccerlivezone.com](https://www.soccerlivezone.com)
 - And also for other clients in Paris
+
+If ever you encounter issues during critical moment at work just contact me ASAP
+- [thomasdeveloper-react.com](https://www.thomasdeveloper-react.com)
