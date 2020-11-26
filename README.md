@@ -8,9 +8,9 @@ The app is SSR Server Side Rendering, and we use `redux-saga`, `loadable-compone
 
 Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr.herokuapp.com)
 
-## TOC
+## Table of contents
 
-- [Motivation](#motivation)
+- [Motivations](#motivations)
 - [Contributors and mainteners](#Contributors-and-mainteners)
 - [Getting started](#Getting-started)
   - [Start in dev mode](#Start-in-dev-mode)
@@ -24,12 +24,18 @@ Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr
     - [Disadvantages of redux-saga and react-jss](#Disadvantages-of-redux-saga-and-react-jss)
 - [Notes](#Notes)
 
-## Motivation
+## Motivations
 
 Why do we make such a complicated setup ?
 Well you can use a Framework to do all of this, but to me you are locking yourself behind walls.
 You can use `Next.js` or `Gatsby.js` but you will loose some powerful React functions.
 React is a library, and you are gonna put yourself in a fucking framework. Which is great by the way ;)
+List of points you are gonna loose if you use a framework like `Next.js` or `Gatsby.js`
+
+- The `React-router`module : you won't be able to handle this wonderful module, hmmm so bad you can cry :sob: :sob: :sob:
+- You won't have access to what happens on the Server Side, hmmm so bad, just go to [this page and you are done mate](https://github.com/tomtom94/react-easy-ssr/blob/master/src/server/index.tsx) :flushed: :flushed: :flushed:
+- According to `Next.js` you can just install `redux-thunk` not the other ones, hmmm so bad how can I play with `redux-saga`or `redux-observable` ? :rage: :rage: :rage:
+- Do you find other reasons why not to use a framework ? make a contribution and commit something here
 
 ## Contributors and mainteners
 
