@@ -15,7 +15,7 @@ Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr
 - [Getting started](#Getting-started)
   - [Start in dev mode](#Start-in-dev-mode)
   - [Start in production mode](#Start-in-production-mode)
-    - [With Node.js](#With-Node.js)
+    - [With Node.js](#With-Nodejs)
     - [With Docker](#With-Docker)
 - [Must know about the app](#Must-know-about-the-app)
   - [Checks to do sometimes](#Checks-to-do-sometimes)
