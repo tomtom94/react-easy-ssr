@@ -43,6 +43,10 @@ app.get('/robots.txt', (req: Request, res: Response) => {
   res.send('User-agent: *\nSitemap: https://www.mywebsite.com/sitemap.xml')
 })
 
+// Is your app overcharged and you wanna win in little tiny performances ??
+// yes ok then serve these static files with a reverse proxy
+// like nginx, if you have access to your provider router, you can't do that with heroku :D
+// then you don't need this express middleware below just kill it
 app.use(paths.publicPath, express.static(path.join(paths.clientBuild, paths.publicPath)))
 
 app.use((req: Request, res: Response) => {
