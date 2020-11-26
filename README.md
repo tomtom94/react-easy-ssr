@@ -22,7 +22,7 @@ Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr
   - [Components](#Components)
   - [ES6 Imports possible in JSX](#ES6-Imports-possible-in-JSX)
   - [Disadvantages of redux-saga and react-jss](#Disadvantages-of-redux-saga-and-react-jss)
-  - [I want to use renderToNodeStream to make a top notch](#I-want-to-use-renderToNodeStream-to-make-a-top-notch)
+  - [I want to use renderToNodeStream to make a top notch app](#I-want-to-use-renderToNodeStream-to-make-a-top-notch-app)
 - [Notes](#Notes)
 
 ## Motivations
@@ -155,7 +155,7 @@ You wanna know more about this ? check out this issue [on github](https://github
 - Another big issue is the split code, which affects also the SSR when it reads the app.
 You wanna know more about this ? check out this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760)
 
-### I want to use renderToNodeStream to make a top notch
+### I want to use renderToNodeStream to make a top notch app
 
 Well then you must use a `redux-thunk` which is gonna give you easy promises to handle on the server side. And don't use `react-jss`, just use a classical SASS, LESS or CSS style. And you are good to go
 
