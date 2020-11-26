@@ -45,8 +45,9 @@ app.get('/robots.txt', (req: Request, res: Response) => {
 
 // Is your app overcharged and you wanna win in little tiny performances ??
 // yes ok then serve these static files with a reverse proxy
-// like nginx, if you have access to your provider router, you can't do that with heroku :D
-// then you don't need this express middleware below just kill it
+// like nginx, you need to have access to your provider router. Otherwise you can't do that with heroku :D
+// try to serve /static-for-test/ ==> /client/dist/ to make your test
+// afterwards you need to kill this express middleware below
 app.use(paths.publicPath, express.static(path.join(paths.clientBuild, paths.publicPath)))
 
 app.use((req: Request, res: Response) => {
