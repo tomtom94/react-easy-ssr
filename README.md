@@ -8,13 +8,30 @@ The app is SSR Server Side Rendering, and we use `redux-saga`, `loadable-compone
 
 Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr.herokuapp.com)
 
-## Why do we make such a complicated setup ?
+## TOC
 
+- [Motivation](#motivation)
+- [Contributors and mainteners](#Contributors-and-mainteners)
+- [Getting started](#Getting-started)
+  - [Start in dev mode](#Start-in-dev-mode)
+  - [Start in production mode](#Start-in-production-mode)
+    - [With Node.js](#With-Node.js)
+    - [With Docker](#With-Docker)
+  - [Must know about the app](#Must-know-about-the-app)
+    - [Checks to do sometimes](#Checks-to-do-sometimes)
+    - [Components](#Components)
+    - [ES6 Imports possible in JSX](#ES6-Imports-possible-in-JSX)
+    - [Disadvantages of redux-saga and react-jss](#Disadvantages-of-redux-saga-and-react-jss)
+- [Notes](#Notes)
+
+## Motivation
+
+Why do we make such a complicated setup ?
 Well you can use a Framework to do all of this, but to me you are locking yourself behind walls.
 You can use `Next.js` or `Gatsby.js` but you will loose some powerful React functions.
 React is a library, and you are gonna put yourself in a fucking framework. Which is great by the way ;)
 
-## Do you want to maintain this repo ?
+## Contributors and mainteners
 
 Yes you can do whatever you want, to train yourself.
 You just need to follow the main guidelines of this project : To give the simplest example how modern apps in React make a SSR
@@ -31,7 +48,7 @@ git clone https://github.com/tomtom94/react-easy-ssr.git
 cd react-easy-ssr
 ```
 
-## Start in dev mode
+### Start in dev mode
 
 ```npm
 npm install
@@ -45,9 +62,9 @@ npm run dev
 
 it's gonna start an hot dev middleware with an express server ;) ready to work `http://localhost:3000`
 
-## Start in production mode
+### Start in production mode
 
-### With Node.js
+#### With Node.js
 
 ```npm
 npm install
@@ -66,18 +83,12 @@ it's gonna build in `dist/`
 Then run in production mode
 
 ```npm
-npm start
-```
-
-or
-
-```npm
 npm run start
 ```
 
 ;) it's gonna start the only one SSR express server out of the box for internet `http://localhost:3000` or environment port used.
 
-### With Docker
+#### With Docker
 
 ```docker
 docker build -t react-easy-ssr .
@@ -96,9 +107,7 @@ You wanna work on the application ? it's better to use prettier and eslint. Just
 ### Checks to do sometimes
 
 - Check typescript `npm run tsc`
-
 - Check eslint `npm run lint`
-
 - Check prettier `npm run prettier`
 
 ### Components
@@ -107,17 +116,16 @@ The main rule is we don't use a frontend framework. All the components come from
 
 However [Styled-Components](https://styled-components.com/) is also installed if ever you wanna use it.
 
-### imports possible in JSX
+### ES6 Imports possible in JSX
 
-You can import files with ES6 in type
+The Webpack setup only allows us to import files with ES6 in type
 
 - .js .jsx .ts .tsx
-
 - .png .jpe .jpeg .gif .ico
-
 - .woff .woff2
-
 - .css
+
+But you can add more Webpack `loader` to your project
 
 Please note we don't use classical CSS style. We use [JSS](https://cssinjs.org/react-jss) (it means js in css).
 
@@ -130,12 +138,14 @@ You wanna know more about this ? check out this issue [on github](https://github
 - Another big issue is the split code, which affects also the SSR when it reads the app.
 You wanna know more about this ? check out this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760)
 
-### Notes
+## Notes
 
 I am using this frontend architecture for
+
 - [footlivezone.com](https://www.footlivezone.com)
 - [soccerlivezone.com](https://www.soccerlivezone.com)
 - And also for other clients in Paris
 
 If ever you encounter issues during critical moment at work just contact me ASAP
+
 - [thomasdeveloper-react.com](https://www.thomasdeveloper-react.com)
