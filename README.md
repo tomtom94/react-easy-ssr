@@ -1,4 +1,4 @@
-# Introduction
+# ⚛ React boilerplate app with SSR
 
 React App not initiated with CRA `create-react-app`, that's for junior at school ;)
 
