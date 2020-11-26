@@ -37,10 +37,4 @@ declare module '*.svg' {
 interface Window {
   browserHistory: any
   __PRELOADED_STATE__: any
-  adsbygoogle: any
-  canRunAds: boolean
-  fbAsyncInit: any
 }
-
-declare let FB: any
-declare let gapi: any

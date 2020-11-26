@@ -53,7 +53,7 @@ it's gonna start an hot dev middleware with an express server ;) ready to work `
 npm install
 ```
 
-Write in your server provider the environment variables `BACKEND_HOST` and `BACKEND_PORT`
+Write in your server provider the environment variables `BACKEND_BASE_URL`
 
 Run build mode with
 
@@ -103,7 +103,7 @@ You wanna work on the application ? it's better to use prettier and eslint. Just
 
 ### Components
 
-The main rule is we don't use a frontend framework. All the components come from wherever we need it, but we are not stick to one. We are not stick to Material-ui, we are not stick to Bootstrap etc... However I am used to copy past source code of them.
+The main rule is we don't use a frontend framework. All the components come from wherever we need it, but we are not stick to one. We are not stick to Material-ui, we are not stick to Bootstrap etc... However I am used to copy past source code of them. For example I made a copy past of the wonderfull Material-ui `<Grid />` which is so much powerfull [check it out in the repot](https://github.com/tomtom94/react-easy-ssr/blob/master/src/components/Grid.tsx)
 
 However [Styled-Components](https://styled-components.com/) is also installed if ever you wanna use it.
 

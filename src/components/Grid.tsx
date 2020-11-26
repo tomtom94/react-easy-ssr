@@ -1,3 +1,5 @@
+// This component is copy past of the Material-ui one, here https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Grid/Grid.js
+
 // A grid component using the following libs as inspiration.
 //
 // For the implementation:

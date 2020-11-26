@@ -1,6 +1,5 @@
 const path = require('path')
 const webpack = require('webpack')
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -36,10 +35,6 @@ module.exports = {
         background_color: '#ffffff',
         display: 'standalone'
       }
-    }),
-    new WorkboxWebpackPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: false
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',

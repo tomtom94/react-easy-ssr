@@ -65,6 +65,7 @@ const clientApp = () => {
       ReactDOM.hydrate(<Main />, document.querySelector('#root'))
     })
   } else {
+    // We don't want Google Cache to use our bundles JS and make whatever he wants with it
     console.error('Forbidden hostname')
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component, PureComponent, useEffect, FC } from 'react'
 import { hot } from 'react-hot-loader/root'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
 import { RouteComponentProps } from 'react-router'
 import { useTheme } from 'react-jss'
@@ -17,12 +17,13 @@ const AboutUs: FC<Props> = props => {
   const theme = useTheme()
   const classes: any = aboutUsStyle({ theme })
 
-  const { app } = props
+  const dispatch = useDispatch()
+  const app = useSelector((state: ReduxState) => state.app)
+  const { pathname, search } = props.location
 
   const title = 'About us'
   const description = 'Details about the app'
 
-  const { pathname } = props.router.location
   return (
     <>
       <Helmet>
@@ -48,11 +49,4 @@ const AboutUs: FC<Props> = props => {
   )
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const { app } = state
-  return {
-    app
-  }
-}
-
-export default hot(connect(mapStateToProps, {})(AboutUs))
+export default hot(AboutUs)

@@ -8,11 +8,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import footerStyle from '../assets/jss/components/footerStyle'
 import { ReduxState } from '../store/rootReducer'
 
-interface Props extends RouteComponentProps, ReduxState {}
+type Props = RouteComponentProps
 
 const Footer: FC<Props> = props => {
   const theme = useTheme()
   const classes: any = footerStyle({ theme })
+
+  const { pathname, search } = props.location
+
   return (
     <footer className={classNames(classes.containerFluid)}>
       <div className={classNames(classes.container, classes.footer)}>

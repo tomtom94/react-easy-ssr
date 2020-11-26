@@ -8,7 +8,7 @@ import path from 'path'
 import compression from 'compression'
 import cors from 'cors'
 
-import { Helmet, HelmetProvider, FilledContext } from 'react-helmet-async'
+import { HelmetProvider, FilledContext, HelmetData } from 'react-helmet-async'
 import express, { Request, Response, NextFunction } from 'express'
 import { dom } from '@fortawesome/fontawesome-svg-core'
 import { JssProvider, SheetsRegistry, createGenerateId, jss } from 'react-jss'
@@ -55,7 +55,7 @@ app.use((req: Request, res: Response) => {
   const history = createHistory([req.url])
   const store = configureStore(initialState, history)
   const sheet = new ServerStyleSheet()
-  const jsx = (context: StaticRouterContext = {}, helmetContext: FilledContext = { helmet: {} }) => (
+  const jsx = (context: StaticRouterContext = {}, helmetContext: FilledContext = { helmet: null }) => (
     <StaticRouter location={req.url} context={context}>
       <Provider store={store}>
         <HelmetProvider context={helmetContext}>
@@ -69,7 +69,7 @@ app.use((req: Request, res: Response) => {
     .toPromise()
     .then(async () => {
       const staticContext: StaticRouterContext = {}
-      const helmetContext: FilledContext = { helmet: {} }
+      const helmetContext: FilledContext = { helmet: null }
       const generateId = createGenerateId()
       const sheets = new SheetsRegistry()
       const html = renderToString(

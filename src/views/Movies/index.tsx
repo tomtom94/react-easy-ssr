@@ -1,6 +1,6 @@
 import React, { Component, PureComponent, useEffect, FC, useRef } from 'react'
 import { hot } from 'react-hot-loader/root'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
 import { RouteComponentProps } from 'react-router'
 import { useTheme } from 'react-jss'
@@ -21,16 +21,17 @@ const Movies: FC<Props> = props => {
   const classes: any = moviesStyle({ theme })
   const willMount = useRef(true)
 
-  const { triggerMovies: triggerMoviesAction } = props
-  const { app } = props
+  const dispatch = useDispatch()
+  const app = useSelector((state: ReduxState) => state.app)
+  const { pathname, search } = props.location
 
   if (willMount.current) {
-    triggerMoviesAction('get')
+    dispatch(triggerMovies('get'))
     willMount.current = false
   }
 
-  if (props.staticContext && Object.prototype.hasOwnProperty.call(props.app.movies, 'error')) {
-    props.staticContext.statusCode = props.app.movies.error.status
+  if (props.staticContext && Object.prototype.hasOwnProperty.call(app.movies, 'error')) {
+    props.staticContext.statusCode = app.movies.error.status
   }
 
   if (app.movies.isLoading) {
@@ -39,8 +40,6 @@ const Movies: FC<Props> = props => {
 
   const title = 'Movies'
   const description = 'List of the most recent movies'
-
-  const { pathname } = props.router.location
 
   return (
     <>
@@ -92,11 +91,4 @@ const Movies: FC<Props> = props => {
   )
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const { app } = state
-  return {
-    app
-  }
-}
-
-export default hot(connect(mapStateToProps, { triggerMovies })(Movies))
+export default hot(Movies)

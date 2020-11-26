@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect, useCallback, useRef, PropsWithChildren } from 'react'
 import { Route, Switch, withRouter, Redirect, RouteComponentProps, Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import { hot } from 'react-hot-loader/root'
 import { useTheme, ThemeProvider } from 'react-jss'
 import { Helmet, HelmetProvider } from 'react-helmet-async'
@@ -11,6 +11,7 @@ import CssBaseline from './components/CssBaseline'
 import defaultTheme from './assets/jss/theme'
 import Footer from './components/Footer'
 import Header from './components/Header'
+
 import { ReduxState } from './store/rootReducer'
 import { ActionsRedux } from './store/actions/index'
 import appStyle from './assets/jss/views/appStyle'
@@ -33,7 +34,7 @@ import './assets/fonts/stylesheet.css'
 
 library.add(faFacebook, faTwitter, faSpinner, faBars, faExclamationTriangle)
 
-interface Props extends RouteComponentProps, ReduxState, ActionsRedux {}
+type Props = RouteComponentProps
 
 const AppProvider: FC<Props> = props => (
   <ThemeProvider theme={defaultTheme}>
@@ -44,9 +45,12 @@ const AppProvider: FC<Props> = props => (
 const App: FC<Props> = props => {
   const theme = useTheme()
   const classes: any = appStyle({ theme })
-  const { ...rest } = props
 
-  const { pathname, search } = props.router.location
+  const dispatch = useDispatch()
+  const app = useSelector((state: ReduxState) => state.app)
+  const { pathname, search } = useSelector((state: ReduxState) => state.router.location)
+
+  const { ...rest } = props // Just the RouteComponentProps
 
   const oldPage = useRef(pathname)
   useEffect(() => {
@@ -114,8 +118,4 @@ const App: FC<Props> = props => {
   )
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return state
-}
-
-export default hot(withRouter(connect(mapStateToProps, {})(AppProvider)))
+export default hot(withRouter(AppProvider))

@@ -6,6 +6,7 @@ const express = require('express')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('../webpack')('development')
+const cors = require('cors')
 
 const { compilerPromise } = require('./utils')
 
@@ -37,10 +38,7 @@ const start = async () => {
     stats: clientConfig.stats
   }
 
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    return next()
-  })
+  app.use(cors())
 
   app.use(
     webpackDevMiddleware(clientCompiler, {
