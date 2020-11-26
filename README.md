@@ -27,6 +27,7 @@ Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr
 ## Motivations
 
 Why do we make such a complicated setup ?
+
 Well you can use a Framework to do all of this, but to me you are locking yourself behind walls.
 You can use `Next.js` or `Gatsby.js` but you will loose some powerful React functions.
 
@@ -45,7 +46,9 @@ I am making this because we need to make lobbying us, the developers. Upper-laye
 ## Contributors and mainteners
 
 Yes you can do whatever you want, to train yourself.
-You just need to follow the main guidelines of this project : To give the simplest example how modern apps in React make a SSR
+You just need to follow the main guidelines of this project
+
+To give the simplest example how modern apps in React make a SSR
 
 ## Getting started
 
@@ -113,7 +116,9 @@ Then open `http://localhost:80`
 
 ## Must know about the app
 
-You wanna work on the application ? it's better to use prettier and eslint. Just note by default prettier don't touch `.ts` and `.tsx` extension files, [you must make a speacial manipulation in Visual Studio Code](https://levelup.gitconnected.com/setting-up-eslint-with-prettier-typescript-and-visual-studio-code-d113bbec9857?) in your `settings.json`
+You wanna work on the application ?
+
+it's recommended to use `prettier` and `eslint` on you IDE (Visual Studio Code for example). Just note by default prettier don't touch `.ts` and `.tsx` extension files, [you must make a speacial manipulation in Visual Studio Code](https://levelup.gitconnected.com/setting-up-eslint-with-prettier-typescript-and-visual-studio-code-d113bbec9857?) in your `settings.json`
 
 ### Checks to do sometimes
 
