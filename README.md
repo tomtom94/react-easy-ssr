@@ -40,7 +40,7 @@ Below the list of disadvantages of frameworks
 - You are gonna use a upper-layer of React. What happens if one of them make an upgrade but not the other :cold_sweat: :cold_sweat: :cold_sweat: (this is the cold sweat smiley)
 - Do you find other reasons why not to use a framework ? make a contribution and commit something here
 
-I am making this because we need to make lobbying us, the developers. Upper-layer module of React are kind of side effect of open source community perfectionism. We are making upper-layer module of upper-layer module what ... ?
+I am making this because we need to make lobbying us, the developers. Upper-layer module of React are kind of side effect of open source community perfectionism. We are making upper-layer module of upper-layer module WTF ?
 
 ## Contributors and mainteners
 
