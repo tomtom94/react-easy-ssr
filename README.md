@@ -29,13 +29,18 @@ Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr
 Why do we make such a complicated setup ?
 Well you can use a Framework to do all of this, but to me you are locking yourself behind walls.
 You can use `Next.js` or `Gatsby.js` but you will loose some powerful React functions.
-React is a library, and you are gonna put yourself in a fucking framework. Which is great by the way ;)
-List of points you are gonna loose if you use a framework like `Next.js` or `Gatsby.js`
+
+React is a library, then I would say don't put yourself in a fucking framework. Which is great by the way ;)
+
+Below the list of disadvantages of frameworks
 
 - The `React-router`module : you won't be able to handle this wonderful module, hmmm so bad you can cry :sob: :sob: :sob:
 - You won't have access to what happens on the Server Side, hmmm so bad, just go to [this page and you are done mate](https://github.com/tomtom94/react-easy-ssr/blob/master/src/server/index.tsx) :flushed: :flushed: :flushed:
 - According to `Next.js` you can just install `redux-thunk` not the other ones, hmmm so bad how can I play with `redux-saga`or `redux-observable` ? :rage: :rage: :rage:
+- You are gonna use a upper-layer of React. What happens if one of them make an upgrade but not the other :cold_sweat: :cold_sweat: :cold_sweat: (this is the cold sweat smiley)
 - Do you find other reasons why not to use a framework ? make a contribution and commit something here
+
+I am making this because we need to make lobbying us, the developers. Upper-layer module of React are kind of side effect of open source community perfectionism. We are making upper-layer module of upper-layer module what ... ?
 
 ## Contributors and mainteners
 
