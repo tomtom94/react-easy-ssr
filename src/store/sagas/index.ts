@@ -49,5 +49,14 @@ function* watchMovies(): SagaIterator {
 }
 
 export default function* root(): SagaIterator {
-  yield all([fork(watchMovies)])
+  yield all([
+    fork(watchMovies)
+    // You use one saga watcher per redux reducer (for example)
+    // fork(watchAccount),
+    // fork(watchTheaters),
+    // fork(watchOthers1),
+    // fork(watchOthers2),
+    // fork(watchOthers3),
+    // fork(watchOthers4)
+  ])
 }

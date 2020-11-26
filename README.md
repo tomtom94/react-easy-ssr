@@ -144,7 +144,7 @@ The Webpack setup only allows us to import files with ES6 in type
 
 But you can add more Webpack `loader` to your project
 
-Please note we don't use classical CSS style. We use [JSS](https://cssinjs.org/react-jss) (it means js in css).
+Please note we don't use classical CSS style. We use [JSS](https://cssinjs.org/react-jss) (it means js in css). There also is fontawesome which is installed.
 
 ### Disadvantages of redux-saga and react-jss
 
