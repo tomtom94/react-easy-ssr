@@ -133,7 +133,7 @@ it's recommended to use `prettier` and `eslint` on you IDE (Visual Studio Code f
 
 The main rule is we don't use a frontend framework. All the components come from wherever we need it, but we are not stick to one. We are not stick to Material-ui, we are not stick to Bootstrap etc... However I am used to copy past source code of them. For example I made a copy past of the wonderfull Material-ui `<Grid />` which is so much powerful [check it out in this repo](https://github.com/tomtom94/react-easy-ssr/blob/master/src/components/Grid.tsx)
 
-However [Styled-Components](https://styled-components.com/) is also installed if ever you wanna use it.
+However [Styled-Components](https://styled-components.com/) is also installed if ever you wanna use it. There also is fontawesome which is installed.
 
 ### ES6 Imports possible in JSX
 
@@ -146,7 +146,7 @@ The Webpack setup only allows us to import files with ES6 in type
 
 But you can add more Webpack `loader` to your project
 
-Please note we don't use classical CSS style. We use [JSS](https://cssinjs.org/react-jss) (it means js in css). There also is fontawesome which is installed.
+Please note we don't use classical CSS style. We use [JSS](https://cssinjs.org/react-jss) (it means js in css).
 
 ### Disadvantages of redux-saga and react-jss
 
