@@ -18,7 +18,6 @@ const start = async () => {
 
   const [clientConfig, serverConfig] = webpackConfig
   clientConfig.entry.bundle = [`webpack-hot-middleware/client?path=http://localhost:${PORT}/__webpack_hmr`, ...clientConfig.entry.bundle]
-
   clientConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json'
   clientConfig.output.hotUpdateChunkFilename = 'updates/[id].[hash].hot-update.js'
 
@@ -56,8 +55,10 @@ const start = async () => {
   serverCompiler.watch(watchOptions, (err, stats) => compilation(err, stats, serverConfig.stats))
 
   try {
-    await serverPromise
+    // You don't need a Promise.all() here, just try to understand why this is high level, if you understand this you understand all about webpack
+    // Just a tip, here ask yourself who launched the client compilation ? (this is webpackDevMiddleware which is doing this for us), for the server we made a webpack.watch()
     await clientPromise
+    await serverPromise
   } catch (error) {
     console.log(error.message)
   }
