@@ -15,7 +15,6 @@ import { JssProvider, SheetsRegistry, createGenerateId, jss } from 'react-jss'
 import serialize from 'serialize-javascript'
 import { ServerStyleSheet } from 'styled-components'
 import { StaticRouterContext } from 'react-router'
-import vendorPrefixer from 'jss-plugin-vendor-prefixer'
 import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 import CleanCSS from 'clean-css'
@@ -54,7 +53,7 @@ app.use((req: Request, res: Response) => {
 
   const extractor = new ChunkExtractor({
     statsFile: path.join(paths.clientBuild, paths.publicPath, 'loadable-stats.json'),
-    entrypoints: ['bundle'],
+    entrypoints: ['bundle']
   })
   const history = createHistory([req.url])
   const store = configureStore(initialState, history)
@@ -99,7 +98,7 @@ app.use((req: Request, res: Response) => {
         .status(staticContext.statusCode || 200)
         .send(renderFullPage(html, css, fontAwesomeCss, styleTags, serialize(store.getState()), helmet, scriptTags))
     })
-    .catch((e) => {
+    .catch(e => {
       console.log(e.message)
       res.status(500).send(e.message)
     })
@@ -109,7 +108,7 @@ app.use((req: Request, res: Response) => {
   store.close()
 })
 
-app.listen(PORT, (err) => {
+app.listen(PORT, err => {
   if (err) console.log(err)
   else console.log(`App SSR running ${process.env.NODE_ENV === 'production' ? `port : ${PORT}` : `http://localhost:${PORT}`} 🌎`)
 })

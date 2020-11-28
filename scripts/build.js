@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const rimraf = require('rimraf')
 const webpackConfig = require('../webpack')('production')
 
-const { compilerPromise, paths } = require('./utils')
+const { compilerPromise, paths, compilation } = require('./utils')
 
 const build = async () => {
   rimraf.sync(paths.dist)
@@ -16,21 +16,8 @@ const build = async () => {
   const clientPromise = compilerPromise('client', clientCompiler)
   const serverPromise = compilerPromise('server', serverCompiler)
 
-  serverCompiler.run((error, stats) => {
-    if (!error && !stats.hasErrors()) {
-      console.log(stats.toString(serverConfig.stats))
-      return
-    }
-    console.error(stats.compilation.errors)
-  })
-
-  clientCompiler.run((error, stats) => {
-    if (!error && !stats.hasErrors()) {
-      console.log(stats.toString(clientConfig.stats))
-      return
-    }
-    console.error(stats.compilation.errors)
-  })
+  serverCompiler.run((err, stats) => compilation(err, stats, serverConfig.stats))
+  clientCompiler.run((err, stats) => compilation(err, stats, clientConfig.stats))
 
   // wait until client and server is compiled
   try {

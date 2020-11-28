@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const os = require('os')
 
 const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
@@ -27,7 +28,22 @@ const compilerPromise = (name, compiler) => {
   })
 }
 
+const compilation = (err, stats, format) => {
+  if (!err && !stats.hasErrors()) {
+    console.log(stats.toString(format))
+    return
+  }
+  if (err) {
+    console.error(err)
+  }
+  if (stats.hasErrors()) {
+    const json = stats.toJson()
+    console.error(json.errors.join(os.EOL))
+  }
+}
+
 module.exports = {
   compilerPromise,
-  paths
+  paths,
+  compilation
 }

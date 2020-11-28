@@ -1,14 +1,13 @@
 const webpack = require('webpack')
 const nodemon = require('nodemon')
 const rimraf = require('rimraf')
-const path = require('path')
 const express = require('express')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('../webpack')('development')
 const cors = require('cors')
 
-const { compilerPromise, paths } = require('./utils')
+const { compilerPromise, paths, compilation } = require('./utils')
 
 const PORT = 3001
 
@@ -54,26 +53,8 @@ const start = async () => {
     else console.log(`Hot dev server middleware port : ${PORT} 🌎`)
   })
 
-  serverCompiler.watch(watchOptions, (error, stats) => {
-    if (!error && !stats.hasErrors()) {
-      console.log(stats.toString(serverConfig.stats))
-      return
-    }
+  serverCompiler.watch(watchOptions, (err, stats) => compilation(err, stats, serverConfig.stats))
 
-    if (error) {
-      console.log(error)
-    }
-
-    if (stats.hasErrors()) {
-      const info = stats.toJson()
-      const errors = info.errors[0].split('\n')
-      console.log(errors[0])
-      console.log(errors[1])
-      console.log(errors[2])
-    }
-  })
-
-  // wait until client and server is compiled
   try {
     await serverPromise
     await clientPromise
