@@ -1,5 +1,5 @@
 const path = require('path')
-const paths = require('../scripts/paths')
+const { compilerPromise, paths } = require('../scripts/utils')
 
 module.exports = {
   rules: [
@@ -13,7 +13,7 @@ module.exports = {
       use: [
         {
           loader: 'css-loader',
-          options: { onlyLocals: true }
+          options: { onlyLocals: true } // We don't want the static files in the server build, no need of that
         },
         {
           loader: 'postcss-loader',
@@ -33,7 +33,7 @@ module.exports = {
             limit: 150000,
             outputPath: 'assets/images',
             name: '[name].[ext]',
-            emitFile: false
+            emitFile: false // We don't want the static files in the server build, no need of that
           }
         }
       ]
@@ -47,7 +47,7 @@ module.exports = {
           options: {
             outputPath: 'assets/images/icons',
             name: '[name].[ext]',
-            emitFile: false
+            emitFile: false // We don't want the static files in the server build, no need of that
           }
         }
       ]
@@ -61,7 +61,7 @@ module.exports = {
             outputPath: 'assets/fonts',
             mimetype: 'application/font-woff',
             name: '[name].[ext]',
-            emitFile: false
+            emitFile: false // We don't want the static files in the server build, no need of that
           }
         }
       ]
@@ -76,7 +76,7 @@ module.exports = {
             limit: 150000,
             outputPath: 'assets/images',
             name: '[name].[ext]',
-            emitFile: false
+            emitFile: false // We don't want the static files in the server build, no need of that
           }
         }
       ]

@@ -24,7 +24,7 @@ import configureStore, { createHistory } from '../store/configureStore'
 import App from '../App'
 import renderFullPage from './renderFullPage'
 import rootSaga from '../store/sagas'
-import paths from '../../scripts/paths'
+import { paths } from '../../scripts/utils'
 
 const PORT = process.env.PORT || 3000
 
@@ -37,6 +37,17 @@ app.enable('trust proxy')
 app.use(cors())
 
 app.use(compression())
+
+app.use(
+  '/sitemap*+.xml',
+  createProxyMiddleware({
+    target: BASE_URL,
+    pathRewrite: {
+      '^/sitemap': '/api/sitemap/sitemap' // Make a reverse proxy to serve sitemap files into your backend server
+    },
+    changeOrigin: true
+  })
+)
 
 app.get('/robots.txt', (req: Request, res: Response) => {
   res.type('text/plain')

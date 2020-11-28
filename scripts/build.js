@@ -2,8 +2,7 @@ const webpack = require('webpack')
 const rimraf = require('rimraf')
 const webpackConfig = require('../webpack')('production')
 
-const paths = require('./paths')
-const { compilerPromise } = require('./utils')
+const { compilerPromise, paths } = require('./utils')
 
 const build = async () => {
   rimraf.sync(paths.dist)

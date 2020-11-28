@@ -1,5 +1,5 @@
 const path = require('path')
-const paths = require('../scripts/paths')
+const { compilerPromise, paths } = require('../scripts/utils')
 
 module.exports = {
   rules: [

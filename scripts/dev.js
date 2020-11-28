@@ -8,9 +8,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('../webpack')('development')
 const cors = require('cors')
 
-const { compilerPromise } = require('./utils')
-
-const paths = require('./paths')
+const { compilerPromise, paths } = require('./utils')
 
 const PORT = 3001
 

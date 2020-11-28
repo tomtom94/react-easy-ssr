@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ManifestPlugin = require('webpack-manifest-plugin')
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin')
 const LoadablePlugin = require('@loadable/webpack-plugin')
-const paths = require('../scripts/paths')
+const { compilerPromise, paths } = require('../scripts/utils')
 
 module.exports = {
   name: 'client',
