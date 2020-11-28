@@ -19,7 +19,6 @@ import vendorPrefixer from 'jss-plugin-vendor-prefixer'
 import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 import CleanCSS from 'clean-css'
-import { createProxyMiddleware } from 'http-proxy-middleware'
 import configureStore, { createHistory } from '../store/configureStore'
 import App from '../App'
 import renderFullPage from './renderFullPage'
@@ -38,17 +37,6 @@ app.use(cors())
 
 app.use(compression())
 
-app.use(
-  '/sitemap*+.xml',
-  createProxyMiddleware({
-    target: BASE_URL,
-    pathRewrite: {
-      '^/sitemap': '/api/sitemap/sitemap' // Make a reverse proxy to serve sitemap files into your backend server
-    },
-    changeOrigin: true
-  })
-)
-
 app.get('/robots.txt', (req: Request, res: Response) => {
   res.type('text/plain')
   res.send('User-agent: *\nSitemap: https://www.mywebsite.com/sitemap.xml')
@@ -66,7 +54,7 @@ app.use((req: Request, res: Response) => {
 
   const extractor = new ChunkExtractor({
     statsFile: path.join(paths.clientBuild, paths.publicPath, 'loadable-stats.json'),
-    entrypoints: ['bundle']
+    entrypoints: ['bundle'],
   })
   const history = createHistory([req.url])
   const store = configureStore(initialState, history)
@@ -111,7 +99,7 @@ app.use((req: Request, res: Response) => {
         .status(staticContext.statusCode || 200)
         .send(renderFullPage(html, css, fontAwesomeCss, styleTags, serialize(store.getState()), helmet, scriptTags))
     })
-    .catch(e => {
+    .catch((e) => {
       console.log(e.message)
       res.status(500).send(e.message)
     })
@@ -121,7 +109,7 @@ app.use((req: Request, res: Response) => {
   store.close()
 })
 
-app.listen(PORT, err => {
+app.listen(PORT, (err) => {
   if (err) console.log(err)
   else console.log(`App SSR running ${process.env.NODE_ENV === 'production' ? `port : ${PORT}` : `http://localhost:${PORT}`} 🌎`)
 })

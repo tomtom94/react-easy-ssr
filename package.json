@@ -52,7 +52,6 @@
     "friendly-errors-webpack-plugin": "^1.7.0",
     "global": "^4.4.0",
     "history": "^4.9.0",
-    "http-proxy-middleware": "^1.0.3",
     "isomorphic-fetch": "^2.2.1",
     "jss-plugin-vendor-prefixer": "^10.0.4",
     "mini-css-extract-plugin": "^0.8.0",
