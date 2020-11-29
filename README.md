@@ -1,5 +1,11 @@
 # ⚛ React boilerplate app with SSR
 
+![alt text](https://i.ibb.co/vXmmtyS/looking-guy.jpg "React library vs framework")
+
+![alt text](https://i.ibb.co/nMQzFGP/thinking-guy.jpg "React library vs framework")
+
+## Introduction
+
 React App not initiated with CRA `create-react-app`, that's for junior at school ;)
 
 Webpack 4 installed manually. In dev mode `webpack-dev-server` isn't used. Because we are using live reload thanks to `webpack-dev-middleware` & `webpack-hot-middleware` modules.
