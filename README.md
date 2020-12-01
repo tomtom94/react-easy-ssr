@@ -129,7 +129,7 @@ You wanna work on the application ?
 
 it's recommended to use `prettier` and `eslint` on you IDE (Visual Studio Code for example). Just note by default prettier don't touch `.ts` and `.tsx` extension files, [you must make a speacial manipulation in Visual Studio Code](https://levelup.gitconnected.com/setting-up-eslint-with-prettier-typescript-and-visual-studio-code-d113bbec9857?) in your `settings.json`
 
-You also better use another search engine sometimes. `Google.com` is enough. And enough is enough. We have a good search engine in Europe (finance by the European Investment Bank at 25 million in 2015) just use `Qwant.com` at least when you search for easy stuff, this is a good start. Moreover this is a french one ;) just use [Qwant.com](qwant.com)
+You also better use another search engine sometimes. `Google.com` is enough. And enough is enough. We have a good search engine in Europe (finance by the European Investment Bank at 25 million in 2015) just use `Qwant.com` at least when you search for easy stuff, this is a good start. Moreover this is a french one ;) just use [Qwant.com](https://qwant.com)
 
 ### Checks to do sometimes
 
