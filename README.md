@@ -129,6 +129,8 @@ You wanna work on the application ?
 
 it's recommended to use `prettier` and `eslint` on you IDE (Visual Studio Code for example). Just note by default prettier don't touch `.ts` and `.tsx` extension files, [you must make a speacial manipulation in Visual Studio Code](https://levelup.gitconnected.com/setting-up-eslint-with-prettier-typescript-and-visual-studio-code-d113bbec9857?) in your `settings.json`
 
+You also better use another search engine sometimes. `Google.com` is enough. And enough is enough. We have a good search engine in Europe (finance by the European Investment Bank at 25 million in 2015) just use `Qwant.com` at least when you search for easy stuff, this is a good start. Moreover this is a french one ;) just use [Qwant.com](qwant.com)
+
 ### Checks to do sometimes
 
 - Check typescript `npm run tsc`
@@ -154,18 +156,21 @@ But you can add more Webpack `loader` to your project
 
 Please note we don't use classical CSS style. We use [JSS](https://cssinjs.org/react-jss) (it means js in css).
 
-### Disadvantages of redux-saga and react-jss
+### Some disadvantages
 
-- With this you can't use the powerful React function unveiled in 2018 called `renderToNodeStream`. We must use the old one which is `rendeToString`.
-Of course we make a classical `hydratation` afterwards.
-You wanna know more about this ? check out this issue [on github](https://github.com/redux-saga/redux-saga/issues/2112)
+- With this configuration can't use the powerful React function unveiled in 2018 called `renderToNodeStream`. We must use the old one which is (from 2015) `rendeToString`. But no worries bro 90% of React websites are on the old one.
+List of modules not compatible with `renderToNodeStream` (I am telling you the ones I am sure of, this is not a full list)
+  - `redux-saga` check out this issue [on github](https://github.com/redux-saga/redux-saga/issues/2112)
+  - `react-jss` check out this issue [on github](https://github.com/cssinjs/jss/issues/807)
+  - `redux-observable` check out this issue [on github](https://github.com/redux-observable/redux-observable/issues?q=is%3Aissue+is%3Aopen+rendertonodestream)
 
-- Another big issue is the split code, which affects also the SSR when it reads the app.
+- Another big issue is the split code, this normal behavior no worries ;).
+The first time your server (frontend) reads one of your page it'll be blind of redux actions. I can't explain you why but this is so much interesting try to investigate yourself (use Postman and check if you have data in your DOM, turn off and on your server check in Postman again)
 You wanna know more about this ? check out this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760)
 
 ### I want to use renderToNodeStream to make a top notch app
 
-Well then you must use a `redux-thunk` which is gonna give you easy promises to handle on the server side. And don't use `react-jss`, just use a classical SASS, LESS or CSS style. And you are good to go
+Well then you must use a `redux-thunk` and/or a `apollographql` which is gonna give you easy promises to handle on the server side. And don't use `react-jss`, just use a classical SASS, LESS or CSS style. And you are good to go
 
 ## Notes
 
