@@ -164,7 +164,7 @@ List of modules not compatible with `renderToNodeStream` (I am telling you the o
   - `react-jss` check out this issue [on github](https://github.com/cssinjs/jss/issues/807)
   - `redux-observable` check out this issue [on github](https://github.com/redux-observable/redux-observable/issues?q=is%3Aissue+is%3Aopen+rendertonodestream)
 
-- Another big issue is the split code, this normal behavior no worries ;).
+- Another big issue is the split code, this is normal behavior no worries ;).
 The first time your server (frontend) reads one of your page it'll be blind of redux actions. I can't explain you why but this is so much interesting try to investigate yourself (use Postman and check if you have data in your DOM, turn off and on your server check in Postman again)
 You wanna know more about this ? check out this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760)
 
