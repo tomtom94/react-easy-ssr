@@ -160,7 +160,7 @@ List of modules not compatible with `renderToNodeStream` (I am telling you the o
 
 - Another big issue is the split code, this is normal behavior no worries ;).
 The first time your server (frontend) reads one of your page it'll be blind of redux actions. I can't explain you why but this is so much interesting try to investigate yourself (use Postman and check if you have data in your DOM, turn off and on your server check in Postman again)
-You wanna know more about this ? check out this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760)
+You wanna know more about this ? check out this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760). Hopefully we use the split code option `webpackPrefetch` which allows the server to read all the app by itself without having someone to open page per page. Understand this and you understand all about split code ;)
 
 ### I want to use renderToNodeStream to make a top notch app
 
