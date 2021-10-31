@@ -7,8 +7,7 @@ import { Provider } from 'react-redux'
 import path from 'path'
 import compression from 'compression'
 import cors from 'cors'
-
-import { HelmetProvider, FilledContext, HelmetData } from 'react-helmet-async'
+import { Helmet, HelmetProvider, FilledContext } from 'react-helmet-async'
 import express, { Request, Response, NextFunction } from 'express'
 import { dom } from '@fortawesome/fontawesome-svg-core'
 import { JssProvider, SheetsRegistry, createGenerateId, jss } from 'react-jss'
@@ -24,7 +23,7 @@ import renderFullPage from './renderFullPage'
 import rootSaga from '../store/sagas'
 import { paths } from '../../scripts/utils'
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3030
 
 const BASE_URL = process.env.BACKEND_BASE_URL ? `${process.env.BACKEND_BASE_URL}` : 'http://localhost:3002'
 
@@ -41,12 +40,25 @@ app.get('/robots.txt', (req: Request, res: Response) => {
   res.send('User-agent: *\nSitemap: https://www.mywebsite.com/sitemap.xml')
 })
 
-// Is your app overcharged and you wanna win in little tiny performances ??
-// yes ok then serve these static files with a reverse proxy
-// like nginx, you need to have access to your provider router. Otherwise you can't do that with heroku :D
-// try to serve /static-for-test/ ==> /client/dist/ to make your test
-// afterwards you need to kill this express middleware below
-app.use(paths.publicPath, express.static(path.join(paths.clientBuild, paths.publicPath)))
+if (process.env.NODE_ENV === 'production') {
+  app.get('/health', (req: Request, res: Response) => {
+    res.json({ status: 'UP' })
+  })
+}
+
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development') {
+  /**
+   * This line should in normal time only be used in development mode
+   * In production mode you need to separate static files from the main Express.js frontend server
+   * By separating them, you discharge tensions on this Express.js frontend server
+   * It now depends what kind of router you are using, Nginx my favorite, Traefik. The rule
+   * is to make a redirection for example like this https://www.mywebsite.com/static/15.bundle-832a294529dcad5060bd.js
+   * and now the static bundle file 15.bundle-832a294529dcad5060bd.js is served.
+   * In order to achieve this you need a good CI which will do npm run build, then copy the build in an other
+   * docker container to serve it through /static/ path
+   */
+  app.use(paths.publicPath, express.static(path.join(paths.clientBuild, paths.publicPath)))
+}
 
 app.use((req: Request, res: Response) => {
   const initialState = {}
@@ -58,7 +70,7 @@ app.use((req: Request, res: Response) => {
   const history = createHistory([req.url])
   const store = configureStore(initialState, history)
   const sheet = new ServerStyleSheet()
-  const jsx = (context: StaticRouterContext = {}, helmetContext: FilledContext = { helmet: null }) => (
+  const jsx = (context = {}, helmetContext = { helmet: {} }) => (
     <StaticRouter location={req.url} context={context}>
       <Provider store={store}>
         <HelmetProvider context={helmetContext}>
@@ -72,7 +84,7 @@ app.use((req: Request, res: Response) => {
     .toPromise()
     .then(async () => {
       const staticContext: StaticRouterContext = {}
-      const helmetContext: FilledContext = { helmet: null }
+      const helmetContext = { helmet: {} }
       const generateId = createGenerateId()
       const sheets = new SheetsRegistry()
       const html = renderToString(

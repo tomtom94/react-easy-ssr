@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const rimraf = require('rimraf')
 const webpackConfig = require('../webpack')('production')
-const os = require('os')
 
 const { compilerPromise, paths, compilation } = require('./utils')
 
@@ -20,11 +19,10 @@ const build = async () => {
   serverCompiler.run((err, stats) => compilation(err, stats, serverConfig.stats))
   clientCompiler.run((err, stats) => compilation(err, stats, clientConfig.stats))
 
+  // wait until client and server is compiled
   try {
-    // You don't need a Promise.all() here, just try to understand why this is high level, if you understand this you understand all about webpack
-    // Just a tip, we launched ourself the compilations making 2 webpack.run() just above, we are just tapping the end of theses 2 processes
-    await clientPromise
     await serverPromise
+    await clientPromise
     console.log('Webpack compilation client and server done !')
   } catch (error) {
     console.log(error.message)

@@ -54,11 +54,10 @@ const start = async () => {
 
   serverCompiler.watch(watchOptions, (err, stats) => compilation(err, stats, serverConfig.stats))
 
+  // wait until client and server is compiled
   try {
-    // You don't need a Promise.all() here, just try to understand why this is high level, if you understand this you understand all about webpack
-    // Just a tip, here ask yourself who launched the client compilation ? (this is webpackDevMiddleware which is doing this for us), for the server we made a webpack.watch()
-    await clientPromise
     await serverPromise
+    await clientPromise
   } catch (error) {
     console.log(error.message)
   }
