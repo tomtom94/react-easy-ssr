@@ -168,12 +168,6 @@ Well then you must use a `redux-thunk` and/or a `apollographql` which is gonna g
 
 ## Notes
 
-I am using this frontend architecture for
-
-- [footlivezone.com](https://www.footlivezone.com)
-- [soccerlivezone.com](https://www.soccerlivezone.com)
-- And also for other clients in Paris
-
 If ever you encounter issues during critical moment at work just contact me ASAP, download my resume you are gonna find my phone number
 
 - [thomasdeveloper-react.com](https://www.thomasdeveloper-react.com)

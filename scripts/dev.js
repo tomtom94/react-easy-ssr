@@ -29,17 +29,13 @@ const start = async () => {
   const clientPromise = compilerPromise('client', clientCompiler)
   const serverPromise = compilerPromise('server', serverCompiler)
 
-  const watchOptions = {
-    ignored: /node_modules/,
-    stats: clientConfig.stats
-  }
-
   app.use(cors())
 
   app.use(
     webpackDevMiddleware(clientCompiler, {
       publicPath: clientConfig.output.publicPath,
-      stats: clientConfig.stats
+      stats: clientConfig.stats,
+      writeToDisk: true
     })
   )
 
@@ -50,7 +46,13 @@ const start = async () => {
     else console.log(`Hot dev server middleware port : ${PORT} 🌎`)
   })
 
-  serverCompiler.watch(watchOptions, (err, stats) => compilation(err, stats, serverConfig.stats))
+  serverCompiler.watch(
+    {
+      ignored: /node_modules/,
+      stats: clientConfig.stats
+    },
+    (err, stats) => compilation(err, stats, serverConfig.stats)
+  )
 
   // wait until client and server is compiled
   try {
