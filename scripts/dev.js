@@ -18,7 +18,10 @@ const start = async () => {
     rimraf.sync(paths.dist)
 
     const [clientConfig, serverConfig] = webpackConfig
-    clientConfig.entry.bundle = [`webpack-hot-middleware/client?path=http://localhost:${PORT}/__webpack_hmr`, ...clientConfig.entry.bundle]
+    clientConfig.entry.bundle = [
+      `webpack-hot-middleware/client?path=http://localhost:${PORT}/__webpack_hmr&timeout=2000&overlay=false`,
+      ...clientConfig.entry.bundle
+    ]
     clientConfig.output.hotUpdateMainFilename = 'updates/[fullhash].hot-update.json'
     clientConfig.output.hotUpdateChunkFilename = 'updates/[id].[fullhash].hot-update.js'
 
@@ -37,7 +40,13 @@ const start = async () => {
       })
     )
 
-    app.use(webpackHotMiddleware(clientCompiler))
+    app.use(
+      webpackHotMiddleware(clientCompiler, {
+        log: false,
+        path: '/__webpack_hmr',
+        heartbeat: 2000
+      })
+    )
 
     app.listen(PORT, err => {
       if (err) console.log(err)
