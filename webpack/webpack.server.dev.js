@@ -1,13 +1,14 @@
 const nodeExternals = require('webpack-node-externals')
 const webpack = require('webpack')
-const { compilerPromise, paths } = require('../scripts/utils')
+const { paths } = require('../scripts/utils')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   name: 'server',
   mode: 'development',
   target: 'node',
   entry: {
-    server: [require.resolve('core-js/stable'), require.resolve('regenerator-runtime/runtime'), paths.srcServer]
+    server: [paths.srcServer]
   },
   output: {
     path: paths.serverBuild,
@@ -21,6 +22,7 @@ module.exports = {
   },
   module: require('./loaders.server.js'),
   plugins: [
+    new MiniCssExtractPlugin(),
     new webpack.DefinePlugin({
       'process.env.BROWSER': 'false'
     })

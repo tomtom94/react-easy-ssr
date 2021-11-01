@@ -23,7 +23,7 @@ import renderFullPage from './renderFullPage'
 import rootSaga from '../store/sagas'
 import { paths } from '../../scripts/utils'
 
-const PORT = process.env.PORT || 3030
+const PORT = process.env.PORT || 3000
 
 const BASE_URL = process.env.BACKEND_BASE_URL ? `${process.env.BACKEND_BASE_URL}` : 'http://localhost:3002'
 

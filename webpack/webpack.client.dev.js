@@ -2,16 +2,16 @@ const webpack = require('webpack')
 const path = require('path')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const WriteFileWebpackPlugin = require('write-file-webpack-plugin')
 const LoadablePlugin = require('@loadable/webpack-plugin')
-const { compilerPromise, paths } = require('../scripts/utils')
+const { paths } = require('../scripts/utils')
 
 module.exports = {
   name: 'client',
   mode: 'development',
   target: 'web',
-  devtool: 'cheap-module-source-map',
+  devtool: 'source-map',
   entry: {
     bundle: [require.resolve('core-js/stable'), require.resolve('regenerator-runtime/runtime'), paths.srcClient]
   },
@@ -30,7 +30,7 @@ module.exports = {
   module: require('./loaders.client.js'),
   plugins: [
     new LoadablePlugin(),
-    new ManifestPlugin({
+    new WebpackManifestPlugin({
       seed: {
         name: 'mywebsite',
         short_name: 'mywebsite',
@@ -39,13 +39,9 @@ module.exports = {
         display: 'standalone'
       }
     }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
-    }),
+    new MiniCssExtractPlugin(),
     new WriteFileWebpackPlugin(),
     new FriendlyErrorsWebpackPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({

@@ -18,8 +18,8 @@ const start = async () => {
 
   const [clientConfig, serverConfig] = webpackConfig
   clientConfig.entry.bundle = [`webpack-hot-middleware/client?path=http://localhost:${PORT}/__webpack_hmr`, ...clientConfig.entry.bundle]
-  clientConfig.output.hotUpdateMainFilename = 'updates/[hash].hot-update.json'
-  clientConfig.output.hotUpdateChunkFilename = 'updates/[id].[hash].hot-update.js'
+  clientConfig.output.hotUpdateMainFilename = 'updates/[fullhash].hot-update.json'
+  clientConfig.output.hotUpdateChunkFilename = 'updates/[id].[fullhash].hot-update.js'
 
   const multiCompiler = webpack([clientConfig, serverConfig])
 
@@ -38,10 +38,8 @@ const start = async () => {
 
   app.use(
     webpackDevMiddleware(clientCompiler, {
-      logLevel: 'warn',
       publicPath: clientConfig.output.publicPath,
-      stats: clientConfig.stats,
-      watchOptions
+      stats: clientConfig.stats
     })
   )
 

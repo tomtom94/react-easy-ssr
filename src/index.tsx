@@ -37,7 +37,6 @@ const Main = () => {
       fontAwesomeCssStyles.parentNode.removeChild(fontAwesomeCssStyles)
     }
   }, [])
-
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>

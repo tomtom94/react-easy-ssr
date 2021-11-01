@@ -19,10 +19,17 @@ const compilerPromise = (name, compiler) => {
     compiler.hooks.compile.tap(name, () => {
       console.log(`Compiling ${name} please wait...`)
     })
+
+    compiler.hooks.failed.tap(name, error => {
+      console.log(error)
+    })
     compiler.hooks.done.tap(name, stats => {
       if (!stats.hasErrors()) {
         return resolve(console.log(`Successfully compiled ${name}`))
       }
+      stats.compilation.errors.forEach(error => {
+        console.log(error)
+      })
       return reject(new Error(`Failed to compile ${name}`))
     })
   })

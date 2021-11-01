@@ -1,5 +1,6 @@
 const path = require('path')
 const { compilerPromise, paths } = require('../scripts/utils')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   rules: [
@@ -11,6 +12,9 @@ module.exports = {
     {
       test: /\.css$/,
       use: [
+        {
+          loader: MiniCssExtractPlugin.loader
+        },
         {
           loader: 'css-loader',
           options: { onlyLocals: true } // We don't want the static files in the server build, no need of that

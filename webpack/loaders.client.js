@@ -1,5 +1,6 @@
 const path = require('path')
 const { compilerPromise, paths } = require('../scripts/utils')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   rules: [
@@ -12,10 +13,7 @@ module.exports = {
       test: /\.css$/,
       use: [
         {
-          loader: require('mini-css-extract-plugin').loader,
-          options: {
-            hmr: process.env.NODE_ENV === 'development'
-          }
+          loader: MiniCssExtractPlugin.loader
         },
         {
           loader: 'css-loader'

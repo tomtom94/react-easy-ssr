@@ -3,10 +3,10 @@ const webpack = require('webpack')
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ManifestPlugin = require('webpack-manifest-plugin')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const LoadablePlugin = require('@loadable/webpack-plugin')
-const { compilerPromise, paths } = require('../scripts/utils')
+const { paths } = require('../scripts/utils')
 
 module.exports = {
   name: 'client',
@@ -17,7 +17,7 @@ module.exports = {
   },
   output: {
     path: path.join(paths.clientBuild, paths.publicPath),
-    filename: 'bundle-[hash].js',
+    filename: 'bundle-[fullhash].js',
     publicPath: paths.publicPath
   },
   resolve: {
@@ -27,7 +27,7 @@ module.exports = {
   module: require('./loaders.client.js'),
   plugins: [
     new LoadablePlugin(),
-    new ManifestPlugin({
+    new WebpackManifestPlugin({
       seed: {
         name: 'mywebsite',
         short_name: 'mywebsite',
@@ -36,10 +36,7 @@ module.exports = {
         display: 'standalone'
       }
     }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css'
-    }),
+    new MiniCssExtractPlugin(),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       reportFilename: 'webpack-report.html',
