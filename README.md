@@ -5,7 +5,7 @@
 
 ## Introduction
 
-React App with SSR. Webpack 4 installed manually. In dev mode we use live reload thanks to `webpack-dev-middleware` & `webpack-hot-middleware` modules.
+React App with SSR. Webpack 5 installed manually. In dev mode we use live reload thanks to `webpack-dev-middleware` & `webpack-hot-middleware` modules.
 
 The other main modules used are `redux-saga`, `loadable-component`, `react-jss` and `Typescript`.
 
