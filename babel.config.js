@@ -5,7 +5,6 @@ module.exports = api => {
 
   const plugins = [
     '@loadable/babel-plugin',
-    '@babel/plugin-transform-runtime',
     '@babel/plugin-transform-spread',
     '@babel/plugin-proposal-object-rest-spread',
     'react-hot-loader/babel'
