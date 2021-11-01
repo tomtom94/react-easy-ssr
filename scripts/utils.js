@@ -21,6 +21,7 @@ const compilerPromise = (name, compiler) => {
 
     compiler.hooks.failed.tap(name, error => {
       console.log(error)
+      reject(new Error(`Failed to compile ${name}`))
     })
     compiler.hooks.done.tap(name, stats => {
       if (!stats.hasErrors()) {
