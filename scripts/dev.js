@@ -53,12 +53,6 @@ const start = async () => {
       (err, stats) => compilation(err, stats, serverConfig.stats)
     )
 
-    watching.close(closeErr => {
-      if (closeErr) {
-        console.error(closeErr)
-      }
-    })
-
     await Promise.all([compilerPromise('client', clientCompiler), compilerPromise('server', serverCompiler)])
 
     const script = nodemon({
