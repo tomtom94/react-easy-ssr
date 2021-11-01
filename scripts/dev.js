@@ -44,7 +44,7 @@ const start = async () => {
       else console.log(`Hot dev server middleware port : ${PORT} 🌎`)
     })
 
-    const watching = serverCompiler.watch(
+    serverCompiler.watch(
       {
         ignored: /node_modules/,
         poll: 1000, // Check for changes every second
