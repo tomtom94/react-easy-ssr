@@ -5,27 +5,23 @@ const webpackConfig = require('../webpack')('production')
 const { compilerPromise, paths, compilation } = require('./utils')
 
 const build = async () => {
-  rimraf.sync(paths.dist)
-
-  const [clientConfig, serverConfig] = webpackConfig
-  const multiCompiler = webpack([clientConfig, serverConfig])
-
-  const clientCompiler = multiCompiler.compilers.find(compiler => compiler.name === 'client')
-  const serverCompiler = multiCompiler.compilers.find(compiler => compiler.name === 'server')
-
-  const clientPromise = compilerPromise('client', clientCompiler)
-  const serverPromise = compilerPromise('server', serverCompiler)
-
-  serverCompiler.run((err, stats) => compilation(err, stats, serverConfig.stats))
-  clientCompiler.run((err, stats) => compilation(err, stats, clientConfig.stats))
-
-  // wait until client and server is compiled
   try {
-    await serverPromise
-    await clientPromise
+    rimraf.sync(paths.dist)
+
+    const [clientConfig, serverConfig] = webpackConfig
+    const multiCompiler = webpack([clientConfig, serverConfig])
+
+    const clientCompiler = multiCompiler.compilers.find(compiler => compiler.name === 'client')
+    const serverCompiler = multiCompiler.compilers.find(compiler => compiler.name === 'server')
+
+    serverCompiler.run((err, stats) => compilation(err, stats, serverConfig.stats))
+    clientCompiler.run((err, stats) => compilation(err, stats, clientConfig.stats))
+
+    await Promise.all([compilerPromise('client', clientCompiler), compilerPromise('server', serverCompiler)])
+
     console.log('Webpack compilation client and server done !')
   } catch (error) {
-    console.log(error.message)
+    console.error(error.message)
   }
 }
 

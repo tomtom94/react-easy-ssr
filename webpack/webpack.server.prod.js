@@ -30,5 +30,5 @@ module.exports = {
     })
   ],
   externals: [nodeExternals()],
-  stats: 'minimal'
+  stats: 'detailed'
 }

@@ -49,5 +49,5 @@ module.exports = {
     }),
     new CompressionPlugin({ algorithm: 'gzip' })
   ],
-  stats: 'minimal'
+  stats: 'detailed'
 }

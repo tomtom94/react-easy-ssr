@@ -1,6 +1,5 @@
 const path = require('path')
 const fs = require('fs')
-const os = require('os')
 
 const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
@@ -25,27 +24,39 @@ const compilerPromise = (name, compiler) => {
     })
     compiler.hooks.done.tap(name, stats => {
       if (!stats.hasErrors()) {
-        return resolve(console.log(`Successfully compiled ${name}`))
+        resolve()
       }
       stats.compilation.errors.forEach(error => {
-        console.log(error)
+        console.error(error)
       })
-      return reject(new Error(`Failed to compile ${name}`))
+      reject(new Error(`Failed to compile ${name}`))
     })
   })
 }
 
 const compilation = (err, stats, format) => {
-  if (!err && !stats.hasErrors()) {
-    console.log(stats.toString(format))
+  if (err) {
+    console.error(err.stack || err)
+    if (err.details) {
+      console.error(err.details)
+    }
     return
   }
-  if (err) {
-    console.error(err)
-  }
+
+  console.log(stats.toString(format))
+
+  const info = stats.toJson(format)
+
   if (stats.hasErrors()) {
-    const json = stats.toJson()
-    console.error(json.errors.join(os.EOL))
+    info.errors.forEach(error => {
+      console.error(error.message)
+    })
+  }
+
+  if (stats.hasWarnings()) {
+    info.warnings.forEach(warning => {
+      console.warn(warning.message)
+    })
   }
 }
 
