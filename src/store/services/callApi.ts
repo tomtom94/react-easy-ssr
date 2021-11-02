@@ -6,11 +6,17 @@ import 'isomorphic-fetch'
 
 const BASE_URL = 'https://api.themoviedb.org' // It should be here your backend server url !
 
-export default (endpoint, params) => {
+export default (endpoint, params): Promise<{ response?: any; error?: { status: any; message: any } }> => {
   const url = new URL(`${BASE_URL}${endpoint}`)
   return fetch(url.href, params)
     .then(response => {
-      return response.json().then(json => ({ json, response }))
+      return response
+        .json()
+        .then(json => ({ json, response }))
+        .catch(error => {
+          Object.assign(error, { message: 'Unexpected reponse from the server', status: 404 })
+          return Promise.reject(error)
+        })
     })
     .then(({ json, response }) => {
       if (!response.ok) {

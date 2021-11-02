@@ -24,14 +24,14 @@ export const moviesFetch: Saga = fetchEntity.bind(null, movies, moviesApi.movies
 /** ******************************* SAGAS ************************************* */
 /** *************************************************************************** */
 
-function* getMovies(page): SagaIterator {
+function* getMovies(dispatchKind): SagaIterator {
   const cleanable = yield select(moviesCleanable)
   if (cleanable) {
     yield put(actions.clearMovies())
   }
   const loadable = yield select(moviesLoadable)
   if (loadable) {
-    yield call(moviesFetch, { page })
+    yield call(moviesFetch, { dispatchKind })
   }
 }
 
@@ -41,9 +41,9 @@ function* getMovies(page): SagaIterator {
 
 function* watchMovies(): SagaIterator {
   while (true) {
-    const { page } = yield take(actions.TRIGGER_MOVIES)
-    if (page === 'get') {
-      yield call(getMovies, page)
+    const { dispatchKind } = yield take(actions.TRIGGER_MOVIES)
+    if (dispatchKind === 'GET_MOVIES') {
+      yield call(getMovies, dispatchKind)
     }
   }
 }

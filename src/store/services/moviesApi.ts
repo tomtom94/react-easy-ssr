@@ -8,7 +8,7 @@ export const movies = () => {
       language: 'en-US'
     })}`,
     {
-      method: 'get',
+      method: 'GET_MOVIES',
       headers: { 'Content-Type': 'application/json' }
     }
   )

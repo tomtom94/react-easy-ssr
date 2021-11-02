@@ -23,9 +23,9 @@ export const movies = {
 }
 
 export interface ActionsRedux {
-  triggerMovies?: (page: 'get') => void
+  triggerMovies?: (dispatchKind: 'GET_MOVIES') => void
   clearMovies?: () => void
 }
 
-export const triggerMovies = page => action(TRIGGER_MOVIES, { page })
+export const triggerMovies = dispatchKind => action(TRIGGER_MOVIES, { dispatchKind })
 export const clearMovies = () => action(CLEAR_MOVIES)

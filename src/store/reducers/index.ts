@@ -5,7 +5,7 @@ import * as ActionTypes from '../actions'
 interface MoviesState {
   isLoading: boolean
   data: any[]
-  error?: { message: string; status: number }
+  error?: { message: string; status: number; isBrowser: boolean }
 }
 
 const INITIAL_STATE_MOVIES: MoviesState = {
@@ -14,32 +14,33 @@ const INITIAL_STATE_MOVIES: MoviesState = {
 }
 
 const movies = (state = INITIAL_STATE_MOVIES, action) => {
-  const copyData = JSON.parse(JSON.stringify(state)) // Avoid JS mutation
+  const copyState = JSON.parse(JSON.stringify(state)) // Avoid JS mutation
   switch (action.type) {
     case ActionTypes.MOVIES.REQUEST:
+      delete copyState.error
       return {
-        ...copyData,
+        ...copyState,
         isLoading: true
       }
     case ActionTypes.MOVIES.SUCCESS:
-      delete copyData.error
+      delete copyState.error
       let data = []
-      if (action.body.page === 'get') {
+      if (action.body.dispatchKind === 'GET_MOVIES') {
         data = action.response.results
       }
       return {
-        ...copyData,
+        ...copyState,
         isLoading: false,
         data
       }
     case ActionTypes.MOVIES.FAILURE:
       return {
-        ...copyData,
+        ...copyState,
         isLoading: false,
-        error: { message: action.error.message, status: action.error.status }
+        error: { message: action.error.message, status: action.error.status, isBrowser: process.env.BROWSER }
       }
     case ActionTypes.CLEAR_MOVIES:
-      delete copyData.error
+      delete copyState.error
       return {
         ...state
       }

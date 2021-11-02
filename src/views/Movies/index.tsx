@@ -26,7 +26,7 @@ const Movies: FC<Props> = props => {
   const { pathname, search } = props.location
 
   if (willMount.current) {
-    dispatch(triggerMovies('get'))
+    dispatch(triggerMovies('GET_MOVIES'))
     willMount.current = false
   }
 
