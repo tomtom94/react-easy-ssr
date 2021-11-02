@@ -9,4 +9,4 @@ export const moviesLoadable = state =>
  */
 export const moviesCleanable = state =>
   Object.prototype.hasOwnProperty.call(state.app.movies, 'error') &&
-  (state.app.seasons.error.isBrowser || state.app.movies.data.length === 0)
+  (state.app.movies.error.isBrowser || state.app.movies.data.length === 0)

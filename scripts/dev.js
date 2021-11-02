@@ -19,7 +19,7 @@ const start = async () => {
 
     const [clientConfig, serverConfig] = webpackConfig
     clientConfig.entry.bundle = [
-      `webpack-hot-middleware/client?path=http://localhost:${PORT}/__webpack_hmr&timeout=2000&overlay=false`,
+      `webpack-hot-middleware/client?path=http://localhost:${PORT}/__webpack_hmr&timeout=2000`,
       ...clientConfig.entry.bundle
     ]
     clientConfig.output.hotUpdateMainFilename = 'updates/[fullhash].hot-update.json'
