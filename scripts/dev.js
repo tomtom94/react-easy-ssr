@@ -48,11 +48,6 @@ const start = async () => {
       })
     )
 
-    app.listen(PORT, err => {
-      if (err) console.log(err)
-      else console.log(`Hot dev server middleware port : ${PORT} 🌎`)
-    })
-
     serverCompiler.watch(
       {
         ignored: /node_modules/,
@@ -62,7 +57,12 @@ const start = async () => {
       (err, stats) => compilation(err, stats, serverConfig.stats)
     )
 
-    await Promise.all([compilerPromise('client', clientCompiler), compilerPromise('server', serverCompiler)])
+    await compilerPromise('server', serverCompiler)
+
+    app.listen(PORT, err => {
+      if (err) console.log(err)
+      else console.log(`Hot dev server middleware port : ${PORT} 🌎`)
+    })
 
     const script = nodemon({
       script: `${paths.serverBuild}/server.js`,
