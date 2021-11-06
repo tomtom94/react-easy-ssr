@@ -13,7 +13,7 @@ const paths = {
   src: resolveApp('src')
 }
 
-const compilerPromise = (name, compiler) => {
+const compilerListener = (name, compiler) => {
   return new Promise((resolve, reject) => {
     compiler.hooks.compile.tap(name, () => {
       console.log(`Compiling ${name} please wait...`)
@@ -62,7 +62,7 @@ const compilation = (err, stats, format) => {
 }
 
 module.exports = {
-  compilerPromise,
+  compilerListener,
   paths,
   compilation
 }

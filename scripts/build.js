@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const rimraf = require('rimraf')
 const webpackConfig = require('../webpack')('production')
 
-const { compilerPromise, paths, compilation } = require('./utils')
+const { compilerListener, paths, compilation } = require('./utils')
 
 const build = async () => {
   try {
@@ -17,7 +17,7 @@ const build = async () => {
     serverCompiler.run((err, stats) => compilation(err, stats, serverConfig.stats))
     clientCompiler.run((err, stats) => compilation(err, stats, clientConfig.stats))
 
-    await Promise.all([compilerPromise('client', clientCompiler), compilerPromise('server', serverCompiler)])
+    await Promise.all([compilerListener('client', clientCompiler), compilerListener('server', serverCompiler)])
 
     console.log('Webpack compilation client and server done !')
   } catch (error) {

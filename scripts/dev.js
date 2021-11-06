@@ -7,7 +7,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('../webpack')('development')
 const cors = require('cors')
 
-const { compilerPromise, paths, compilation } = require('./utils')
+const { compilerListener, paths, compilation } = require('./utils')
 
 const PORT = 3001
 
@@ -57,7 +57,7 @@ const start = async () => {
       (err, stats) => compilation(err, stats, serverConfig.stats)
     )
 
-    await compilerPromise('server', serverCompiler)
+    await Promise.all([compilerListener('client', clientCompiler), compilerListener('server', serverCompiler)])
 
     app.listen(PORT, err => {
       if (err) console.log(err)
