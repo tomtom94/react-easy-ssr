@@ -1,13 +1,18 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { hot } from 'react-hot-loader/root'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useTheme } from 'react-jss'
+import { RouteComponentProps } from 'react-router'
+
 import { Helmet } from 'react-helmet-async'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import exceptionPageStyle from '../../assets/jss/views/exceptionPageStyle'
 
-const Exception: FunctionComponent<any> = props => {
-  const theme = useTheme()
-  const classes: any = exceptionPageStyle({ theme })
+type Props = {
+  routeComponent?: RouteComponentProps
+}
+
+const Exception: FC<Props> = ({ children, routeComponent, ...props }) => {
+  const classes = exceptionPageStyle(props)
   return (
     <>
       <Helmet>

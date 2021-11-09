@@ -13,17 +13,17 @@ const indexRoutes = [
   {
     exact: true,
     path: '/',
-    component: Home
+    Component: Home
   },
   {
     path: '/movies',
-    component: Movies
+    Component: Movies
   },
   {
     path: '/about-us',
-    component: AboutUs
+    Component: AboutUs
   },
-  { name: 'NoMatch', component: NoMatch }
+  { name: 'NoMatch', Component: NoMatch }
 ]
 
 export default indexRoutes

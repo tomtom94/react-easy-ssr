@@ -1,40 +1,40 @@
-import React, { Component, PureComponent, useEffect, FC, useRef } from 'react'
+import React, { FC, useRef } from 'react'
 import { hot } from 'react-hot-loader/root'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
 import { RouteComponentProps } from 'react-router'
-import { useTheme } from 'react-jss'
-import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Grid from '../../components/Grid'
 import moviesStyle from '../../assets/jss/views/moviesStyle'
 
 import { ReduxState } from '../../store/rootReducer'
-import { ActionsRedux, triggerMovies } from '../../store/actions/index'
+import { triggerMovies } from '../../store/actions/index'
 import Loading from '../Exception/Loading'
 
-interface Props extends RouteComponentProps, ReduxState, ActionsRedux {}
+type Props = {
+  routeComponent: RouteComponentProps
+}
 
-const Movies: FC<Props> = props => {
-  const theme = useTheme()
-  const classes: any = moviesStyle({ theme })
-  const willMount = useRef(true)
+const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {
+  const classes = moviesStyle(props)
 
   const dispatch = useDispatch()
-  const app = useSelector((state: ReduxState) => state.app)
-  const { pathname, search } = props.location
+  const { movies } = useSelector((state: ReduxState) => state.app)
+  const { pathname, search } = routeComponent.location
 
+  const willMount = useRef(true)
   if (willMount.current) {
     dispatch(triggerMovies('GET_MOVIES'))
     willMount.current = false
   }
 
-  if (props.staticContext && Object.prototype.hasOwnProperty.call(app.movies, 'error')) {
-    props.staticContext.statusCode = app.movies.error.status
+  if (routeComponent.staticContext && Object.prototype.hasOwnProperty.call(movies, 'error')) {
+    // eslint-disable-next-line no-param-reassign
+    routeComponent.staticContext.statusCode = movies.error.status
   }
 
-  if (app.movies.isLoading) {
+  if (movies.isLoading) {
     return <Loading />
   }
 
@@ -55,21 +55,21 @@ const Movies: FC<Props> = props => {
               <h1 className={classes.title}>{title}</h1>
               <h1 className={classes.subtitle}>{description}</h1>
 
-              {Object.prototype.hasOwnProperty.call(app.movies, 'error') && (
+              {Object.prototype.hasOwnProperty.call(movies, 'error') && (
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                   <div className={classes.message}>
                     <div className={classes.errorMessage}>
                       <span>
                         <FontAwesomeIcon icon="exclamation-triangle" />
                       </span>
-                      <p>{app.movies.error.message}</p>
+                      <p>{movies.error.message}</p>
                     </div>
                   </div>
                 </Grid>
               )}
-              {app.movies.data.length > 0 && (
+              {movies.data.length > 0 && (
                 <ul className={classes.listMovies}>
-                  {app.movies.data.map(e => (
+                  {movies.data.map(e => (
                     <li key={e.id}>
                       <div className={classes.movieJacket}>
                         <img src={`https://image.tmdb.org/t/p/original${e.poster_path}`} alt="jacket" />

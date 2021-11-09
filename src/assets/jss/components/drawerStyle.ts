@@ -1,6 +1,6 @@
 import { createUseStyles } from 'react-jss'
 import { Theme } from '../theme'
-import grassBackground from '../../images/5023.png'
+import grassBackground from '../../images/free_repeating_background_texture-light_green.jpg'
 
 const drawerWidth = 260
 

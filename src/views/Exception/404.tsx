@@ -1,15 +1,18 @@
-import React, { FunctionComponent } from 'react'
+import React, { FC } from 'react'
 import { hot } from 'react-hot-loader/root'
-import { useTheme } from 'react-jss'
+import { RouteComponentProps } from 'react-router'
 
 import { Helmet } from 'react-helmet-async'
 
 import exceptionPageStyle from '../../assets/jss/views/exceptionPageStyle'
 import ExceptionImageUrl, { ReactComponent as ExceptionImage } from '../../assets/images/404.svg'
 
-const Exception: FunctionComponent<any> = props => {
-  const theme = useTheme()
-  const classes: any = exceptionPageStyle({ theme })
+type Props = {
+  routeComponent?: RouteComponentProps
+}
+
+const Exception: FC<Props> = ({ children, routeComponent, ...props }) => {
+  const classes = exceptionPageStyle(props)
   return (
     <>
       <Helmet>

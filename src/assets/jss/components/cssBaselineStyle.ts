@@ -1,9 +1,9 @@
 import { createUseStyles } from 'react-jss'
-import theme from '../theme'
+import { Theme } from '../theme'
 
 // https://github.com/cssinjs/normalize-jss/blob/master/index.js
 // https://material-ui.com/components/css-baseline/
-export default createUseStyles({
+export default createUseStyles((theme: Theme) => ({
   '@global': {
     html: {
       WebkitFontSmoothing: 'antialiased', // Antialiasing.
@@ -345,4 +345,4 @@ export default createUseStyles({
       display: 'none'
     }
   }
-})
+}))

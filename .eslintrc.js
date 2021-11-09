@@ -42,7 +42,8 @@ module.exports = {
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': 'warn',
     'react/jsx-wrap-multilines': 0,
-    'react/no-did-update-set-state': 'off'
+    'react/no-did-update-set-state': 'off',
+    'react/require-default-props': 'off'
   },
   globals: {
     window: true,

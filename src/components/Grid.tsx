@@ -1,5 +1,3 @@
-// This component is copy past of the Material-ui one, here https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/Grid/Grid.js
-
 // A grid component using the following libs as inspiration.
 //
 // For the implementation:
@@ -11,7 +9,7 @@
 // Follow this flexbox Guide to better understand the underlying model:
 // - https://css-tricks.com/snippets/css/a-guide-to-flexbox/
 
-import React, { ReactNode } from 'react'
+import React, { ReactNode, FC } from 'react'
 import classNames from 'classnames'
 import { createUseStyles, useTheme } from 'react-jss'
 import { Theme } from '../assets/jss/theme/index'
@@ -205,7 +203,7 @@ export const styles = createUseStyles((theme: Theme) => {
   }
 })
 
-interface Props {
+type Props = {
   id?: string
   children: ReactNode
   alignContent?: 'stretch' | 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around'
@@ -225,27 +223,27 @@ interface Props {
   zeroMinWidth?: boolean
 }
 
-const Grid = function Grid(props: Props) {
-  const theme = useTheme()
-  const classes: any = styles({ theme })
-  const {
-    alignContent = 'stretch',
-    alignItems = 'stretch',
-    className: classNameProp,
-    container = false,
-    direction = 'row',
-    item = false,
-    justify = 'flex-start',
-    xs = false,
-    sm = false,
-    md = false,
-    lg = false,
-    xl = false,
-    spacing = 0,
-    wrap = 'wrap',
-    zeroMinWidth = false,
-    ...rest
-  } = props
+const Grid: FC<Props> = ({
+  children,
+  id,
+  alignContent = 'stretch',
+  alignItems = 'stretch',
+  className: classNameProp,
+  container = false,
+  direction = 'row',
+  item = false,
+  justify = 'flex-start',
+  xs = false,
+  sm = false,
+  md = false,
+  lg = false,
+  xl = false,
+  spacing = 0,
+  wrap = 'wrap',
+  zeroMinWidth = false,
+  ...props
+}) => {
+  const classes = styles(props)
 
   const className = classNames(
     classes.root,
@@ -268,7 +266,7 @@ const Grid = function Grid(props: Props) {
     classNameProp
   )
 
-  return <div className={className} {...rest} />
+  return <div className={className} {...(id && { id })} {...(children && { children })} />
 }
 
 export default Grid

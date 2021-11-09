@@ -1,25 +1,24 @@
 import React, { Component, PureComponent, useEffect, FC } from 'react'
 import { hot } from 'react-hot-loader/root'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
 import { RouteComponentProps } from 'react-router'
-import { useTheme } from 'react-jss'
 
 import Grid from '../components/Grid'
 import aboutUsStyle from '../assets/jss/views/aboutUsStyle'
 
 import { ReduxState } from '../store/rootReducer'
-import { ActionsRedux } from '../store/actions/index'
 
-interface Props extends RouteComponentProps, ReduxState, ActionsRedux {}
+type Props = {
+  routeComponent: RouteComponentProps
+}
 
-const AboutUs: FC<Props> = props => {
-  const theme = useTheme()
-  const classes: any = aboutUsStyle({ theme })
+const AboutUs: FC<Props> = ({ children, routeComponent, ...props }) => {
+  const classes = aboutUsStyle(props)
 
   const dispatch = useDispatch()
   const app = useSelector((state: ReduxState) => state.app)
-  const { pathname, search } = props.location
+  const { pathname, search } = routeComponent.location
 
   const title = 'About us'
   const description = 'Details about the app'

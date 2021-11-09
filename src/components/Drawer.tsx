@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback, FC, ReactNode } from 'react'
-import { useTheme } from 'react-jss'
+
 import { hot } from 'react-hot-loader/root'
-import { Link, RouteComponentProps } from 'react-router-dom'
 import classNames from 'classnames'
 
 import drawerStyle from '../assets/jss/components/drawerStyle'
@@ -13,16 +12,11 @@ interface Props {
   id: string
 }
 
-const Drawer: FC<Props> = props => {
-  const { id } = props
-
-  const theme = useTheme()
-  const classes: any = drawerStyle({ theme })
+const Drawer: FC<Props> = ({ children, open, onClose, id, ...props }) => {
+  const classes = drawerStyle(props)
 
   const [visible, setVisible] = useState(false)
   const [drawer, setDrawer] = useState(false)
-
-  const { children, open, onClose } = props
 
   useEffect(() => {
     if (open && !drawer) {

@@ -1,7 +1,7 @@
 import { createUseStyles } from 'react-jss'
-import theme from '../theme'
+import { Theme } from '../theme'
 
-export default createUseStyles({
+export default createUseStyles((theme: Theme) => ({
   root: {
     display: 'flex'
   },
@@ -19,4 +19,4 @@ export default createUseStyles({
       padding: '20px 0'
     }
   }
-})
+}))

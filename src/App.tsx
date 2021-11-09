@@ -1,9 +1,9 @@
-import React, { FC, useState, useEffect, useCallback, useRef, PropsWithChildren } from 'react'
-import { Route, Switch, withRouter, Redirect, RouteComponentProps, Link } from 'react-router-dom'
-import { connect, useDispatch, useSelector } from 'react-redux'
+import React, { FC, useEffect, useRef } from 'react'
+import { Route, Switch, withRouter } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { hot } from 'react-hot-loader/root'
-import { useTheme, ThemeProvider } from 'react-jss'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { ThemeProvider } from 'react-jss'
+import { Helmet } from 'react-helmet-async'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faBars, faExclamationTriangle, faSpinner } from '@fortawesome/free-solid-svg-icons'
@@ -13,7 +13,6 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 
 import { ReduxState } from './store/rootReducer'
-import { ActionsRedux } from './store/actions/index'
 import appStyle from './assets/jss/views/appStyle'
 import appleTouchIcon57 from './assets/images/icons/apple-icon-57x57.png'
 import appleTouchIcon60 from './assets/images/icons/apple-icon-60x60.png'
@@ -34,23 +33,20 @@ import './assets/fonts/stylesheet.css'
 
 library.add(faFacebook, faTwitter, faSpinner, faBars, faExclamationTriangle)
 
-type Props = RouteComponentProps
+type Props = {}
 
-const AppProvider: FC<Props> = props => (
+const AppProvider: FC<Props> = ({ children, ...props }) => (
   <ThemeProvider theme={defaultTheme}>
-    <App {...props} />
+    <App />
   </ThemeProvider>
 )
 
-const App: FC<Props> = props => {
-  const theme = useTheme()
-  const classes: any = appStyle({ theme })
+const App: FC<Props> = ({ children, ...props }) => {
+  const classes = appStyle(props)
 
   const dispatch = useDispatch()
   const app = useSelector((state: ReduxState) => state.app)
   const { pathname, search } = useSelector((state: ReduxState) => state.router.location)
-
-  const { ...rest } = props // Just the RouteComponentProps
 
   const oldPage = useRef(pathname)
   useEffect(() => {
@@ -99,20 +95,20 @@ const App: FC<Props> = props => {
         <link rel="canonical" href="https://www.mywebsite.com" />
       </Helmet>
       <main className={classes.app}>
-        <Header {...rest} />
+        <Header />
         <section className={classes.section}>
           <Switch>
-            {routes.map((route, i) => (
+            {routes.map(({ Component, exact, path }, i) => (
               <Route
-                exact={typeof route.exact !== 'undefined' ? route.exact : false}
-                path={route.path}
+                exact={typeof exact !== 'undefined' ? exact : false}
+                path={path}
                 key={i}
-                render={({ ...routerProps }) => <route.component {...rest} {...routerProps} />}
+                render={({ ...routeComponent }) => <Component routeComponent={routeComponent} />}
               />
             ))}
           </Switch>
         </section>
-        <Footer {...rest} />
+        <Footer />
       </main>
     </div>
   )

@@ -1,23 +1,23 @@
 import React, { useEffect, useState, useRef, useCallback, FC } from 'react'
-import { useTheme } from 'react-jss'
 import { hot } from 'react-hot-loader/root'
-import { Link, RouteComponentProps } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useSelector } from 'react-redux'
 import Drawer from './Drawer'
 import headerStyle from '../assets/jss/components/headerStyle'
 import ReactLogoImage from '../assets/images/react.png'
 import CloseImageUrl, { ReactComponent as CloseImage } from '../assets/images/61155.svg'
+import { ReduxState } from '../store/rootReducer'
 
-type Props = RouteComponentProps
+type Props = {}
 
-const Header: FC<Props> = props => {
-  const theme = useTheme()
-  const classes: any = headerStyle({ theme })
+const Header: FC<Props> = ({ children, ...props }) => {
+  const classes = headerStyle(props)
   const [mobileOpen, setMobileOpen] = useState(false)
   const oldMobileOpen = useRef(false)
 
-  const { pathname } = props.location
+  const { pathname, search } = useSelector((state: ReduxState) => state.router.location)
 
   const oldPage = useRef(pathname)
 
