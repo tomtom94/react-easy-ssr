@@ -20,9 +20,6 @@ export default createUseStyles((theme: Theme) => ({
     '& $containerSocialLinks': {
       display: 'flex',
       alignItems: 'center',
-      '& .ie': {
-        '&:hover': { color: '#ffd24d' }
-      },
       '& > a': {
         textDecoration: 'none',
 
@@ -49,11 +46,6 @@ export default createUseStyles((theme: Theme) => ({
       '& > div': {
         display: 'flex',
 
-        '& .ie': {
-          '&:hover': {
-            textDecoration: 'underline'
-          }
-        },
         '& > a': {
           textDecoration: 'none',
           color: 'black',

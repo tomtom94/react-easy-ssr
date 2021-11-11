@@ -21,7 +21,7 @@ const build = async () => {
 
     console.log('Webpack compilation client and server done !')
   } catch (error) {
-    console.error(error.message)
+    console.error(error)
   }
 }
 

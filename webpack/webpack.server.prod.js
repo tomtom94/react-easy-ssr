@@ -30,5 +30,5 @@ module.exports = {
     })
   ],
   externals: [nodeExternals()],
-  stats: 'detailed'
+  stats: 'normal'
 }

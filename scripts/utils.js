@@ -20,17 +20,22 @@ const compilerListener = (name, compiler) => {
     })
 
     compiler.hooks.failed.tap(name, error => {
-      console.log(error)
-      reject(new Error(`Failed to compile ${name}`))
+      reject(error)
     })
     compiler.hooks.done.tap(name, stats => {
       if (!stats.hasErrors()) {
         resolve()
       }
-      stats.compilation.errors.forEach(error => {
-        console.error(error)
-      })
-      reject(new Error(`Failed to compile ${name}`))
+      if (stats.hasErrors()) {
+        stats.compilation.errors.forEach(error => {
+          reject(error)
+        })
+      }
+      if (stats.hasWarnings()) {
+        stats.compilation.warnings.forEach(warning => {
+          console.warn(warning)
+        })
+      }
     })
   })
 }
@@ -45,20 +50,6 @@ const compilation = (err, stats, format) => {
   }
 
   console.log(stats.toString(format))
-
-  const info = stats.toJson(format)
-
-  if (stats.hasErrors()) {
-    info.errors.forEach(error => {
-      console.error(error.message)
-    })
-  }
-
-  if (stats.hasWarnings()) {
-    info.warnings.forEach(warning => {
-      console.warn(warning.message)
-    })
-  }
 }
 
 module.exports = {

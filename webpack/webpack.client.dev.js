@@ -1,9 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
-const WriteFileWebpackPlugin = require('write-file-webpack-plugin')
 const LoadablePlugin = require('@loadable/webpack-plugin')
 const { paths } = require('../scripts/utils')
 
@@ -30,20 +27,8 @@ module.exports = {
   module: require('./loaders.client.js'),
   plugins: [
     new LoadablePlugin(),
-    new WebpackManifestPlugin({
-      seed: {
-        name: 'mywebsite',
-        short_name: 'mywebsite',
-        theme_color: '#ffffff',
-        background_color: '#ffffff',
-        display: 'standalone'
-      }
-    }),
     new MiniCssExtractPlugin(),
-    new WriteFileWebpackPlugin(),
-    new FriendlyErrorsWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.BROWSER': 'true'
     })

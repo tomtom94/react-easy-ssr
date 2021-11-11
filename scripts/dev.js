@@ -84,7 +84,7 @@ const start = async () => {
       process.exit(1)
     })
   } catch (error) {
-    console.error(error.message)
+    console.error(error)
   }
 }
 
