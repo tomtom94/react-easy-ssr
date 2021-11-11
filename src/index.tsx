@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { ConnectedRouter } from 'connected-react-router'
-import { hot } from 'react-hot-loader/root'
 import { HelmetProvider } from 'react-helmet-async'
 
 import { Provider } from 'react-redux'
@@ -22,8 +21,6 @@ const store = configureStore(preloadedState, history)
 store.runSaga(rootSaga)
 
 jss.use(vendorPrefixer())
-
-const HotApp = hot(App)
 
 const Main = () => {
   useEffect(() => {
