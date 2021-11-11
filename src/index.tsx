@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { Router } from 'react-router-dom'
 import { ConnectedRouter } from 'connected-react-router'
 import { hot } from 'react-hot-loader/root'
-import { Helmet, HelmetProvider } from 'react-helmet-async'
+import { HelmetProvider } from 'react-helmet-async'
 
 import { Provider } from 'react-redux'
 import { loadableReady } from '@loadable/component'
-import { JssProvider, SheetsRegistry, createGenerateId, jss } from 'react-jss'
+import { JssProvider, jss } from 'react-jss'
 
 import window from 'global/window'
 import vendorPrefixer from 'jss-plugin-vendor-prefixer'
@@ -42,7 +41,7 @@ const Main = () => {
       <ConnectedRouter history={history}>
         <HelmetProvider>
           <JssProvider jss={jss} classNamePrefix="app-">
-            <HotApp />
+            <App />
           </JssProvider>
         </HelmetProvider>
       </ConnectedRouter>
@@ -51,14 +50,15 @@ const Main = () => {
 }
 
 const clientApp = () => {
+  const { hostname } = window.location
   if (
     process.env.NODE_ENV === 'development' ||
     (process.env.NODE_ENV === 'production' &&
-      (window.location.hostname === 'www.mywebsite.com' ||
-        window.location.hostname === 'mywebsite.com' ||
-        window.location.hostname === 'react-easy-ssr.herokuapp.com' ||
-        window.location.hostname === 'localhost' ||
-        window.location.hostname === '192.168.0.20'))
+      (hostname === 'www.mywebsite.com' ||
+        hostname === 'mywebsite.com' ||
+        hostname === 'react-easy-ssr.herokuapp.com' ||
+        hostname === 'localhost' ||
+        hostname === '192.168.0.20'))
   ) {
     loadableReady(() => {
       ReactDOM.hydrate(<Main />, document.querySelector('#root'))

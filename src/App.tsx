@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react'
-import { Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { hot } from 'react-hot-loader/root'
 import { ThemeProvider } from 'react-jss'
@@ -114,4 +114,4 @@ const App: FC<Props> = ({ children, ...props }) => {
   )
 }
 
-export default hot(withRouter(AppProvider))
+export default hot(AppProvider)
