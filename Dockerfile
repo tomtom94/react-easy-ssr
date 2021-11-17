@@ -16,4 +16,4 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["node", "dist/server/server.js"]
+ENTRYPOINT ["node", "dist/server/server.js"]
