@@ -20,4 +20,4 @@ RUN chmod +x ./heroku-entrypoint.sh
 
 ENTRYPOINT ["./heroku-entrypoint.sh"]
 
-CMD ["heroku-entrypoint.sh", "node", "dist/server/server.js"]
+CMD ["node", "dist/server/server.js"]
