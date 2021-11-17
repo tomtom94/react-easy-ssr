@@ -12,8 +12,12 @@ ENV PORT 80
 
 ENV BACKEND_BASE_URL https://server.mywebsite.com
 
+RUN chmod +x heroku-entrypoint.sh
+
 COPY . .
 
 EXPOSE 80
 
-ENTRYPOINT ["node", "dist/server/server.js"]
+ENTRYPOINT ["heroku-entrypoint.sh"]
+
+CMD ["heroku-entrypoint.sh", "node", "dist/server/server.js"]
