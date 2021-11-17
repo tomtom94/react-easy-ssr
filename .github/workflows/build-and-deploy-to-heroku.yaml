@@ -47,7 +47,7 @@ jobs:
         name: Build & push Docker image
         with:
           image: react-easy-ssr
-          # tag: ${GITHUB_REF##*/}
+          tag: latest
           registry: registry.heroku.com/react-easy-ssr/web
           dockerfile: Dockerfile
           username: thomas.aumaitre@gmail.com
