@@ -8,8 +8,8 @@ COPY ./static ./static
 
 EXPOSE 80
 
-RUN chmod +x heroku-entrypoint.sh
+RUN chmod +x ./heroku-entrypoint.sh
 
-ENTRYPOINT ["heroku-entrypoint.sh"]
+ENTRYPOINT ["./heroku-entrypoint.sh"]
 
 CMD ["nginx", "-g", "daemon off;"]
