@@ -41,9 +41,12 @@ jobs:
           user-email: thomas.aumaitre@gmail.com
           commit-message: "#patch new front static files"
 
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12 
+      - uses: mr-smithers-excellent/docker-build-push@v3
+        name: Build & push Docker image
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "react-easy-ssr"
-          heroku_email: "thomas.aumaitre@gmail.com"
+          image: react-easy-ssr
+          tag: ${GITHUB_REF##*/}
+          registry: registry.heroku.com/react-easy-ssr/web
+          dockerfile: Dockerfile
+          username: thomas.aumaitre@gmail.com
+          password: ${{ secrets.HEROKU_API_KEY }}
