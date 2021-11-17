@@ -15,7 +15,6 @@ ENV BACKEND_BASE_URL https://server.mywebsite.com
 RUN apk add --update npm
 
 COPY . .
-COPY ./dist .
 
 EXPOSE 80
 
