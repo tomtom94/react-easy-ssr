@@ -3,4 +3,7 @@ build:
     web: Dockerfile
 run:
   web: bundle exec puma -C config/puma.rb
-  worker: nginx -g daemon off;
+  worker:
+    command:
+      - nginx -g daemon off;
+    image: web

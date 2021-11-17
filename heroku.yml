@@ -3,4 +3,7 @@ build:
     web: Dockerfile
 run:
   web: bundle exec puma -C config/puma.rb
-  worker: node dist/server/server.js
+  worker:
+    command:
+      - node dist/server/server.js
+    image: web
