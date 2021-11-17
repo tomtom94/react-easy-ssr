@@ -16,7 +16,8 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v3
         name: Build & push Docker image
         with:
-          registry: registry.heroku.com/react-easy-ssr-staticfiles/web
+          image: react-easy-ssr-staticfiles/web
+          registry: registry.heroku.com
           dockerfile: Dockerfile
           username: thomas.aumaitre@gmail.com
           password: ${{ secrets.HEROKU_API_KEY }}
