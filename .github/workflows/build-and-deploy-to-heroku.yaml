@@ -68,13 +68,6 @@ jobs:
           HEROKU_EMAIL: thomas.aumaitre@gmail.com
 
       - name: Release the image just built
-        run: heroku container:release --app $HEROKU_APP_NAME
+        run: heroku container:release --app $HEROKU_APP_NAME web
         env:
           HEROKU_APP_NAME: react-easy-ssr
-
-      # - name: Deploy to Heroku
-      #   uses: akhileshns/heroku-deploy@v3.12.12 
-      #   with:
-      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-      #     heroku_app_name: "react-easy-ssr"
-      #     heroku_email: "thomas.aumaitre@gmail.com"
