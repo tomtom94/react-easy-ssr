@@ -16,8 +16,6 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v3
         name: Build & push Docker image
         with:
-          image: react-easy-ssr-staticfiles
-          tag: latest
           registry: registry.heroku.com/react-easy-ssr-staticfiles/web
           dockerfile: Dockerfile
           username: thomas.aumaitre@gmail.com
