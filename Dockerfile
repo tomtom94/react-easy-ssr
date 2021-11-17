@@ -12,6 +12,8 @@ ENV PORT 80
 
 ENV BACKEND_BASE_URL https://server.mywebsite.com
 
+RUN apk add --update npm
+
 COPY . .
 
 EXPOSE 80
