@@ -4,7 +4,7 @@ WORKDIR /var/www
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY ./static ./static
+COPY . .
 
 EXPOSE 80
 
