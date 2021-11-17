@@ -4,7 +4,7 @@
   "description": "React easy SSR application",
   "main": "dist/server/server.js",
   "engines": {
-    "node": "13.9.x"
+    "node": "14.16.1"
   },
   "repository": {
     "type": "git"
@@ -14,10 +14,7 @@
     "email": "thomas.aumaitre@gmail.com"
   },
   "browserslist": [
-    "last 1 version",
-    "> 1%",
-    "maintained node versions",
-    "not dead"
+    "defaults"
   ],
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {

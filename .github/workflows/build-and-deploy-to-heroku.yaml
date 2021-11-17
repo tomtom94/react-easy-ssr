@@ -1,0 +1,49 @@
+name: 2) Build and deploy to Heroku
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    name: Build and push image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Check out code
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+
+      - run: npm install
+
+      - run: npm run build
+        env:
+          BACKEND_BASE_URL: 'https://server.mywebsite.com'
+
+      - name: Past new static files
+        uses: canastro/copy-file-action@master
+        with:
+          source: dist/client/static/.
+          target: staticfiles_container/static/
+          flags: '-r'
+
+      - name: Push to the repository which will create the staticfiles pod into the cluster
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.REPO_ACCESS_TOKEN }}
+        with:
+          source-directory: 'staticfiles_container'
+          destination-github-username: 'tomtom94'
+          destination-repository-name: 'react-easy-ssr-staticfiles'
+          user-email: thomas.aumaitre@gmail.com
+          commit-message: "#patch new front static files"
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12 
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "react-easy-ssr"
+          heroku_email: "thomas.aumaitre@gmail.com"

@@ -1,0 +1,25 @@
+name: 1) Upgrade tag version
+
+on:
+  push:
+    branches:
+      - issue-5
+  pull_request:
+    branches:
+      - issue-5
+
+jobs:
+  build:
+    name: Generate tag
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        name: Check out code
+        with:
+          fetch-depth: '0'
+      - uses: ChloePlanet/github-tag-action@master
+        name: Bump version and push tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          WITH_V: true
+          RELEASE_BRANCHES: master,issue-5
