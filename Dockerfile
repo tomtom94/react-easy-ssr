@@ -16,4 +16,6 @@ COPY . .
 
 EXPOSE 80
 
+RUN chmod +x ./heroku-entrypoint.sh
+
 CMD ["./heroku-entrypoint.sh", "node", "dist/server/server.js"]
