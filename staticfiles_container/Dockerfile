@@ -8,4 +8,4 @@ COPY ./static ./static
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["./heroku-entrypoint.sh", "nginx", "-g", "daemon off;"]
