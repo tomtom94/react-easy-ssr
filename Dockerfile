@@ -16,4 +16,4 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["node", "dist/server/server.js"]
+CMD ["/bin/bash", "-c", "node", "dist/server/server.js"]

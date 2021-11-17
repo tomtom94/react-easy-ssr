@@ -8,4 +8,4 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/bin/bash", "-c", "nginx", "-g", "daemon off;"]
