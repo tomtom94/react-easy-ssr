@@ -29,7 +29,7 @@ jobs:
         uses: canastro/copy-file-action@master
         with:
           source: dist/client/static/.
-          target: staticfiles_pod/static/
+          target: public/static/
           flags: '-r'
 
       - name: Copy past static files
