@@ -36,7 +36,7 @@ jobs:
         uses: andstor/copycat-action@v3
         with:
           personal_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          src_path: /public
+          src_path: public
           dst_path: .
           dst_owner: tomtom94
           dst_repo_name: react-easy-ssr-staticfiles
