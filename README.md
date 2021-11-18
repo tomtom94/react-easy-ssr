@@ -128,7 +128,7 @@ You also better use another search engine sometimes. `Google.com` is enough. And
 
 When pushing or merging a pull request on master branch, you can trigger the CI with a code included in the commit message, just use `#major` or `#patch`.
 
-Example of commit message in order to start a deployment
+Example of commit message in order to start a deployment :
 
 ```git
 git commit -m "#major this is a big commit"
