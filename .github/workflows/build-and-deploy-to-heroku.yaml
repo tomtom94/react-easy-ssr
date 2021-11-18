@@ -25,19 +25,19 @@ jobs:
         env:
           BACKEND_BASE_URL: 'https://server.mywebsite.com'
 
-      - name: Past new static files
+      - name: Deplace static files
         uses: canastro/copy-file-action@master
         with:
           source: dist/client/static/.
           target: public/static/
           flags: '-r'
 
-      - name: Copy past static files
+      - name: Copy past static files to other repository
         uses: andstor/copycat-action@v3
         with:
           personal_token: ${{ secrets.REPO_ACCESS_TOKEN }}
           src_path: public/.
-          dst_path: /.
+          dst_path: .
           dst_owner: tomtom94
           dst_repo_name: react-easy-ssr-staticfiles
           clean: (contains(github.event.head_commit.message, '#flushstaticfiles'))
