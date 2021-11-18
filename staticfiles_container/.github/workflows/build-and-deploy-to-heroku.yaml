@@ -17,6 +17,7 @@ jobs:
         name: Build & push Docker image
         with:
           image: react-easy-ssr-staticfiles/web
+          tag: latest
           registry: registry.heroku.com
           dockerfile: Dockerfile
           username: thomas.aumaitre@gmail.com
