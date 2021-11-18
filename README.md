@@ -7,7 +7,9 @@
 
 React App with SSR. Webpack 5 installed manually. In dev mode we use live reload thanks to `webpack-dev-middleware` & `webpack-hot-middleware` modules.
 
-The other main modules used are `redux-saga`, `loadable-component`, `react-jss` and `Typescript`.
+Main modules used are `redux-saga`, `loadable-component`, `react-jss` and `Typescript`.
+
+Free and easy to used CI/CD with Github Actions and Heroku.
 
 Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr.herokuapp.com)
 
@@ -21,6 +23,7 @@ Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr
     - [With Node.js](#With-Nodejs)
     - [With Docker](#With-Docker)
 - [Must know about the app](#Must-know-about-the-app)
+  - [Continious Integration with Github Actions](#Continious-Integration-with-Github-Actions)
   - [Checks to do sometimes](#Checks-to-do-sometimes)
   - [Components](#Components)
   - [ES6 Imports possible in JSX](#ES6-Imports-possible-in-JSX)
@@ -120,6 +123,23 @@ You wanna work on the application ?
 it's recommended to use `prettier` and `eslint` on you IDE (Visual Studio Code for example). Just note by default prettier don't touch `.ts` and `.tsx` extension files, [you must make a speacial manipulation in Visual Studio Code](https://levelup.gitconnected.com/setting-up-eslint-with-prettier-typescript-and-visual-studio-code-d113bbec9857?) in your `settings.json`
 
 You also better use another search engine sometimes. `Google.com` is enough. And enough is enough. We have a good search engine in Europe (finance by the European Investment Bank at 25 million in 2015) just use `Qwant.com` at least when you search for easy stuff, this is a good start. Moreover this is a french one ;) just use [Qwant.com](https://qwant.com)
+
+### Continious Integration with Github Actions
+
+When pushing or merging a pull request on master branch, you can trigger the CI with a code included in the commit message, just use `#major` or `#patch`.
+
+Example of commit message in order to start a deployment
+```git
+git add .
+git commit -m "#major this is a big commit"
+git push
+```
+
+```git
+git add .
+git commit -m "#patch this is a tiny commit"
+git push
+```
 
 ### Checks to do sometimes
 
