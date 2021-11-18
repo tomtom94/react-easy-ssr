@@ -17,7 +17,7 @@ module.exports = {
   output: {
     path: path.join(paths.clientBuild, paths.publicPath),
     filename: 'bundle-[fullhash].js',
-    publicPath: `https://react-easy-ssr-staticfiles.herokuapp.com${paths.publicPath}`
+    publicPath: `https://react-easy-ssr-staticfiles.herokuapp.com/`
   },
   resolve: {
     modules: [paths.src, 'node_modules'],
