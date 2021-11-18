@@ -36,8 +36,8 @@ app.use(cors())
 app.use(compression())
 
 app.get('/robots.txt', (req: Request, res: Response) => {
-  res.type('text/plain')
-  res.send('User-agent: *\nSitemap: ${BASE_URL}/sitemap.xml')
+  res.type(`text/plain`)
+  res.send(`User-agent: *\nSitemap: ${BASE_URL}/sitemap.xml`)
 })
 
 if (process.env.NODE_ENV === 'production') {
