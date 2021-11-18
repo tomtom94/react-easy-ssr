@@ -30,7 +30,7 @@ jobs:
         with:
           personal_token: ${{ secrets.REPO_ACCESS_TOKEN }}
           src_path: /dist/client/static/.
-          dst_path: /public/static/
+          dst_path: /static/
           dst_owner: tomtom94
           dst_repo_name: react-easy-ssr-staticfiles
           clean: (contains(github.event.head_commit.message, '#flushstaticfiles'))
