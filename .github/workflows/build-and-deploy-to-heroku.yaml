@@ -29,7 +29,7 @@ jobs:
         uses: canastro/copy-file-action@master
         with:
           source: dist/client/static/.
-          target: staticfiles_container/static/
+          target: public/static/
           flags: '-r'
 
       - name: Push to the repository which will create the staticfiles pod into the cluster
@@ -37,7 +37,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.REPO_ACCESS_TOKEN }}
         with:
-          source-directory: 'staticfiles_container'
+          source-directory: 'public'
           destination-github-username: 'tomtom94'
           destination-repository-name: 'react-easy-ssr-staticfiles'
           user-email: thomas.aumaitre@gmail.com
