@@ -1,0 +1,73 @@
+name: 2) Build and deploy to Heroku
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    name: Build and push image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Check out code
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+
+      - run: npm install
+
+      - run: npm run build
+        env:
+          BACKEND_BASE_URL: 'https://server.mywebsite.com'
+
+      - name: Past new static files
+        uses: canastro/copy-file-action@master
+        with:
+          source: dist/client/static/.
+          target: public/static/
+          flags: '-r'
+
+      - name: Push to the repository which will create the staticfiles container
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.REPO_ACCESS_TOKEN }}
+        with:
+          source-directory: 'public'
+          destination-github-username: 'tomtom94'
+          destination-repository-name: 'react-easy-ssr-staticfiles'
+          user-email: thomas.aumaitre@gmail.com
+          commit-message: "#patch new front static files"
+
+      - uses: mr-smithers-excellent/docker-build-push@v3
+        name: Build & push Docker image
+        with:
+          image: react-easy-ssr/web
+          tag: latest
+          registry: registry.heroku.com
+          dockerfile: Dockerfile
+          username: thomas.aumaitre@gmail.com
+          password: ${{ secrets.HEROKU_API_KEY }}
+
+      - name: Custom Heroku login credentials
+        run: |
+          cat > ~/.netrc <<EOF
+            machine api.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+            machine git.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+          EOF
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_EMAIL: thomas.aumaitre@gmail.com
+
+      - name: Release the image just built
+        run: heroku container:release --app $HEROKU_APP_NAME web
+        env:
+          HEROKU_APP_NAME: react-easy-ssr

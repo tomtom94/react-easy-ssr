@@ -1,0 +1,43 @@
+name: 2) Build and deploy to Heroku
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build:
+    name: Build and push image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Check out code
+
+      - uses: mr-smithers-excellent/docker-build-push@v3
+        name: Build & push Docker image
+        with:
+          image: react-easy-ssr-staticfiles/web
+          tag: latest
+          registry: registry.heroku.com
+          dockerfile: Dockerfile
+          username: thomas.aumaitre@gmail.com
+          password: ${{ secrets.HEROKU_API_KEY }}
+
+      - name: Custom Heroku login credentials
+        run: |
+          cat > ~/.netrc <<EOF
+            machine api.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+            machine git.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+          EOF
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_EMAIL: thomas.aumaitre@gmail.com
+
+      - name: Release the image just built
+        run: heroku container:release --app $HEROKU_APP_NAME web
+        env:
+          HEROKU_APP_NAME: react-easy-ssr-staticfiles

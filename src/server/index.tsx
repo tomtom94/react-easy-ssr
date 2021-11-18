@@ -36,8 +36,8 @@ app.use(cors())
 app.use(compression())
 
 app.get('/robots.txt', (req: Request, res: Response) => {
-  res.type('text/plain')
-  res.send('User-agent: *\nSitemap: https://www.mywebsite.com/sitemap.xml')
+  res.type(`text/plain`)
+  res.send(`User-agent: *\nSitemap: ${BASE_URL}/sitemap.xml`)
 })
 
 if (process.env.NODE_ENV === 'production') {
@@ -46,13 +46,13 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   /**
-   * This line should in normal time only be used in development mode
-   * In production mode you need to separate static files from the main Express.js frontend server
+   * This line is only used in development mode
+   * In production mode we separate static files from the main Express.js frontend server
    * By separating them, you discharge tensions on this Express.js frontend server
    * It now depends what kind of router you are using, Nginx my favorite, Traefik. The rule
-   * is to make a redirection for example like this https://www.mywebsite.com/static/15.bundle-832a294529dcad5060bd.js
+   * is to make a redirection for example like this https://react-easy-ssr-staticfiles.herokuapp.com/15.bundle-832a294529dcad5060bd.js
    * and now the static bundle file 15.bundle-832a294529dcad5060bd.js is served.
    * In order to achieve this you need a good CI which will do npm run build, then copy the build in an other
    * docker container to serve it through /static/ path
