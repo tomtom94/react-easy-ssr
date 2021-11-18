@@ -138,12 +138,6 @@ git commit -m "#major this is a big commit"
 git commit -m "#patch this is a tiny commit"
 ```
 
-In case you don't wanna keep the old static files just use `#flushstaticfiles`
-
-```git
-git commit -m "#patch #flushstaticfiles this is a tiny commit"
-```
-
 ### Checks to do sometimes
 
 - Check typescript `npm run tsc`
