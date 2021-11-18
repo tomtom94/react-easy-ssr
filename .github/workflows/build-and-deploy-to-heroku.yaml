@@ -25,23 +25,23 @@ jobs:
         env:
           BACKEND_BASE_URL: 'https://server.mywebsite.com'
 
-      - name: Deplace static files
+      - name: Past new static files
         uses: canastro/copy-file-action@master
         with:
           source: dist/client/static/.
           target: public/static/
           flags: '-r'
 
-      - name: Copy past static files to other repository
-        uses: andstor/copycat-action@v3
+      - name: Push to the repository which will create the staticfiles container
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.REPO_ACCESS_TOKEN }}
         with:
-          personal_token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          src_path: public
-          dst_path: .
-          dst_owner: tomtom94
-          dst_repo_name: react-easy-ssr-staticfiles
-          clean: (contains(github.event.head_commit.message, '#flushstaticfiles'))
-          commit_message: "#patch new front static files"
+          source-directory: 'public'
+          destination-github-username: 'tomtom94'
+          destination-repository-name: 'react-easy-ssr-staticfiles'
+          user-email: thomas.aumaitre@gmail.com
+          commit-message: "#patch new front static files"
 
       - uses: mr-smithers-excellent/docker-build-push@v3
         name: Build & push Docker image
