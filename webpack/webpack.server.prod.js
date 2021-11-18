@@ -13,7 +13,7 @@ module.exports = {
   output: {
     path: paths.serverBuild,
     filename: 'server.js',
-    publicPath: `https://react-easy-ssr-staticfiles.herokuapp.com/`,
+    publicPath: `https://react-easy-ssr-staticfiles.herokuapp.com${paths.publicPath}`,
     libraryTarget: 'commonjs2'
   },
   resolve: {
