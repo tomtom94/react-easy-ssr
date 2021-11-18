@@ -7,8 +7,8 @@ const renderFullPage = (html, css, fontAwesomeCss, styleTags, store, helmet, scr
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <link rel="stylesheet" type="text/css" href="${
-      process.env.NODE_ENV === 'production' ? `https://react-easy-ssr-staticfiles.herokuapp.com` : ``
-    }/static/bundle.css" />
+      process.env.NODE_ENV === 'production' ? `https://react-easy-ssr-staticfiles.herokuapp.com` : `/static`
+    }/bundle.css" />
     
     ${helmet.title.toString()}
     ${helmet.meta.toString()}
