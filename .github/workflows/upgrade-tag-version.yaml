@@ -3,10 +3,10 @@ name: 1) Upgrade tag version
 on:
   push:
     branches:
-      - master
+      - issue-5
   pull_request:
     branches:
-      - master
+      - issue-5
 
 jobs:
   build:
