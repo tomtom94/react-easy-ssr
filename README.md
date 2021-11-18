@@ -4,14 +4,13 @@
 
 <img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/gifs/wave.gif" width="15" alt="star github"> Hello, thanks to give me a star for this project.
 
-
 ## Introduction
 
 React App with SSR. Webpack 5 installed manually. In dev mode we use live reload thanks to `webpack-dev-middleware` & `webpack-hot-middleware` modules.
 
 Main modules used are `redux-saga`, `loadable-component`, `react-jss` and `Typescript`.
 
-<img src="https://gifimage.net/wp-content/uploads/2017/10/new-icon-gif-animation-14.gif" width="25" alt="star github"> Free and easy to use CI/CD with Github Actions and Heroku.
+<img src="https://gifimage.net/wp-content/uploads/2017/10/new-icon-gif-animation-14.gif" width="25" alt="star github"> [Free and easy to use CI/CD](#Continious-Integration-with-Github-Actions) with Github Actions and Heroku.
 
 Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr.herokuapp.com)
 
