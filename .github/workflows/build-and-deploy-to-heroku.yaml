@@ -32,16 +32,16 @@ jobs:
           target: public/static/
           flags: '-r'
 
-      - name: Push to the repository which will create the staticfiles container
-        uses: cpina/github-action-push-to-another-repository@master
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.REPO_ACCESS_TOKEN }}
+      - uses: mr-smithers-excellent/docker-build-push@v3
+        name: Build & push Docker image
         with:
-          source-directory: 'public'
-          destination-github-username: 'tomtom94'
-          destination-repository-name: 'react-easy-ssr-staticfiles'
-          user-email: thomas.aumaitre@gmail.com
-          commit-message: "#patch new front static files"
+          image: react-easy-ssr-staticfiles/web
+          tag: latest
+          registry: registry.heroku.com
+          directory: public
+          dockerfile: Dockerfile
+          username: thomas.aumaitre@gmail.com
+          password: ${{ secrets.HEROKU_API_KEY }}
 
       - uses: mr-smithers-excellent/docker-build-push@v3
         name: Build & push Docker image
@@ -71,3 +71,8 @@ jobs:
         run: heroku container:release --app $HEROKU_APP_NAME web
         env:
           HEROKU_APP_NAME: react-easy-ssr
+
+      - name: Release the image just built
+        run: heroku container:release --app $HEROKU_APP_NAME web
+        env:
+          HEROKU_APP_NAME: react-easy-ssr-staticfiles
