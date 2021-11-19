@@ -38,7 +38,8 @@ jobs:
           image: react-easy-ssr-staticfiles/web
           tag: latest
           registry: registry.heroku.com
-          dockerfile: ./public/Dockerfile
+          directory: public
+          dockerfile: Dockerfile
           username: thomas.aumaitre@gmail.com
           password: ${{ secrets.HEROKU_API_KEY }}
 
