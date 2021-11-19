@@ -39,7 +39,7 @@ jobs:
           tag: latest
           registry: registry.heroku.com
           directory: public
-          dockerfile: Dockerfile
+          dockerfile: ./public/Dockerfile
           username: thomas.aumaitre@gmail.com
           password: ${{ secrets.HEROKU_API_KEY }}
 
