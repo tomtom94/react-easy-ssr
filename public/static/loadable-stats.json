@@ -1,47 +1,47 @@
 {
   "name": "client",
-  "hash": "d986780afe549597ad05",
+  "hash": "da6abfbec638b328d609",
   "publicPath": "https://react-easy-ssr-staticfiles.herokuapp.com/static/",
   "outputPath": "/home/runner/work/react-easy-ssr/react-easy-ssr/dist/client/static/",
   "assetsByChunkName": {
     "bundle": [
       "bundle.css",
-      "bundle-d986780afe549597ad05.js"
+      "bundle-da6abfbec638b328d609.js"
     ],
     "Forbidden": [
-      "875.bundle-d986780afe549597ad05.js"
+      "875.bundle-da6abfbec638b328d609.js"
     ],
     "NoMatch": [
-      "680.bundle-d986780afe549597ad05.js"
+      "680.bundle-da6abfbec638b328d609.js"
     ],
     "ServerDown": [
-      "644.bundle-d986780afe549597ad05.js"
+      "644.bundle-da6abfbec638b328d609.js"
     ],
     "Home": [
-      "268.bundle-d986780afe549597ad05.js"
+      "268.bundle-da6abfbec638b328d609.js"
     ],
     "Movies": [
-      "249.bundle-d986780afe549597ad05.js"
+      "249.bundle-da6abfbec638b328d609.js"
     ],
     "AboutUs": [
-      "930.bundle-d986780afe549597ad05.js"
+      "930.bundle-da6abfbec638b328d609.js"
     ]
   },
   "assets": [
     {
       "type": "asset",
-      "name": "bundle-d986780afe549597ad05.js",
+      "name": "bundle-da6abfbec638b328d609.js",
       "size": 548394,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
       "info": {
         "immutable": true,
-        "fullhash": "d986780afe549597ad05",
+        "fullhash": "da6abfbec638b328d609",
         "javascriptModule": false,
         "minimized": true,
         "related": {
-          "license": "bundle-d986780afe549597ad05.js.LICENSE.txt"
+          "license": "bundle-da6abfbec638b328d609.js.LICENSE.txt"
         }
       },
       "chunkNames": [
@@ -58,14 +58,14 @@
     },
     {
       "type": "asset",
-      "name": "644.bundle-d986780afe549597ad05.js",
+      "name": "644.bundle-da6abfbec638b328d609.js",
       "size": 118063,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
       "info": {
         "immutable": true,
-        "fullhash": "d986780afe549597ad05",
+        "fullhash": "da6abfbec638b328d609",
         "javascriptModule": false,
         "minimized": true
       },
@@ -82,14 +82,14 @@
     },
     {
       "type": "asset",
-      "name": "680.bundle-d986780afe549597ad05.js",
+      "name": "680.bundle-da6abfbec638b328d609.js",
       "size": 116311,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
       "info": {
         "immutable": true,
-        "fullhash": "d986780afe549597ad05",
+        "fullhash": "da6abfbec638b328d609",
         "javascriptModule": false,
         "minimized": true
       },
@@ -121,14 +121,14 @@
     },
     {
       "type": "asset",
-      "name": "875.bundle-d986780afe549597ad05.js",
+      "name": "875.bundle-da6abfbec638b328d609.js",
       "size": 71493,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
       "info": {
         "immutable": true,
-        "fullhash": "d986780afe549597ad05",
+        "fullhash": "da6abfbec638b328d609",
         "javascriptModule": false,
         "minimized": true
       },
@@ -160,14 +160,14 @@
     },
     {
       "type": "asset",
-      "name": "249.bundle-d986780afe549597ad05.js",
+      "name": "249.bundle-da6abfbec638b328d609.js",
       "size": 14946,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
       "info": {
         "immutable": true,
-        "fullhash": "d986780afe549597ad05",
+        "fullhash": "da6abfbec638b328d609",
         "javascriptModule": false,
         "minimized": true
       },
@@ -278,14 +278,14 @@
     },
     {
       "type": "asset",
-      "name": "268.bundle-d986780afe549597ad05.js",
+      "name": "268.bundle-da6abfbec638b328d609.js",
       "size": 8076,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
       "info": {
         "immutable": true,
-        "fullhash": "d986780afe549597ad05",
+        "fullhash": "da6abfbec638b328d609",
         "javascriptModule": false,
         "minimized": true
       },
@@ -347,14 +347,14 @@
     },
     {
       "type": "asset",
-      "name": "930.bundle-d986780afe549597ad05.js",
-      "size": 7376,
+      "name": "930.bundle-da6abfbec638b328d609.js",
+      "size": 7355,
       "emitted": false,
       "comparedForEmit": false,
       "cached": true,
       "info": {
         "immutable": true,
-        "fullhash": "d986780afe549597ad05",
+        "fullhash": "da6abfbec638b328d609",
         "javascriptModule": false,
         "minimized": true
       },
@@ -647,7 +647,7 @@
           "name": "bundle.css"
         },
         {
-          "name": "bundle-d986780afe549597ad05.js"
+          "name": "bundle-da6abfbec638b328d609.js"
         }
       ],
       "filteredAssets": 0,
@@ -663,7 +663,7 @@
             ],
             "assets": [
               {
-                "name": "930.bundle-d986780afe549597ad05.js"
+                "name": "930.bundle-da6abfbec638b328d609.js"
               }
             ],
             "filteredAssets": 0,
@@ -676,7 +676,7 @@
             ],
             "assets": [
               {
-                "name": "268.bundle-d986780afe549597ad05.js"
+                "name": "268.bundle-da6abfbec638b328d609.js"
               }
             ],
             "filteredAssets": 0,
@@ -689,7 +689,7 @@
             ],
             "assets": [
               {
-                "name": "249.bundle-d986780afe549597ad05.js"
+                "name": "249.bundle-da6abfbec638b328d609.js"
               }
             ],
             "filteredAssets": 0,
@@ -702,7 +702,7 @@
             ],
             "assets": [
               {
-                "name": "875.bundle-d986780afe549597ad05.js"
+                "name": "875.bundle-da6abfbec638b328d609.js"
               }
             ],
             "filteredAssets": 0,
@@ -715,7 +715,7 @@
             ],
             "assets": [
               {
-                "name": "680.bundle-d986780afe549597ad05.js"
+                "name": "680.bundle-da6abfbec638b328d609.js"
               }
             ],
             "filteredAssets": 0,
@@ -728,7 +728,7 @@
             ],
             "assets": [
               {
-                "name": "644.bundle-d986780afe549597ad05.js"
+                "name": "644.bundle-da6abfbec638b328d609.js"
               }
             ],
             "filteredAssets": 0,
@@ -738,12 +738,12 @@
       },
       "childAssets": {
         "prefetch": [
-          "930.bundle-d986780afe549597ad05.js",
-          "268.bundle-d986780afe549597ad05.js",
-          "249.bundle-d986780afe549597ad05.js",
-          "875.bundle-d986780afe549597ad05.js",
-          "680.bundle-d986780afe549597ad05.js",
-          "644.bundle-d986780afe549597ad05.js"
+          "930.bundle-da6abfbec638b328d609.js",
+          "268.bundle-da6abfbec638b328d609.js",
+          "249.bundle-da6abfbec638b328d609.js",
+          "875.bundle-da6abfbec638b328d609.js",
+          "680.bundle-da6abfbec638b328d609.js",
+          "644.bundle-da6abfbec638b328d609.js"
         ]
       }
     },
@@ -754,7 +754,7 @@
       ],
       "assets": [
         {
-          "name": "875.bundle-d986780afe549597ad05.js"
+          "name": "875.bundle-da6abfbec638b328d609.js"
         }
       ],
       "filteredAssets": 0,
@@ -771,7 +771,7 @@
       ],
       "assets": [
         {
-          "name": "680.bundle-d986780afe549597ad05.js"
+          "name": "680.bundle-da6abfbec638b328d609.js"
         }
       ],
       "filteredAssets": 0,
@@ -788,7 +788,7 @@
       ],
       "assets": [
         {
-          "name": "644.bundle-d986780afe549597ad05.js"
+          "name": "644.bundle-da6abfbec638b328d609.js"
         }
       ],
       "filteredAssets": 0,
@@ -805,7 +805,7 @@
       ],
       "assets": [
         {
-          "name": "268.bundle-d986780afe549597ad05.js"
+          "name": "268.bundle-da6abfbec638b328d609.js"
         }
       ],
       "filteredAssets": 0,
@@ -822,7 +822,7 @@
       ],
       "assets": [
         {
-          "name": "249.bundle-d986780afe549597ad05.js"
+          "name": "249.bundle-da6abfbec638b328d609.js"
         }
       ],
       "filteredAssets": 0,
@@ -839,7 +839,7 @@
       ],
       "assets": [
         {
-          "name": "930.bundle-d986780afe549597ad05.js"
+          "name": "930.bundle-da6abfbec638b328d609.js"
         }
       ],
       "filteredAssets": 0,
@@ -856,43 +856,43 @@
       "id": 296,
       "files": [
         "bundle.css",
-        "bundle-d986780afe549597ad05.js"
+        "bundle-da6abfbec638b328d609.js"
       ]
     },
     {
       "id": 875,
       "files": [
-        "875.bundle-d986780afe549597ad05.js"
+        "875.bundle-da6abfbec638b328d609.js"
       ]
     },
     {
       "id": 680,
       "files": [
-        "680.bundle-d986780afe549597ad05.js"
+        "680.bundle-da6abfbec638b328d609.js"
       ]
     },
     {
       "id": 644,
       "files": [
-        "644.bundle-d986780afe549597ad05.js"
+        "644.bundle-da6abfbec638b328d609.js"
       ]
     },
     {
       "id": 268,
       "files": [
-        "268.bundle-d986780afe549597ad05.js"
+        "268.bundle-da6abfbec638b328d609.js"
       ]
     },
     {
       "id": 249,
       "files": [
-        "249.bundle-d986780afe549597ad05.js"
+        "249.bundle-da6abfbec638b328d609.js"
       ]
     },
     {
       "id": 930,
       "files": [
-        "930.bundle-d986780afe549597ad05.js"
+        "930.bundle-da6abfbec638b328d609.js"
       ]
     }
   ]
