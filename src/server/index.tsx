@@ -25,8 +25,6 @@ import { paths } from '../../scripts/utils'
 
 const PORT = process.env.PORT || 3000
 
-const BASE_URL = process.env.BACKEND_BASE_URL ? `${process.env.BACKEND_BASE_URL}` : 'http://localhost:3002'
-
 const app = express()
 
 app.enable('trust proxy')
@@ -35,26 +33,21 @@ app.use(cors())
 
 app.use(compression())
 
-app.get('/robots.txt', (req: Request, res: Response) => {
-  res.type(`text/plain`)
-  res.send(`User-agent: *\nSitemap: ${BASE_URL}/sitemap.xml`)
-})
-
 if (process.env.NODE_ENV === 'production') {
   app.get('/health', (req: Request, res: Response) => {
     res.json({ status: 'UP' })
   })
 }
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' || (!process.env.STATIC_FILES_URL && process.env.NODE_ENV === 'production')) {
   /**
    * This line is only used in development mode
    * In production mode we separate static files from the main Express.js frontend server
    * By separating them, you discharge tensions on this Express.js frontend server
    * It now depends what kind of router you are using, Nginx my favorite, Traefik. The rule
-   * is to make a redirection for example like this https://react-easy-ssr-staticfiles.herokuapp.com/15.bundle-832a294529dcad5060bd.js
+   * is to make a redirection for example like this https://react-easy-ssr-staticfiles.herokuapp.com/static/15.bundle-832a294529dcad5060bd.js
    * and now the static bundle file 15.bundle-832a294529dcad5060bd.js is served.
-   * In order to achieve this you need a good CI which will do npm run build, then copy the build in an other
+   * In order to achieve this you need a good CI which will do npm run build, then copy the build into an other
    * docker container to serve it through /static/ path
    */
   app.use(paths.publicPath, express.static(path.join(paths.clientBuild, paths.publicPath)))

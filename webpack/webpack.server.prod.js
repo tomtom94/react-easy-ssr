@@ -12,8 +12,8 @@ module.exports = {
   },
   output: {
     path: paths.serverBuild,
-    filename: 'server.js',
-    publicPath: `https://react-easy-ssr-staticfiles.herokuapp.com${paths.publicPath}`,
+    filename: 'index.js',
+    publicPath: process.env.STATIC_FILES_URL ? `${process.env.STATIC_FILES_URL}${paths.publicPath}` : `${paths.publicPath}`,
     libraryTarget: 'commonjs2'
   },
   resolve: {
@@ -25,8 +25,9 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new webpack.DefinePlugin({
       'process.env.BROWSER': 'false',
-      'process.env.NODE_ENV': JSON.stringify('production'),
-      'process.env.BACKEND_BASE_URL': JSON.stringify(process.env.BACKEND_BASE_URL)
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.BACKEND_BASE_URL': JSON.stringify(process.env.BACKEND_BASE_URL),
+      'process.env.STATIC_FILES_URL': JSON.stringify(process.env.STATIC_FILES_URL) // just used in src/server/renderFullPage.ts
     })
   ],
   externals: [nodeExternals()],

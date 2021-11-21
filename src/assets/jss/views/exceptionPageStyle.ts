@@ -22,7 +22,7 @@ export default createUseStyles((theme: Theme) => ({
   containerText: {},
   exceptionImage: {},
   fontSpinner: {
-    fontSize: 35,
+    fontSize: 50,
     color: theme.palette.common.black
   },
   spinner: {

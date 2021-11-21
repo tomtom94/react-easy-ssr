@@ -65,7 +65,7 @@ const start = async () => {
     })
 
     const script = nodemon({
-      script: `${paths.serverBuild}/server.js`,
+      script: `${paths.serverBuild}/index.js`,
       ignore: ['src', 'webpack', 'scripts', 'dist/client'],
       delay: 200
     })

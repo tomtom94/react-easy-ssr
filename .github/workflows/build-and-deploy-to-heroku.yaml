@@ -23,7 +23,13 @@ jobs:
 
       - run: npm run build
         env:
-          BACKEND_BASE_URL: 'https://server.mywebsite.com'
+          STATIC_FILES_URL: 'https://react-easy-ssr-staticfiles.herokuapp.com'
+
+      - name: Remove File
+        if: (contains(github.event.head_commit.message, '#flushstaticfiles'))
+        uses: JesseTG/rm@v1.0.2
+        with:
+          path: public/static/.
 
       - name: Past new static files
         uses: canastro/copy-file-action@master
@@ -70,9 +76,16 @@ jobs:
       - name: Release the image just built
         run: heroku container:release --app $HEROKU_APP_NAME web
         env:
-          HEROKU_APP_NAME: react-easy-ssr
+          HEROKU_APP_NAME: react-easy-ssr-staticfiles
 
       - name: Release the image just built
         run: heroku container:release --app $HEROKU_APP_NAME web
         env:
-          HEROKU_APP_NAME: react-easy-ssr-staticfiles
+          HEROKU_APP_NAME: react-easy-ssr
+
+      - uses: EndBug/add-and-commit@v7
+        with:
+          add: 'public/static/'
+          message: 'CI Copy static files'
+          push: true
+          branch: fix/bad-stuffs

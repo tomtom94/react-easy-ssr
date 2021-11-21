@@ -1,12 +1,12 @@
 import React, { FC, useEffect, useRef } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { hot } from 'react-hot-loader/root'
 import { ThemeProvider } from 'react-jss'
 import { Helmet } from 'react-helmet-async'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faFacebook, faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faFacebook, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faBars, faExclamationTriangle, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { hot } from 'react-hot-loader/root'
 import CssBaseline from './components/CssBaseline'
 import defaultTheme from './assets/jss/theme'
 import Footer from './components/Footer'
@@ -31,7 +31,7 @@ import msApplication144 from './assets/images/icons/ms-icon-144x144.png'
 import routes from './views/routes'
 import './assets/fonts/stylesheet.css'
 
-library.add(faFacebook, faTwitter, faSpinner, faBars, faExclamationTriangle)
+library.add(faFacebook, faTwitter, faSpinner, faBars, faExclamationTriangle, faGithub)
 
 type Props = {}
 
@@ -92,7 +92,7 @@ const App: FC<Props> = ({ children, ...props }) => {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content={msApplication144} />
         <meta name="description" content={description} />
-        <link rel="canonical" href="https://www.mywebsite.com" />
+        <link rel="canonical" href="https://react-easy-ssr.herokuapp.com/" />
       </Helmet>
       <main className={classes.app}>
         <Header />

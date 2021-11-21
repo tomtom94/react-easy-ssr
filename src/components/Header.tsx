@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector } from 'react-redux'
 import Drawer from './Drawer'
 import headerStyle from '../assets/jss/components/headerStyle'
-import ReactLogoImage from '../assets/images/react.png'
 import CloseImageUrl, { ReactComponent as CloseImage } from '../assets/images/61155.svg'
 import { ReduxState } from '../store/rootReducer'
 
@@ -79,7 +78,10 @@ const Header: FC<Props> = ({ children, ...props }) => {
     <header className={classNames(classes.appBar)}>
       <div className={classNames(classes.toolBar)}>
         <Link to="/" className={classes.logoLink}>
-          <img src={ReactLogoImage} alt="logo" className={classes.logoImage} />
+          <div>
+            <FontAwesomeIcon icon={['fab', 'github']} />
+            <span>react-easy-ssr</span>
+          </div>
         </Link>
         <div className={classes.hiddenSmDown}>{headerLinks()}</div>
         <div className={classes.hiddenMdUp}>

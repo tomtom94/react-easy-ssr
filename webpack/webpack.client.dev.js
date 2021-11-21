@@ -30,7 +30,9 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env.BROWSER': 'true'
+      'process.env.BROWSER': 'true',
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+      'process.env.BACKEND_BASE_URL': JSON.stringify(process.env.BACKEND_BASE_URL)
     })
   ],
   stats: 'minimal'
