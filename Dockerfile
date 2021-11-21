@@ -10,8 +10,6 @@ ENV NODE_VERSION 14.16.1
 ENV NPM_CONFIG_LOGLEVEL warn
 ENV PORT 80
 
-ENV BACKEND_BASE_URL https://server.mywebsite.com
-
 RUN apk add --update npm
 
 COPY . .
