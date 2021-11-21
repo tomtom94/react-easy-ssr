@@ -1,0 +1,44 @@
+@font-face {
+    font-family: 'Quantico';
+    src: url(https://react-easy-ssr-staticfiles.herokuapp.com/static/assets/fonts/Quantico-BoldItalic.woff2) format('woff2'),
+        url(https://react-easy-ssr-staticfiles.herokuapp.com/static/assets/fonts/Quantico-BoldItalic.woff) format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'Quantico';
+    src: url(https://react-easy-ssr-staticfiles.herokuapp.com/static/assets/fonts/Quantico-Regular.woff2) format('woff2'),
+        url(https://react-easy-ssr-staticfiles.herokuapp.com/static/assets/fonts/Quantico-Regular.woff) format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'Quantico';
+    src: url(https://react-easy-ssr-staticfiles.herokuapp.com/static/assets/fonts/Quantico-Italic.woff2) format('woff2'),
+        url(https://react-easy-ssr-staticfiles.herokuapp.com/static/assets/fonts/Quantico-Italic.woff) format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'Quantico';
+    src: url(https://react-easy-ssr-staticfiles.herokuapp.com/static/assets/fonts/Quantico-Bold.woff2) format('woff2'),
+        url(https://react-easy-ssr-staticfiles.herokuapp.com/static/assets/fonts/Quantico-Bold.woff) format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: block;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url(https://react-easy-ssr-staticfiles.herokuapp.com/static/assets/fonts/Roboto-Medium.woff2) format('woff2'),
+        url(https://react-easy-ssr-staticfiles.herokuapp.com/static/assets/fonts/Roboto-Medium.woff) format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: block;
+}
