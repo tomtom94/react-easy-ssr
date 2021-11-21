@@ -89,4 +89,4 @@ jobs:
           add: 'public/static/'
           message: 'CI Copy static files'
           push: true
-          branch: fix/bad-stuffs
+          branch: master

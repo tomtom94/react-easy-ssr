@@ -3,10 +3,10 @@ name: 1) Upgrade tag version
 on:
   push:
     branches:
-      - fix/bad-stuffs
+      - master
   pull_request:
     branches:
-      - fix/bad-stuffs
+      - master
 
 jobs:
   build:
@@ -17,10 +17,10 @@ jobs:
         name: Check out code
         with:
           fetch-depth: '0'
-          
+
       - uses: ChloePlanet/github-tag-action@master
         name: Bump version and push tag
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           WITH_V: true
-          RELEASE_BRANCHES: master,fix/bad-stuffs
+          RELEASE_BRANCHES: master
