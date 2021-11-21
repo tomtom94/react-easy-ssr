@@ -102,18 +102,45 @@ export default createUseStyles((theme: Theme) => ({
       alignItems: 'center',
       ...theme.layout.containerFluid,
       '& $logoLink': {
+        // color: 'inherit',
         textDecoration: 'none',
         margin: '0 5px 0 0',
 
         '&:focus': {
           outline: 0
         },
-        '& $logoImage': {
-          display: 'block',
-          color: '#ffd24d',
-          transition: `all 300ms ${theme.transition.easing.easeInOut}`,
-          height: 50,
-          width: 'auto'
+        '@media(hover: hover) and (pointer: fine)': {
+          '&:hover': {
+            '& div': {
+              color: '#bbbb99'
+            }
+          }
+        },
+        '@media (hover: none)': {
+          '&:active': {
+            '& div': {
+              color: '#bbbb88'
+            }
+          }
+        },
+        '& div': {
+          display: 'flex',
+          alignItems: 'center',
+          fontSize: 40,
+          color: theme.palette.common.black,
+          [theme.breakpoints.down('md')]: {
+            fontSize: 30
+          },
+          '& span': {
+            margin: '0 0 0 1rem',
+            letterSpacing: '-2px',
+            lineHeight: '1.5rem',
+            [theme.breakpoints.down('md')]: {
+              margin: '0 0 0 0.5rem',
+              lineHeight: '1.3rem',
+              letterSpacing: '-1.7px'
+            }
+          }
         }
       },
       '& button': {
@@ -153,7 +180,6 @@ export default createUseStyles((theme: Theme) => ({
   },
   toolBar: {},
   logoLink: {},
-  logoImage: {},
   menuItems: {},
   closeMenuMobile: {},
   navLink: {}

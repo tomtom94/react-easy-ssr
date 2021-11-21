@@ -1,9 +1,9 @@
-import React, { FC, useRef } from 'react'
+import React, { FC, useRef, useEffect } from 'react'
 import { hot } from 'react-hot-loader/root'
 import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
 import { RouteComponentProps } from 'react-router'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import EventMessage from '../../components/EventMessage'
 
 import Grid from '../../components/Grid'
 import moviesStyle from '../../assets/jss/views/moviesStyle'
@@ -24,10 +24,14 @@ const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {
   const { pathname, search } = routeComponent.location
 
   const willMount = useRef(true)
-  if (willMount.current) {
+  if (willMount.current && !process.env.BROWSER) {
     dispatch(triggerMovies('GET_MOVIES'))
     willMount.current = false
   }
+
+  useEffect(() => {
+    dispatch(triggerMovies('GET_MOVIES'))
+  }, [dispatch])
 
   if (routeComponent.staticContext && Object.prototype.hasOwnProperty.call(movies, 'error')) {
     // eslint-disable-next-line no-param-reassign
@@ -57,14 +61,7 @@ const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {
 
               {Object.prototype.hasOwnProperty.call(movies, 'error') && (
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <div className={classes.message}>
-                    <div className={classes.errorMessage}>
-                      <span>
-                        <FontAwesomeIcon icon="exclamation-triangle" />
-                      </span>
-                      <p>{movies.error.message}</p>
-                    </div>
-                  </div>
+                  <EventMessage event="error" message={movies.error.message} refresh />
                 </Grid>
               )}
               {movies.data.length > 0 && (

@@ -17,7 +17,7 @@ module.exports = {
   output: {
     path: path.join(paths.clientBuild, paths.publicPath),
     filename: 'bundle-[fullhash].js',
-    publicPath: `https://react-easy-ssr-staticfiles.herokuapp.com${paths.publicPath}`
+    publicPath: process.env.STATIC_FILES_URL ? `${process.env.STATIC_FILES_URL}${paths.publicPath}` : `${paths.publicPath}`
   },
   resolve: {
     modules: [paths.src, 'node_modules'],
@@ -34,7 +34,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.BROWSER': 'true',
-      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.BACKEND_BASE_URL': JSON.stringify(process.env.BACKEND_BASE_URL)
     }),
     new CompressionPlugin({ algorithm: 'gzip' })

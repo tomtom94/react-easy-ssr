@@ -15,10 +15,10 @@ const Footer: FC<Props> = ({ children, ...props }) => {
     <footer className={classNames(classes.containerFluid)}>
       <div className={classNames(classes.container, classes.footer)}>
         <div className={classes.containerSocialLinks}>
-          <a href="https://www.facebook.com/mywebsite" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.facebook.com/react-easy-ssr" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={['fab', 'facebook']} />
           </a>
-          <a href="https://www.facebook.com/mywebsite" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.twitter.com/react-easy-ssr" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={['fab', 'twitter']} />
           </a>
         </div>
@@ -32,7 +32,7 @@ const Footer: FC<Props> = ({ children, ...props }) => {
           </div>
           <p>
             &copy;
-            {`${new Date().getFullYear()} Mywebsite.`}
+            {`${new Date().getFullYear()} react-easy-ssr.`}
           </p>
         </div>
       </div>

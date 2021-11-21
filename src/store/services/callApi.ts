@@ -2,9 +2,7 @@
 
 import 'isomorphic-fetch'
 
-// const BASE_URL = process.env.BACKEND_BASE_URL ? `${process.env.BACKEND_BASE_URL}` : 'http://localhost:3002'
-
-const BASE_URL = 'https://api.themoviedb.org' // It should be here your backend server url !
+const BASE_URL = process.env.BACKEND_BASE_URL
 
 export default (endpoint, params): Promise<{ response?: any; error?: { status: any; message: any } }> => {
   const url = new URL(`${BASE_URL}${endpoint}`)

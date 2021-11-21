@@ -4,25 +4,6 @@ import { Theme } from '../theme'
 export default createUseStyles((theme: Theme) => ({
   container: { ...theme.layout.container },
   box: { ...theme.layout.box, flexDirection: 'column', justifyContent: 'flex-start' },
-  message: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    margin: 20,
-    '& $errorMessage': {
-      display: 'flex',
-      alignItems: 'center',
-      minWidth: 200,
-      backgroundColor: theme.palette.error,
-      padding: '10px 25px',
-      '& span': {
-        fontSize: 40,
-        marginRight: 15
-      }
-    }
-  },
-  errorMessage: {},
   title: { ...theme.typography.h3, margin: 0, letterSpacing: -1 },
   subtitle: { ...theme.typography.h5, margin: 0, letterSpacing: -1 },
   listMovies: {
@@ -35,7 +16,7 @@ export default createUseStyles((theme: Theme) => ({
         flexDirection: 'column'
       },
       margin: '0 0 20px 0',
-      backgroundColor: '#eee',
+      backgroundColor: '#fffeee',
       '&:last-of-type': {
         margin: '0 0 0 0'
       },
@@ -43,11 +24,13 @@ export default createUseStyles((theme: Theme) => ({
         display: 'flex',
         justifyContent: 'center',
         '& img': {
-          width: 200
+          width: 200,
+          height: 300
         }
       },
       '& $movieDetails': {
-        '& h2': { ...theme.typography.h4, margin: 0, letterSpacing: -1 },
+        '& h2': { ...theme.typography.h4, margin: 0, letterSpacing: -1, lineHeight: '2.5rem' },
+        '& p': { ...theme.typography.subtitle2, margin: '1rem 0 0 0', lineHeight: '1.3rem' },
         padding: '20px 30px'
       }
     }
