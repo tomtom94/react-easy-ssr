@@ -3,10 +3,10 @@ name: 1) Upgrade tag version
 on:
   push:
     branches:
-      - master
+      - fix/bad-stuffs
   pull_request:
     branches:
-      - master
+      - fix/bad-stuffs
 
 jobs:
   build:
@@ -22,4 +22,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           WITH_V: true
-          RELEASE_BRANCHES: master,issue-5
+          RELEASE_BRANCHES: master,fix/bad-stuffs
