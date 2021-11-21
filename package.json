@@ -2,7 +2,7 @@
   "name": "react-easy-ssr",
   "version": "1.0.0",
   "description": "React easy SSR application",
-  "main": "dist/server/server.js",
+  "main": "dist/server/index.js",
   "engines": {
     "node": "14.16.1"
   },
@@ -19,7 +19,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "build": "node scripts/build.js",
-    "start": "node dist/server/server.js",
+    "start": "node dist/server/index.js",
     "dev": "node scripts/dev.js",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "tsc": "tsc --noEmit",
@@ -74,6 +74,7 @@
     "@babel/core": "^7.16.0",
     "@babel/plugin-proposal-class-properties": "^7.16.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.16.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-spread": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
     "@babel/preset-react": "^7.16.0",
