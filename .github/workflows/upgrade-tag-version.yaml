@@ -17,6 +17,7 @@ jobs:
         name: Check out code
         with:
           fetch-depth: '0'
+          
       - uses: ChloePlanet/github-tag-action@master
         name: Bump version and push tag
         env:
