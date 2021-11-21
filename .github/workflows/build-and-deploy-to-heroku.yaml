@@ -25,13 +25,13 @@ jobs:
         env:
           STATIC_FILES_URL: 'https://react-easy-ssr-staticfiles.herokuapp.com'
 
-      - name: Remove File
+      - name: Remove past static files
         if: (contains(github.event.head_commit.message, '#flushstaticfiles'))
         uses: JesseTG/rm@v1.0.2
         with:
           path: public/static/
 
-      - name: Past new static files
+      - name: Copy past new static files
         uses: canastro/copy-file-action@master
         with:
           source: dist/client/static/.
@@ -83,7 +83,8 @@ jobs:
         env:
           HEROKU_APP_NAME: react-easy-ssr
 
-      - uses: EndBug/add-and-commit@v7
+      - name: Commit the new build just made in public/static folder
+        uses: EndBug/add-and-commit@v7
         with:
           add: 'public/static/'
           message: 'CI Copy static files'

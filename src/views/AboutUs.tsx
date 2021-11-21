@@ -38,7 +38,7 @@ const AboutUs: FC<Props> = ({ children, routeComponent, ...props }) => {
               <h1 className={classes.subtitle}>{description}</h1>
               <div className={classes.page}>
                 <p>We do what we do because we have to do it.</p>
-                <p>We do what we do because we deserve to do it.</p>
+                <p>And we deserve to do it.</p>
               </div>
             </Grid>
           </Grid>
