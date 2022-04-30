@@ -9,7 +9,6 @@ const renderFullPage = (html, css, fontAwesomeCss, styleTags, store, helmet, scr
     <link rel="stylesheet" type="text/css" href="${
       process.env.STATIC_FILES_URL ? `${process.env.STATIC_FILES_URL}/static/bundle.css` : `/static/bundle.css`
     }" />
-    
     ${helmet.title.toString()}
     ${helmet.meta.toString()}
     ${helmet.link.toString()}

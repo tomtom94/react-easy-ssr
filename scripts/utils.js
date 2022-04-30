@@ -52,7 +52,20 @@ const compilation = (err, stats, format) => {
   console.log(stats.toString(format))
 }
 
+function getIndexResolve() {
+  const {PLATFORM: platform} = process.env
+  const platformIndex = `index.${platform}`
+
+  // It enables modeule resolution with 'index.desktop', 'index.touch', 'client', 'server' for .ts(x) and .css
+  const platformFilenames = [platformIndex, 'client', 'index']
+  const resolve = {
+    mainFiles: platformFilenames
+  };
+  return resolve;
+}
+
 module.exports = {
+  resolve: getIndexResolve(),
   compilerListener,
   paths,
   compilation

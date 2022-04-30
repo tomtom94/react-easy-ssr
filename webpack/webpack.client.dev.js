@@ -33,7 +33,14 @@ module.exports = {
       'process.env.BROWSER': 'true',
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.BACKEND_BASE_URL': JSON.stringify(process.env.BACKEND_BASE_URL)
-    })
+    }),
   ],
+  devServer: {
+    static: {
+      directory: path.join(paths.clientBuild, 'static'),
+    },
+    compress: true,
+    port: 9000,
+  },
   stats: 'minimal'
 }

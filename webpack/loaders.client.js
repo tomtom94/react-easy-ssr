@@ -1,16 +1,23 @@
 const path = require('path')
-const { paths } = require('../scripts/utils')
+const { paths, resolve } = require('../scripts/utils')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
   rules: [
     {
+      // Removes controllers from client bundle
+      test: /controller.ts$/,
+      use: 'null-loader'
+    },
+    {
       test: /\.(js|jsx|ts|tsx)$/,
       exclude: /node_modules/,
-      loader: 'babel-loader'
+      loader: 'babel-loader',
+      resolve
     },
     {
       test: /\.css$/,
+      resolve,
       use: [
         {
           loader: MiniCssExtractPlugin.loader
@@ -25,6 +32,13 @@ module.exports = {
           }
         }
       ]
+    },
+    {
+      loader: '@teamsupercell/typings-for-css-modules-loader',
+      options: {
+        formatter: 'prettier',
+        disableLocalsExport: true
+      }
     },
     {
       test: /\.(png|jpe?g|gif|ico)$/,
