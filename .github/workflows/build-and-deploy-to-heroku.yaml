@@ -35,7 +35,8 @@ jobs:
         name: Build & push Docker image
         with:
           image: react-easy-ssr-staticfiles/web
-          tags: ${{ github.ref_name }}
+          # tags: ${{ github.ref_name }}
+          tags: latest
           registry: registry.heroku.com
           directory: public
           dockerfile: ./public/Dockerfile
@@ -46,7 +47,8 @@ jobs:
         name: Build & push Docker image
         with:
           image: react-easy-ssr/web
-          tags: ${{ github.ref_name }}
+          # tags: ${{ github.ref_name }}
+          tags: latest
           registry: registry.heroku.com
           dockerfile: Dockerfile
           username: thomas.aumaitre@gmail.com
