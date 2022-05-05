@@ -127,7 +127,7 @@ You also better a good search engine like [Qwant.com](https://qwant.com) also.
 
 ### Continious Integration with Github Actions
 
-When pushing or merging a pull request on master branch, you can trigger the CI with a code included in the commit message, just use `#major` or `#patch`.
+When pushing or merging a pull request on master branch, you can trigger the CI with a code included in the commit message, just use `#major`, `#minor` or `#patch`.
 
 Example of commit message in order to start a deployment :
 
@@ -137,12 +137,6 @@ git commit -m "#major this is a big commit"
 
 ```git
 git commit -m "#patch this is a tiny commit"
-```
-
-In case you would like to delete the past bundles' static files you can add `#flushstaticfiles`
-
-```git
-git commit -m "#patch #flushstaticfiles this is a tiny commit"
 ```
 
 ### Checks to do sometimes

@@ -10,11 +10,8 @@ jobs:
     name: Build and push image
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         name: Check out code
-        with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          fetch-depth: 0
 
       - uses: actions/setup-node@v2
         with:
@@ -24,13 +21,8 @@ jobs:
 
       - run: npm run build
         env:
+          BACKEND_BASE_URL: ''
           STATIC_FILES_URL: 'https://react-easy-ssr-staticfiles.herokuapp.com'
-
-      - name: Remove past static files
-        if: (contains(github.event.head_commit.message, '#flushstaticfiles'))
-        uses: JesseTG/rm@v1.0.2
-        with:
-          path: public/static/
 
       - name: Copy past new static files
         uses: canastro/copy-file-action@master
@@ -39,22 +31,22 @@ jobs:
           target: public/static/
           flags: '-r'
 
-      - uses: mr-smithers-excellent/docker-build-push@v3
+      - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build & push Docker image
         with:
           image: react-easy-ssr-staticfiles/web
-          tag: latest
+          tags: ${{ github.ref_name }}
           registry: registry.heroku.com
           directory: public
           dockerfile: ./public/Dockerfile
           username: thomas.aumaitre@gmail.com
           password: ${{ secrets.HEROKU_API_KEY }}
 
-      - uses: mr-smithers-excellent/docker-build-push@v3
+      - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build & push Docker image
         with:
           image: react-easy-ssr/web
-          tag: latest
+          tags: ${{ github.ref_name }}
           registry: registry.heroku.com
           dockerfile: Dockerfile
           username: thomas.aumaitre@gmail.com
@@ -83,11 +75,3 @@ jobs:
         run: heroku container:release --app $HEROKU_APP_NAME web
         env:
           HEROKU_APP_NAME: react-easy-ssr
-
-      - name: Commit the new build just made in public/static folder
-        uses: EndBug/add-and-commit@v7
-        with:
-          add: 'public/static/ -f'
-          message: 'CI Copy static files'
-          push: true
-          branch: master

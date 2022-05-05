@@ -13,14 +13,13 @@ jobs:
     name: Generate tag
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
         name: Check out code
         with:
-          fetch-depth: '0'
+          fetch-depth: 0
 
-      - uses: ChloePlanet/github-tag-action@master
+      - uses: anothrNick/github-tag-action@1.36.0
         name: Bump version and push tag
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           WITH_V: true
-          RELEASE_BRANCHES: master
