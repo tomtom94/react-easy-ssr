@@ -27,7 +27,7 @@ export default createUseStyles((theme: Theme) => ({
     minWidth: 250,
     maxWidth: 400,
     [theme.breakpoints.down('sm')]: {
-      width: 250
+      width: 270
     },
     padding: '18px 24px',
     position: 'relative',
@@ -36,7 +36,7 @@ export default createUseStyles((theme: Theme) => ({
       marginRight: 15
     },
     '& > div': {
-      '& > p': { lineBreak: 'anywhere' }
+      '& > p': { ...theme.typography.body1, margin: 0 }
     },
     '& $closingButton': {
       borderRadius: '3px',
