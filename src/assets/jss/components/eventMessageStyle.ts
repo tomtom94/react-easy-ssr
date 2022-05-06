@@ -7,17 +7,23 @@ export default createUseStyles((theme: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20
+    margin: '2rem'
   },
   containerNotification: {
     position: 'fixed',
     zIndex: 3000,
     bottom: -400,
-    right: 20,
+    right: '2rem',
+    [theme.breakpoints.down('sm')]: {
+      right: '1rem'
+    },
     transition: `all 350ms ${theme.transition.easing.easeInOut}`
   },
   containerNotificationOpen: {
-    bottom: 20
+    bottom: '2rem',
+    [theme.breakpoints.down('sm')]: {
+      bottom: '1rem'
+    }
   },
 
   message: {
@@ -29,11 +35,11 @@ export default createUseStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       width: 270
     },
-    padding: '18px 24px',
+    padding: '1rem 1.5rem',
     position: 'relative',
     '& span': {
-      fontSize: 50,
-      marginRight: 15
+      fontSize: 40,
+      marginRight: '1.5rem'
     },
     '& > div': {
       '& > p': { ...theme.typography.body1, margin: 0 }
