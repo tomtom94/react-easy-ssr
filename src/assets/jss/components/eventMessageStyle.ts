@@ -26,6 +26,9 @@ export default createUseStyles((theme: Theme) => ({
     alignItems: 'center',
     minWidth: 250,
     maxWidth: 400,
+    [theme.breakpoints.down('sm')]: {
+      width: 250
+    },
     padding: '18px 24px',
     position: 'relative',
     '& span': {
