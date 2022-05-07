@@ -16,6 +16,7 @@ import { ServerStyleSheet } from 'styled-components'
 import { StaticRouterContext } from 'react-router'
 import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
+import { UAParser } from 'ua-parser-js'
 import CleanCSS from 'clean-css'
 import configureStore, { createHistory } from '../store/configureStore'
 import App from '../App'
@@ -54,7 +55,26 @@ if (process.env.NODE_ENV === 'development' || (!process.env.STATIC_FILES_URL && 
 }
 
 app.use((req: Request, res: Response) => {
-  const initialState = {}
+  const userAgent = new UAParser(req.headers['user-agent']).getResult()
+  const acceptedLanguages = Array.isArray(req.acceptsLanguages()) ? req.acceptsLanguages()[0] : req.acceptsLanguages()
+  const hostname = req.header('host')
+  let language = 'fr-FR'
+  const timezone = 'Europe/Paris'
+
+  if (acceptedLanguages && acceptedLanguages !== '*') {
+    language = acceptedLanguages
+  }
+
+  const initialState = {
+    app: {
+      main: {
+        language,
+        timezone,
+        hostname,
+        userAgent
+      }
+    }
+  }
 
   const extractor = new ChunkExtractor({
     statsFile: path.join(paths.clientBuild, paths.publicPath, 'loadable-stats.json'),

@@ -68,7 +68,8 @@
     "rimraf": "^3.0.0",
     "serialize-javascript": "^2.1.0",
     "styled-components": "^5.3.3",
-    "typescript": "^3.9.10"
+    "typescript": "^3.9.10",
+    "ua-parser-js": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

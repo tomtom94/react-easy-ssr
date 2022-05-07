@@ -42,7 +42,7 @@ export default createUseStyles((theme: Theme) => ({
       marginRight: '1.5rem'
     },
     '& > div': {
-      '& > p': { ...theme.typography.body1, margin: 0 }
+      '& > p': { ...theme.typography.body1 }
     },
     '& $closingButton': {
       borderRadius: '3px',

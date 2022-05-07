@@ -2,6 +2,28 @@ import { combineReducers } from 'redux'
 
 import * as ActionTypes from '../actions'
 
+interface MainState {
+  language: undefined | string
+  timezone: undefined | string
+  userAgent: undefined
+  hostname: undefined | string
+}
+
+const INITIAL_STATE_MAIN: MainState = {
+  language: undefined,
+  timezone: undefined,
+  userAgent: undefined,
+  hostname: undefined
+}
+
+const main = (state = INITIAL_STATE_MAIN, action) => {
+  const copyState = JSON.parse(JSON.stringify(state))
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
 interface MoviesState {
   isLoading: boolean
   data: any[]
@@ -54,9 +76,11 @@ const movies = (state = INITIAL_STATE_MOVIES, action) => {
 /** *************************************************************************** */
 
 export interface AppState {
+  main: MainState
   movies: MoviesState
 }
 
 export default combineReducers<AppState>({
+  main,
   movies
 })
