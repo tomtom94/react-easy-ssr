@@ -43,7 +43,7 @@ React is a library, then we would say don't put yourself in a framework. Which i
 
 Please find the list of disadvantages of frameworks
 
-- The `React-router`module : you won't be able to handle this wonderful module, so bad with `Next.js` you create a file and its added to your router automatically :sob:.
+- The `React-router`module : you won't be able to handle this wonderful module, so bad with `Next.js` you create a file and it's added to your router automatically :sob:.
 - You won't have access to what happen on the Server Side. Just go to [this project's page and you are done mate](https://github.com/tomtom94/react-easy-ssr/blob/master/src/server/index.tsx) :flushed:
 - According to `Next.js` you can just install `redux-thunk` not the other ones, so bad how can we play with `redux-saga`or `redux-observable` ? :rage:
 - You are gonna use an upper-layer module of React. What happens if one of them makes an upgrade but not the other one :cold_sweat:
