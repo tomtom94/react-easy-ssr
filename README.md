@@ -168,7 +168,7 @@ You can add more Webpack `loader` to your project...
 
 ### Some disadvantages
 
-- With this configuration you can't use the powerful React function unveiled in 2018 called `renderToNodeStream`. We must use the old one which is (from 2015) `rendeToString`. But no worries 90% of React websites are on the old one `rendeToString`.
+- With this configuration you can't use the powerful React function unveiled in 2018 called `renderToNodeStream`. We must use the old one which is (from 2015) `rendeToString`. But no worries 90% of React Apps are on the old one `rendeToString`.
 List of modules not compatible with `renderToNodeStream` (We are telling you the ones we are sure of, this is not an exhaustive list)
   - `redux-saga` check out this issue [on github](https://github.com/redux-saga/redux-saga/issues/2112)
   - `react-jss` check out this issue [on github](https://github.com/cssinjs/jss/issues/807)
