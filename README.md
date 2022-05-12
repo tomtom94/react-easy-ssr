@@ -122,7 +122,7 @@ You better use a good search engine like [Qwant.com](https://qwant.com) also, do
 
 ### Contributors and mainteners
 
-If ever you wanna work on this project, it's recommended to use `prettier` and `eslint` on you IDE (Visual Studio Code for example). Just note by default prettier don't touch `.ts` and `.tsx` extension files, [you must make a speacial manipulation in Visual Studio Code](https://levelup.gitconnected.com/setting-up-eslint-with-prettier-typescript-and-visual-studio-code-d113bbec9857?) in your `settings.json`.
+If ever you wanna work on this project, it's recommended to use `prettier` and `eslint` on your IDE (Visual Studio Code for example). Just note by default prettier don't touch `.ts` and `.tsx` extension files, [you must make a speacial manipulation in Visual Studio Code](https://levelup.gitconnected.com/setting-up-eslint-with-prettier-typescript-and-visual-studio-code-d113bbec9857?) in your `settings.json`.
 
 ### Continuous Integration and Continuous Delivery
 
