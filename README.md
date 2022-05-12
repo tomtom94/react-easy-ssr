@@ -146,9 +146,9 @@ git commit -m "#patch this is a tiny commit"
 
 ### Components
 
-The main rule is we don't use a frontend framework. All components come from wherever we need it, but we are not stick to one. No need of `material-ui`, no need of `bootstrap` etc... However we are used to copy past source code from them. For example we made a copy past of the wonderfull `material-ui` `<Grid />` which is so much powerful [check it out in this repo](https://github.com/tomtom94/react-easy-ssr/blob/master/src/components/Grid.tsx). We don't use many component that generate their own css stylesheet, because we need to control this carefully in order to make the famous SSR.
+The main rule is we don't use a frontend framework. All components come from wherever we need it, but we are not stick to one. No need of `material-ui`, no need of `bootstrap` etc... However we are used to copy past source code from them. For example we made a copy past of the wonderfull `material-ui` `<Grid />` which is so much powerful [check it out in this repo](https://github.com/tomtom94/react-easy-ssr/blob/master/src/components/Grid.tsx). We don't use many components that generate their own css stylesheet, because we need to control this carefully in order to make the famous SSR.
 
-`style-components` and `fontawesome` module are also installed if ever you wanna use it. And yes we care of them for the SSR also.
+`style-components` and `fontawesome` modules are also installed if ever you wanna use it. And yes we care of them for the SSR also.
 
 Please note we don't use classical CSS style. We use [JSS](https://cssinjs.org/react-jss) (it means js in css). `material-ui` module also uses `react-jss` this is why we didn't installed `material-ui` else it would be stupid to generate twice the `react-jss` stylesheet on the SSR, and inefficiente to make an ultra fast App.
 
@@ -173,7 +173,7 @@ List of modules not compatible with `renderToNodeStream` (We are telling you the
   - `react-jss` check out this issue [on github](https://github.com/cssinjs/jss/issues/807)
   - `redux-observable` check out this issue [on github](https://github.com/redux-observable/redux-observable/issues?q=is%3Aissue+is%3Aopen+rendertonodestream)
 
-- Another important issue to know is the split code, the first time your frontend server reads one of your page it'll be blind of redux actions. This is so much interesting try to investigate yourself (use Postman and check if you have data in your your redux store in the `__PRELOADED_STATE__` window attribute, turn off and on your server check again in Postman, then refresh again)
+- Another important issue to know is the split code, the first time your frontend server reads one of your page it'll be blind of redux actions. This is so much interesting try to investigate yourself (use Postman and check if you have data in your redux store in the `__PRELOADED_STATE__` window attribute, turn off and on your server check again in Postman, then refresh again)
 This is in fact a normal behavior check this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760). After a new deployment the first time you render a page, data-fetching during SSR is something `loadable-component` could not carry about. So the Google robot would not be able to treat a complete page in the DOM (this would be empty of data from the redux store except if another user has already opened this page before the Google robot) in this case only the client side will render. To conclude your app must always be able to render on the server & client side independantly.
 
 Let's illustrate this last point with an example : you have 5 million pages to display with 5 React routes, each route render 1 million pages, you just have to open 1 page (by yourself or a crawler the Google robot, Bing robot etc...) and the other 999999 will render perfectly.
