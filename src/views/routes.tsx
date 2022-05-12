@@ -12,13 +12,13 @@ const loadable = importer => {
   )
 }
 
-const Forbidden = loadable(() => import(/* webpackPrefetch: true, webpackChunkName: "Forbidden" */ './Exception/403'))
-const NoMatch = loadable(() => import(/* webpackPrefetch: true, webpackChunkName: "NoMatch" */ './Exception/404'))
-const ServerDown = loadable(() => import(/* webpackPrefetch: true, webpackChunkName: "ServerDown" */ './Exception/500'))
+const Forbidden = loadable(() => import(/* webpackChunkName: "Forbidden" */ './Exception/403'))
+const NoMatch = loadable(() => import(/* webpackChunkName: "NoMatch" */ './Exception/404'))
+const ServerDown = loadable(() => import(/* webpackChunkName: "ServerDown" */ './Exception/500'))
 
-const Home = loadable(() => import(/* webpackPrefetch: true, webpackChunkName: "Home" */ './Home/index'))
-const Movies = loadable(() => import(/* webpackPrefetch: true, webpackChunkName: "Movies" */ './Movies/index'))
-const AboutUs = loadable(() => import(/* webpackPrefetch: true, webpackChunkName: "AboutUs" */ './AboutUs'))
+const Home = loadable(() => import(/* webpackChunkName: "Home" */ './Home/index'))
+const Movies = loadable(() => import(/* webpackChunkName: "Movies" */ './Movies/index'))
+const AboutUs = loadable(() => import(/* webpackChunkName: "AboutUs" */ './AboutUs'))
 
 export interface Route {
   name?: string
