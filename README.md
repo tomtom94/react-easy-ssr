@@ -10,7 +10,7 @@ React App with SSR Server Side Rendering. Webpack 5 installed manually. In dev m
 
 Main modules used are `redux-saga`, `loadable-component`, `react-jss` and `typescript`.
 
-<img src="https://gifimage.net/wp-content/uploads/2017/10/new-icon-gif-animation-14.gif" width="25" alt="star github"> [Free and easy to use CI/CD](#CI/CD-Continuous-Integration-and-Continuous-Delivery) with Github Actions and Heroku.
+<img src="https://gifimage.net/wp-content/uploads/2017/10/new-icon-gif-animation-14.gif" width="25" alt="star github"> [Free and easy to use CI/CD](#Continuous-Integration-and-Continuous-Delivery) with Github Actions and Heroku.
 
 Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr.herokuapp.com)
 
@@ -25,7 +25,7 @@ Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr
     - [With Docker](#With-Docker)
 - [Must know about the app](#Must-know-about-the-app)
   - [Contributing](#Contributing)
-  - [CI/CD Continuous Integration & Continuous Delivery](#CI/CD-Continuous-Integration-and-Continuous-Delivery)
+  - [Continuous Integration & Continuous Delivery](#Continuous-Integration-and-Continuous-Delivery)
   - [Checks to do sometimes](#Checks-to-do-sometimes)
   - [Components](#Components)
   - [ES6 Imports possible in JSX](#ES6-Imports-possible-in-JSX)
@@ -126,7 +126,7 @@ You also better a good search engine like [Qwant.com](https://qwant.com) also, d
 
 If ever you wanna work on this project, it's recommended to use `prettier` and `eslint` on you IDE (Visual Studio Code for example). Just note by default prettier don't touch `.ts` and `.tsx` extension files, [you must make a speacial manipulation in Visual Studio Code](https://levelup.gitconnected.com/setting-up-eslint-with-prettier-typescript-and-visual-studio-code-d113bbec9857?) in your `settings.json`.
 
-### CI/CD Continuous Integration & Continuous Delivery
+### Continuous Integration & Continuous Delivery
 
 When pushing or merging on master branch, you can trigger Github Actions with a commit message that includes `#major`, `#minor` or `#patch`.
 
