@@ -118,7 +118,7 @@ Then open `http://localhost:80`
 
 ## Must know about the app
 
-You also better a good search engine like [Qwant.com](https://qwant.com) also, don't use Google. please.
+You better use a good search engine like [Qwant.com](https://qwant.com) also, don't use Google. please.
 
 ### Contributors and mainteners
 
