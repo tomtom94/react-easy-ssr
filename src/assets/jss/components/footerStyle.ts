@@ -66,7 +66,7 @@ export default createUseStyles((theme: Theme) => ({
         }
       },
       '& > p': {
-        ...theme.typography.body2,
+        ...theme.typography.body1,
         margin: '0.3rem 0 0.3rem 0',
         '&:first-of-type': {
           marginTop: 0

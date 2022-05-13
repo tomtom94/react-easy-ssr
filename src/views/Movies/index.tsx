@@ -74,7 +74,7 @@ const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {
                       <div className={classes.movieDetails}>
                         <h2>{e.title}</h2>
                         <p>{e.overview}</p>
-                        <p>{`Release date ${e.release_date}`}</p>
+                        <p>{`Release date ${new Date(e.release_date).toLocaleDateString()}`}</p>
                       </div>
                     </li>
                   ))}

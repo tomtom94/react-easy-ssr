@@ -112,14 +112,18 @@ export default createUseStyles((theme: Theme) => ({
         '@media(hover: hover) and (pointer: fine)': {
           '&:hover': {
             '& div': {
-              color: '#bbbb99'
+              '& span': {
+                textDecoration: 'underline'
+              }
             }
           }
         },
         '@media (hover: none)': {
           '&:active': {
             '& div': {
-              color: '#bbbb88'
+              '& span': {
+                textDecoration: 'underline'
+              }
             }
           }
         },

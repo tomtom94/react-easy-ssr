@@ -14,7 +14,7 @@ export interface Typography {
 }
 
 const typography = {
-  fontFamily: ['Quantico', 'sans-serif'].join(','),
+  fontFamily: ['Playfair Display', 'serif'].join(','),
   fontSize: 12,
   fontWeight: 400,
   color: palette.text.primary,
@@ -24,43 +24,49 @@ const typography = {
 export default {
   h1: {
     ...typography,
-    letterSpacing: 0,
+    letterSpacing: -1,
     fontSize: 60
   },
   h2: {
     ...typography,
+    letterSpacing: -0.85,
     fontSize: 48
   },
   h3: {
     ...typography,
+    letterSpacing: -0.7,
     fontSize: 42
   },
   h4: {
     ...typography,
+    letterSpacing: -0.5,
     fontSize: 36
   },
   h5: {
     ...typography,
+    letterSpacing: -0.3,
     fontSize: 20
   },
   h6: {
     ...typography,
+    letterSpacing: -0.2,
     fontSize: 18
   },
   subtitle1: {
     ...typography,
-    fontSize: 18
+    letterSpacing: -0.1,
+    fontSize: 16
   },
   subtitle2: {
     ...typography,
-    fontSize: 16
+    fontSize: 14
   },
   body1: {
     ...typography,
-    fontSize: 14
+    fontSize: 12
   },
   body2: {
     ...typography,
-    fontSize: 12
+    fontSize: 10
   }
 }

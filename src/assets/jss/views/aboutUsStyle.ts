@@ -8,7 +8,7 @@ export default createUseStyles((theme: Theme) => ({
   subtitle: { ...theme.typography.h5, margin: 0, letterSpacing: -1 },
   page: {
     '& p': {
-      ...theme.typography.body2,
+      ...theme.typography.body1,
       margin: '0 0 20px 0',
       '&:first-of-type': {
         margin: '20px 0 20px 0'
