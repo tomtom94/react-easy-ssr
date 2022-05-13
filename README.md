@@ -27,6 +27,7 @@ Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr
   - [Continuous Integration and Continuous Delivery](#Continuous-Integration-and-Continuous-Delivery)
   - [Checks to do sometimes](#Checks-to-do-sometimes)
   - [Components](#Components)
+  - [Data-fetching and SSR](#Data-fetching-and-SSR)
   - [ES6 Imports possible in JSX](#ES6-Imports-possible-in-JSX)
   - [Disadvantages of redux-saga and react-jss](#Disadvantages-of-redux-saga-and-react-jss)
   - [I want to use renderToNodeStream to make a top notch app](#I-want-to-use-renderToNodeStream-to-make-a-top-notch-app)
@@ -154,6 +155,27 @@ Please note we don't use classical CSS style. We use [JSS](https://cssinjs.org/r
 
 Either you install `material-ui` and you make all your css components with it (which is recommended if you do this for big company), or you get free and install `react-jss` like we did.
 
+### Data-fetching and SSR
+
+Let's see how we fetch our data to feed our redux store. You can find this code in the `<Movies />` [component](https://github.com/tomtom94/react-easy-ssr/blob/master/src/views/Movies/index.tsx).
+
+```react
+const willMount = useRef(true)
+if (willMount.current && !process.env.BROWSER) {
+  dispatch(triggerMovies('GET_MOVIES'))
+  willMount.current = false
+}
+
+useEffect(() => {
+  dispatch(triggerMovies('GET_MOVIES'))
+}, [dispatch])
+```
+
+- 1st part is only for server side, we dispatch the redux action : with `useRef` you can be sure the action won't be trigger multiple times in an infinite loop.
+- 2nd part is only for client side, we dispatch the redux action : but when you trigger this action there is a [redux-sage selector](https://github.com/tomtom94/react-easy-ssr/blob/master/src/store/reducers/selectors.ts) which will check if data hasn't been already fetched during 1st part, if yes no need to fetch again.
+
+This way your App is able to fetch data on the server & client side independantly.
+
 ### ES6 Imports possible in JSX
 
 Webpack setup only allows us to import files with ES6 in type
@@ -161,7 +183,7 @@ Webpack setup only allows us to import files with ES6 in type
 - .js .jsx .ts .tsx
 - .png .jpe .jpeg .gif .ico
 - .woff .woff2
-- .css (remember `react-jss` generates its own stylesheet via its own plugins, not via webpack)
+- .css (remember `react-jss` generates its own stylesheet via its own plugins, not via webpack loaders)
 
 You can add more Webpack `loader` to your project...
 
