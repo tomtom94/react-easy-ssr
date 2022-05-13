@@ -119,7 +119,7 @@ Then open `http://localhost:80`
 
 ## Must know about the app
 
-You better use a good search engine like [Qwant.com](https://qwant.com) also, don't use Google. please.
+You better use a good search engine like [Qwant.com](https://qwant.com), don't use Google. please.
 
 ### Contributors and mainteners
 
@@ -172,7 +172,7 @@ useEffect(() => {
 ```
 
 - 1st part is only for server side, we dispatch the redux action : with `useRef` you can be sure the action won't be trigger multiple times in an infinite loop.
-- 2nd part is only for client side, we dispatch the redux action : but when you trigger this action there is a [redux-sage selector](https://github.com/tomtom94/react-easy-ssr/blob/master/src/store/reducers/selectors.ts) which will check if data hasn't been already fetched during 1st part, if yes no need to fetch again.
+- 2nd part is only for client side, we dispatch the redux action : but when you trigger this action there is a [redux-saga selector](https://github.com/tomtom94/react-easy-ssr/blob/master/src/store/reducers/selectors.ts) which will check if data hasn't been already fetched during 1st part, if yes no need to fetch again.
 
 This way your App is able to fetch data on the server & client side independantly.
 
