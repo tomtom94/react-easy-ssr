@@ -168,11 +168,14 @@ if (willMount.current && !process.env.BROWSER) {
 
 useEffect(() => {
   dispatch(triggerMovies('GET_MOVIES'))
+  return () => {
+    dispatch(clearMovies())
+  }
 }, [dispatch])
 ```
 
 - 1st part is only for server side, we dispatch the redux action : with `useRef` you can be sure the action won't be trigger multiple times in an infinite loop.
-- 2nd part is only for client side, we dispatch the redux action : but when you trigger this action there is a [redux-saga selector](https://github.com/tomtom94/react-easy-ssr/blob/master/src/store/reducers/selectors.ts) which will check if data hasn't been already fetched during 1st part, if yes no need to fetch again.
+- 2nd part is only for client side, we dispatch the redux action : but when you trigger this action there is a [redux-saga selector](https://github.com/tomtom94/react-easy-ssr/blob/master/src/store/reducers/selectors.ts) which will check if data hasn't been already fetched during 1st part, if yes no need to fetch again. And we clear the error if there are some before leaving the component.
 
 This way your App is able to fetch data on the server & client side independantly.
 
