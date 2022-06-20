@@ -23,3 +23,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
           WITH_V: true
+          DEFAULT_BUMP: none
