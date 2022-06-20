@@ -9,7 +9,7 @@ import Grid from '../../components/Grid'
 import moviesStyle from '../../assets/jss/views/moviesStyle'
 
 import { ReduxState } from '../../store/rootReducer'
-import { triggerMovies } from '../../store/actions/index'
+import { triggerMovies, clearMovies } from '../../store/actions/index'
 import Loading from '../Exception/Loading'
 
 type Props = {
@@ -31,9 +31,12 @@ const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {
 
   useEffect(() => {
     dispatch(triggerMovies('GET_MOVIES'))
+    return () => {
+      dispatch(clearMovies())
+    }
   }, [dispatch])
 
-  if (routeComponent.staticContext && Object.prototype.hasOwnProperty.call(movies, 'error')) {
+  if (routeComponent.staticContext && movies.error) {
     // eslint-disable-next-line no-param-reassign
     routeComponent.staticContext.statusCode = movies.error.status
   }
@@ -58,8 +61,7 @@ const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
               <h1 className={classes.title}>{title}</h1>
               <h1 className={classes.subtitle}>{description}</h1>
-
-              {Object.prototype.hasOwnProperty.call(movies, 'error') && (
+              {movies.error && (
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                   <EventMessage event="error" message={movies.error.message} refresh />
                 </Grid>
