@@ -23,7 +23,6 @@ Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr
     - [With Node.js](#With-Nodejs)
     - [With Docker](#With-Docker)
 - [Must know about the app](#Must-know-about-the-app)
-  - [Contributors and mainteners](#Contributors-and-mainteners)
   - [Continuous Integration and Continuous Delivery](#Continuous-Integration-and-Continuous-Delivery)
   - [Checks to do sometimes](#Checks-to-do-sometimes)
   - [Components](#Components)
@@ -121,10 +120,6 @@ Then open `http://localhost:80`
 
 You better use a good search engine like [Qwant.com](https://qwant.com), don't use Google. please.
 
-### Contributors and mainteners
-
-If ever you wanna work on this project, it's recommended to use `prettier` and `eslint` on your IDE (Visual Studio Code for example). Just note by default prettier don't touch `.ts` and `.tsx` extension files, [you must make a speacial manipulation in Visual Studio Code](https://levelup.gitconnected.com/setting-up-eslint-with-prettier-typescript-and-visual-studio-code-d113bbec9857?) in your `settings.json`.
-
 ### Continuous Integration and Continuous Delivery
 
 When pushing or merging on master branch, you can trigger Github Actions with a commit message that includes `#major`, `#minor` or `#patch`.
@@ -199,16 +194,16 @@ List of modules not compatible with `renderToNodeStream` (We are telling you the
   - `redux-observable` check out this issue [on github](https://github.com/redux-observable/redux-observable/issues?q=is%3Aissue+is%3Aopen+rendertonodestream)
 
 - Another important issue to know is the split code, the first time your frontend server reads one of your page it'll be blind of redux actions. This is so much interesting try to investigate yourself (use Postman and check if you have data in your redux store in the `__PRELOADED_STATE__` window attribute, turn off and on your server check again in Postman, then refresh again)
-This is in fact a normal behavior check this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760). After a new deployment the first time you render a page, data-fetching during SSR is something `loadable-component` could not carry about. So the Google robot would not be able to treat a complete page in the DOM (this would be empty of data from the redux store except if another user has already opened this page before the Google robot) in this case only the client side will render. To conclude your app must always be able to render on the server & client side independantly.
+This is in fact a normal behavior check this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760). After a new deployment the first time you render a page, data-fetching during SSR is something `loadable-component` could not carry about (because even your server is a casualty of split code). So the Google robot would not be able to treat a complete page in the DOM (this would be empty of data from the redux store except if another user has already opened this page before the Google robot) in this case only the client side will render. All the other times your page will open perfectly with data fetched. To conclude your app must always be able to render on the server & client side independantly.
 
-Let's illustrate this last point with an example : you have 5 million pages to display with 5 React routes, each route render a component which deals with 1 million different pages, you just have to open 1 page (by yourself or a crawler like Google robot, Bing robot etc...) and the other 999999 will render perfectly.
+Let's illustrate this last point with an example : you have 5 million pages to display with 5 React routes, each route renders a component which deals with 1 million different pages, you just have to open 1 page (by yourself or a crawler like Google robot, Bing robot etc...) and the other 999999 will render perfectly.
 
 Please note, in the world there are approximately 10 big crawlers (Russian, American, European, Asian...) which will open a page around every 20 seconds each on your App, this is a statistic home made but quite reliable. Just watch by yourself in your Nginx router who opens your page it's written ;) This is something to take into account for your servers performances, internet network is crazy busy when you have 5 million pages for real in a `sitemap.xml`. Don't think Google robot would read your App if you just do CSR Client Side Rendering. You don't make loose time to crawlers if you wanna have a good SEO score in search engines, moreover if you have 5 million pages to crawl. 
 According to my statistics I just said above this would take more than 3 years in the best case scenario for the Google robot to crawl all your 5 million pages this is why you can play with a parameter in your `sitemap.xml` files to set priorities in pages to crawl first.
 
 ### I want to use renderToNodeStream to make a top notch app
 
-Then you must use `redux-thunk` and/or a `apollographql` which is gonna give you easy promises to handle on server side, but make the right choice. And don't use `react-jss`, just use a classical SASS, LESS or CSS style. And you are good to go.
+Then you must use `redux-thunk` and/or a `apollographql` (but I don't recommend stupid graphql) which is gonna give you easy promises to handle on server side, but make the right choice. And don't use `react-jss`, just use a classical SASS, LESS or CSS style. And you are good to go.
 
 ## Notes
 

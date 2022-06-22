@@ -5,7 +5,7 @@ import * as ActionTypes from '../actions'
 interface MainState {
   language: undefined | string
   timezone: undefined | string
-  userAgent: undefined
+  userAgent: undefined | any
   hostname: undefined | string
 }
 
@@ -20,7 +20,7 @@ const main = (state = INITIAL_STATE_MAIN, action) => {
   const copyState = JSON.parse(JSON.stringify(state))
   switch (action.type) {
     default:
-      return state
+      return copyState
   }
 }
 
@@ -64,10 +64,10 @@ const movies = (state = INITIAL_STATE_MOVIES, action) => {
     case ActionTypes.CLEAR_MOVIES:
       delete copyState.error
       return {
-        ...state
+        ...copyState
       }
     default:
-      return state
+      return copyState
   }
 }
 

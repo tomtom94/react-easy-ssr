@@ -22,10 +22,5 @@ export const movies = {
   failure: (body, error) => action(MOVIES[FAILURE], { body, error })
 }
 
-export interface ActionsRedux {
-  triggerMovies?: (dispatchKind: 'GET_MOVIES') => void
-  clearMovies?: () => void
-}
-
-export const triggerMovies = dispatchKind => action(TRIGGER_MOVIES, { dispatchKind })
+export const triggerMovies = (dispatchKind: 'GET_MOVIES') => action(TRIGGER_MOVIES, { dispatchKind })
 export const clearMovies = () => action(CLEAR_MOVIES)
