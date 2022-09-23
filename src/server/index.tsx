@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'development' || (!process.env.STATIC_FILES_URL && 
    * In production mode we separate static files from the main Express.js frontend server
    * By separating them, you discharge tensions on this Express.js frontend server
    * It now depends what kind of router you are using, Nginx my favorite, Traefik. The rule
-   * is to make a redirection for example like this https://react-easy-ssr-staticfiles.herokuapp.com/static/15.bundle-832a294529dcad5060bd.js
+   * is to make a redirection for example like this https://reacteasyssrjckf9fbl-reacteasyssrstatic.functions.fnc.fr-par.scw.cloud/static/15.bundle-832a294529dcad5060bd.js
    * and now the static bundle file 15.bundle-832a294529dcad5060bd.js is served.
    * In order to achieve this you need a good CI which will do npm run build, then copy the build into an other
    * docker container to serve it through /static/ path

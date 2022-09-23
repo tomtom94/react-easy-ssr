@@ -51,8 +51,7 @@ const clientApp = () => {
   if (
     process.env.NODE_ENV === 'development' ||
     (process.env.NODE_ENV === 'production' &&
-      (hostname === 'react-easy-ssr.herokuapp.com' ||
-        hostname === 'www.react-easy-ssr.herokuapp.com' ||
+      (hostname === 'reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud' ||
         hostname === 'localhost' ||
         hostname === '192.168.0.20'))
   ) {

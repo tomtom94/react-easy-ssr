@@ -12,7 +12,7 @@ Main modules used are `redux-saga`, `loadable-component`, `react-jss` and `types
 
 <img src="https://gifimage.net/wp-content/uploads/2017/10/new-icon-gif-animation-14.gif" width="25" alt="star github"> [Free and easy to use CI/CD](#Continuous-Integration-and-Continuous-Delivery) with Github Actions and Heroku.
 
-Check out this app in live [react-easy-ssr.herokuapp.com](https://react-easy-ssr.herokuapp.com)
+Check out this app in live [reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud](https://reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud)
 
 ## Table of contents
 

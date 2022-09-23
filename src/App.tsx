@@ -92,7 +92,7 @@ const App: FC<Props> = ({ children, ...props }) => {
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="msapplication-TileImage" content={msApplication144} />
         <meta name="description" content={description} />
-        <link rel="canonical" href="https://react-easy-ssr.herokuapp.com/" />
+        <link rel="canonical" href="https://reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud/" />
       </Helmet>
       <main className={classes.app}>
         <Header />
