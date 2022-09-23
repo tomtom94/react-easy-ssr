@@ -22,7 +22,7 @@ jobs:
       - run: npm run build
         env:
           BACKEND_BASE_URL: ''
-          STATIC_FILES_URL: 'https://reacteasyssrjckf9fbl-react-easy-ssr.functions.fnc.fr-par.scw.cloud'
+          STATIC_FILES_URL: 'https://reacteasyssrjckf9fbl-reacteasyssrstatic.functions.fnc.fr-par.scw.cloud'
 
       - name: Copy past new static files
         uses: canastro/copy-file-action@master
@@ -55,19 +55,19 @@ jobs:
       - name: Patch Scaleway Serverless container front
         uses: wei/curl@v1
         with:
-          args: --location --request PATCH https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/5ad8c796-8cda-4db1-8eb6-60d295f8ed73 --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{\"registry_image\":\"rg.fr-par.scw.cloud/funcscwlandingpagefn3xcuzy/landingpagefront:${{ github.ref_name }}\"}'
+          args: --location --request PATCH https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/3dbe3a9e-3329-45de-98ef-479424641d35 --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{\"registry_image\":\"rg.fr-par.scw.cloud/funcscwlandingpagefn3xcuzy/landingpagefront:${{ github.ref_name }}\"}'
 
       - name: Patch Scaleway Serverless container static
         uses: wei/curl@v1
         with:
-          args: --location --request PATCH https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/32385108-eb53-4b41-bd9b-5bbc378199b5 --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{\"registry_image\":\"rg.fr-par.scw.cloud/funcscwlandingpagefn3xcuzy/landingpagestatic:${{ github.ref_name }}\"}'
+          args: --location --request PATCH https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/410315e0-ee07-4d4c-9044-bd7af9055966 --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{\"registry_image\":\"rg.fr-par.scw.cloud/funcscwlandingpagefn3xcuzy/landingpagestatic:${{ github.ref_name }}\"}'
 
       - name: Deploy Scaleway Serverless container front
         uses: wei/curl@v1
         with:
-          args: --location --request POST https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/5ad8c796-8cda-4db1-8eb6-60d295f8ed73/deploy --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{}'
+          args: --location --request POST https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/3dbe3a9e-3329-45de-98ef-479424641d35/deploy --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{}'
 
       - name: Deploy Scaleway Serverless container static
         uses: wei/curl@v1
         with:
-          args: --location --request POST https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/32385108-eb53-4b41-bd9b-5bbc378199b5/deploy --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{}'
+          args: --location --request POST https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/410315e0-ee07-4d4c-9044-bd7af9055966/deploy --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{}'
