@@ -34,7 +34,7 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build & push Docker image
         with:
-          image: landingpagestatic
+          image: reacteasyssrstatic
           tags: ${{ github.ref_name }}
           registry: rg.fr-par.scw.cloud/funcscwreacteasyssrjckf9fbl
           directory: public
@@ -45,7 +45,7 @@ jobs:
       - uses: mr-smithers-excellent/docker-build-push@v5
         name: Build & push Docker image
         with:
-          image: landingpagefront
+          image: reacteasyssrfront
           tags: ${{ github.ref_name }}
           registry: rg.fr-par.scw.cloud/funcscwreacteasyssrjckf9fbl
           dockerfile: Dockerfile
