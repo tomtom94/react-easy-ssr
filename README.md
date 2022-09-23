@@ -10,7 +10,7 @@ React App with SSR Server Side Rendering. Webpack 5 installed manually. In dev m
 
 Main modules used are `redux-saga`, `loadable-component`, `react-jss` and `typescript`.
 
-<img src="https://gifimage.net/wp-content/uploads/2017/10/new-icon-gif-animation-14.gif" width="25" alt="star github"> [Free and easy to use CI/CD](#Continuous-Integration-and-Continuous-Delivery) with Github Actions and Heroku.
+<img src="https://gifimage.net/wp-content/uploads/2017/10/new-icon-gif-animation-14.gif" width="25" alt="star github"> [Free and easy to use CI/CD](#Continuous-Integration-and-Continuous-Delivery) with Github Actions and Scaleway.
 
 Check out this app in live [reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud](https://reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud)
 
