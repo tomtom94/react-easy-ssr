@@ -1,6 +1,6 @@
 {
   "name": "react-easy-ssr",
-  "version": "1.0.0",
+  "version": "v7.1.3",
   "description": "React easy SSR application",
   "main": "dist/server/index.js",
   "engines": {
