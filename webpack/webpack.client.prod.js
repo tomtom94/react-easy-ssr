@@ -12,7 +12,7 @@ module.exports = {
   mode: 'production',
   target: 'web',
   entry: {
-    bundle: [require.resolve('core-js/stable'), require.resolve('regenerator-runtime/runtime'), paths.srcClient]
+    bundle: [paths.srcClient]
   },
   output: {
     path: path.join(paths.clientBuild, paths.publicPath),
