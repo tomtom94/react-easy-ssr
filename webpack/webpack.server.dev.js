@@ -9,7 +9,7 @@ module.exports = {
   mode: 'development',
   target: 'node',
   entry: {
-    server: [require.resolve('core-js/stable'), require.resolve('regenerator-runtime/runtime'), paths.srcServer]
+    server: [paths.srcServer]
   },
   output: {
     path: paths.serverBuild,
