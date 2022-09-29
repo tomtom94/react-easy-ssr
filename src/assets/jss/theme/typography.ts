@@ -16,7 +16,7 @@ export interface Typography {
 const typography = {
   fontFamily: ['Playfair Display', 'serif'].join(','),
   fontSize: 12,
-  fontWeight: 400,
+  fontWeight: 'normal',
   color: palette.text.primary,
   lineHeight: '1.5em'
 }
@@ -24,49 +24,52 @@ const typography = {
 export default {
   h1: {
     ...typography,
-    letterSpacing: -1,
-    fontSize: 60
+    fontSize: 60,
+    letterSpacing: -1.1
   },
   h2: {
     ...typography,
-    letterSpacing: -0.85,
-    fontSize: 48
+    fontSize: 48,
+    letterSpacing: -0.9
   },
   h3: {
     ...typography,
-    letterSpacing: -0.7,
-    fontSize: 42
+    fontSize: 40,
+    letterSpacing: -0.6
   },
   h4: {
     ...typography,
-    letterSpacing: -0.5,
-    fontSize: 36
+    fontSize: 34,
+    letterSpacing: -0.4
   },
   h5: {
     ...typography,
-    letterSpacing: -0.3,
-    fontSize: 20
+    fontSize: 26,
+    letterSpacing: -0.3
   },
   h6: {
     ...typography,
-    letterSpacing: -0.2,
-    fontSize: 18
+    fontSize: 22,
+    letterSpacing: -0.2
   },
   subtitle1: {
     ...typography,
-    letterSpacing: -0.1,
-    fontSize: 16
+    fontSize: 18,
+    letterSpacing: -0.1
   },
   subtitle2: {
     ...typography,
-    fontSize: 14
+    fontSize: 16,
+    letterSpacing: -0.05
   },
   body1: {
     ...typography,
-    fontSize: 12
+    fontSize: 14,
+    letterSpacing: 0
   },
   body2: {
     ...typography,
-    fontSize: 10
+    fontSize: 12,
+    letterSpacing: 0
   }
 }

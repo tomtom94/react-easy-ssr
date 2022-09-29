@@ -6,7 +6,7 @@ export default createUseStyles((theme: Theme) => ({
     ...theme.typography.body1,
     fontWeight: 500,
     fontFamily: 'Roboto,sans-serif',
-    margin: '5px 8px',
+    margin: '0.35rem 0.7rem',
     textDecoration: 'none',
     boxShadow: '0px 0px 0px 2px #9fb4f2',
     background: 'linear-gradient(to bottom, #7892c2 5%, #476e9e 100%)',

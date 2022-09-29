@@ -6,7 +6,7 @@ export default createUseStyles((theme: Theme) => ({
   appBar: {
     display: 'flex',
     width: '100%',
-    height: 60,
+    height: '4rem',
     backgroundImage: `url(${grassBackground})`,
     backgroundRepeat: 'repeat',
     transition: `background-color 300ms ${theme.transition.easing.easeInOut}, height 300ms ${theme.transition.easing.easeInOut}`,
@@ -18,7 +18,6 @@ export default createUseStyles((theme: Theme) => ({
       [theme.breakpoints.down('md')]: {
         height: 'auto',
         flexDirection: 'column',
-        padding: '5px 0',
         justifyContent: 'flex-start',
         alignItems: 'flex-start'
       },
@@ -32,15 +31,21 @@ export default createUseStyles((theme: Theme) => ({
         textDecoration: 'none',
         color: 'black',
         ...theme.typography.h5,
-        letterSpacing: -1,
         textAlign: 'center',
         width: '100%',
         userSelect: 'none',
-        padding: '4px 10px',
+        padding: '0.5rem 1rem',
+        '&:first-of-type': {
+          margin: '0 0 0 1rem',
+          [theme.breakpoints.down('md')]: {
+            margin: '0.5rem 0 0 0'
+          }
+        },
         [theme.breakpoints.down('md')]: {
+          ...theme.typography.h6,
           width: '100%',
           textDecoration: 'none',
-          padding: '6px 14px',
+          padding: '0.5rem 1rem',
           textAlign: 'left'
         },
         '@media(hover: hover) and (pointer: fine)': {
@@ -62,21 +67,20 @@ export default createUseStyles((theme: Theme) => ({
         display: 'flex',
         justifyContent: 'flex-end',
         width: '100%',
+        height: '4rem',
         '& > button': {
           cursor: 'pointer',
           textAlign: 'right',
-          ...theme.typography.h5,
+          fontSize: 28,
           width: '100%',
           border: 0,
-          padding: `9px ${theme.spacing(3)}px`,
+          paddingRight: '2.5rem',
           [theme.breakpoints.down('sm')]: {
-            paddingRight: theme.spacing(1)
+            paddingRight: '1.5rem'
           },
           textDecoration: 'none',
           backgroundColor: 'transparent',
           '& img': {
-            padding: 0,
-            marginRight: theme.spacing(1),
             height: '28px'
           },
           '&:focus': {
@@ -104,8 +108,6 @@ export default createUseStyles((theme: Theme) => ({
       '& $logoLink': {
         // color: 'inherit',
         textDecoration: 'none',
-        margin: '0 5px 0 0',
-
         '&:focus': {
           outline: 0
         },
@@ -130,19 +132,14 @@ export default createUseStyles((theme: Theme) => ({
         '& div': {
           display: 'flex',
           alignItems: 'center',
-          fontSize: 40,
-          color: theme.palette.common.black,
+          ...theme.typography.h4,
           [theme.breakpoints.down('md')]: {
-            fontSize: 30
+            ...theme.typography.h5
           },
           '& span': {
             margin: '0 0 0 1rem',
-            letterSpacing: '-2px',
-            lineHeight: '1.5rem',
             [theme.breakpoints.down('md')]: {
-              margin: '0 0 0 0.5rem',
-              lineHeight: '1.3rem',
-              letterSpacing: '-1.7px'
+              margin: '0 0 0 0.5rem'
             }
           }
         }
@@ -153,7 +150,7 @@ export default createUseStyles((theme: Theme) => ({
         fontSize: 28,
         width: '100%',
         border: 0,
-        padding: '9px 10px',
+        padding: '1rem',
         textDecoration: 'none',
         backgroundColor: 'transparent',
         '&:focus': {

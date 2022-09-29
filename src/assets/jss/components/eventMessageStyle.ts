@@ -27,7 +27,7 @@ export default createUseStyles((theme: Theme) => ({
   },
 
   message: {
-    borderRadius: '3px',
+    borderRadius: 3,
     display: 'flex',
     alignItems: 'center',
     minWidth: 250,
@@ -45,13 +45,13 @@ export default createUseStyles((theme: Theme) => ({
       '& > p': { ...theme.typography.body1 }
     },
     '& $closingButton': {
-      borderRadius: '3px',
+      borderRadius: 3,
       position: 'absolute',
       top: 0,
       right: 0,
       cursor: 'pointer',
       border: 'none',
-      padding: '5px 5px',
+      padding: '0.5rem',
       backgroundColor: 'transparent',
       '& img': {
         padding: 0,
