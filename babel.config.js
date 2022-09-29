@@ -25,11 +25,7 @@ module.exports = api => {
     '@babel/preset-typescript'
   ]
 
-  const plugins = []
-  if (process.env.NODE_ENV === 'development') {
-    plugins.push('react-hot-loader/babel')
-  }
-  plugins.push('@loadable/babel-plugin')
+  const plugins = ['react-hot-loader/babel', '@loadable/babel-plugin']
 
   return {
     presets,
