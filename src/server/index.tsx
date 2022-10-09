@@ -92,6 +92,7 @@ app.use((req: Request, res: Response) => {
       </Provider>
     </StaticRouter>
   )
+
   store
     .runSaga(rootSaga)
     .toPromise()
@@ -100,11 +101,12 @@ app.use((req: Request, res: Response) => {
       const helmetContext = { helmet: {} }
       const generateId = createGenerateId()
       const sheets = new SheetsRegistry()
-      const html = renderToString(
-        <JssProvider jss={jss} registry={sheets} generateId={generateId} classNamePrefix="app-">
+      const printJsx = (
+        <JssProvider jss={jss} registry={sheets} classNamePrefix="app-">
           {sheet.collectStyles(extractor.collectChunks(jsx(staticContext, helmetContext)))}
         </JssProvider>
       )
+      renderToString(printJsx) // just get the staticContext & helmetContext
 
       let css = sheets.toString()
       const prefixer = postcss([autoprefixer])
@@ -119,9 +121,29 @@ app.use((req: Request, res: Response) => {
       const { helmet } = helmetContext
       const scriptTags = extractor.getScriptTags()
 
-      res
-        .status(staticContext.statusCode || 200)
-        .send(renderFullPage(html, css, fontAwesomeCss, styleTags, serialize(store.getState()), helmet, scriptTags))
+      res.write(
+        `<!DOCTYPE html><html><head><meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="${
+          process.env.STATIC_FILES_URL ? `${process.env.STATIC_FILES_URL}/static/bundle.css` : `/static/bundle.css`
+        }" />
+${helmet.title.toString()}
+${helmet.meta.toString()}
+${helmet.link.toString()}
+${styleTags}
+<style id="jss-server-side">${css}</style><style id="fontawesome-server-side">${fontAwesomeCss}</style></head><body><noscript>Sorry, your browser does not support JavaScript!</noscript><script>window.__PRELOADED_STATE__ = ${serialize(
+          store.getState()
+        )}</script>
+${scriptTags}
+<div id="root">`
+      )
+
+      const stream = renderToNodeStream(printJsx)
+      stream.pipe(res, { end: false })
+      stream.on('end', async () => {
+        res.write(`</div></body></html>`)
+        res.end()
+      })
     })
     .catch(e => {
       console.log(e.message)
