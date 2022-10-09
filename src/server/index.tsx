@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import path from 'path'
 import compression from 'compression'
 import cors from 'cors'
-import { Helmet, HelmetProvider, FilledContext } from 'react-helmet-async'
+import { HelmetProvider, HelmetServerState } from 'react-helmet-async'
 import express, { Request, Response, NextFunction } from 'express'
 import { dom } from '@fortawesome/fontawesome-svg-core'
 import { JssProvider, SheetsRegistry, createGenerateId, jss } from 'react-jss'
@@ -20,7 +20,6 @@ import { UAParser } from 'ua-parser-js'
 import CleanCSS from 'clean-css'
 import configureStore, { createHistory } from '../store/configureStore'
 import App from '../App'
-import renderFullPage from './renderFullPage'
 import rootSaga from '../store/sagas'
 import { paths } from '../../scripts/utils'
 
@@ -98,7 +97,9 @@ app.use((req: Request, res: Response) => {
     .toPromise()
     .then(async () => {
       const staticContext: StaticRouterContext = {}
-      const helmetContext = { helmet: {} }
+      const helmetContext: { helmet: Partial<HelmetServerState> } = {
+        helmet: {}
+      }
       const generateId = createGenerateId()
       const sheets = new SheetsRegistry()
       const printJsx = (
