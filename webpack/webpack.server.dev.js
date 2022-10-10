@@ -19,10 +19,10 @@ module.exports = {
   },
   resolve: {
     modules: [paths.src, 'node_modules'],
-    extensions: ['.js', '.jsx', '.ts', '.tsx']
-    // alias: {
-    //   'react-dom': '@hot-loader/react-dom'
-    // }
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    }
   },
   module: require('./loaders.server.js'),
   plugins: [
