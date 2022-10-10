@@ -1,6 +1,6 @@
+import { hot } from 'react-hot-loader/root'
 import React, { useEffect, useState, useRef, useCallback, FC, ReactNode } from 'react'
 
-import { hot } from 'react-hot-loader/root'
 import classNames from 'classnames'
 
 import drawerStyle from '../assets/jss/components/drawerStyle'

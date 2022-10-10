@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
 import { hot } from 'react-hot-loader/root'
+import React, { FC } from 'react'
 import { RouteComponentProps } from 'react-router'
 
 import { Helmet } from 'react-helmet-async'

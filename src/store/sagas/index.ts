@@ -1,4 +1,4 @@
-import { take, put, call, fork, select, delay, all, takeEvery, takeLatest } from 'redux-saga/effects'
+import { take, put, call, fork, select, delay, all, takeEvery, takeLatest, PutEffect, CallEffect } from 'redux-saga/effects'
 import { Saga, SagaIterator } from 'redux-saga'
 
 import { moviesLoadable, moviesCleanable } from '../reducers/selectors'
@@ -18,7 +18,9 @@ function* fetchEntity(entity, apiFn, body) {
 }
 
 // yeah! we can also bind Generators
-export const moviesFetch: Saga = fetchEntity.bind(null, movies, moviesApi.movies)
+export const moviesFetch: (
+  body: any
+) => Generator<PutEffect<any> | CallEffect<unknown>, void, { response: any; error: any }> = fetchEntity.bind(null, movies, moviesApi.movies)
 
 /** *************************************************************************** */
 /** ******************************* SAGAS ************************************* */

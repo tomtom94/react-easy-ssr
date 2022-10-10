@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useState, useRef } from 'react'
 import { hot } from 'react-hot-loader/root'
+import React, { FC, useEffect, useState, useRef } from 'react'
 import { useHistory } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
