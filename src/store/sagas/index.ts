@@ -6,11 +6,16 @@ import { moviesLoadable, moviesCleanable } from '../reducers/selectors'
 import * as moviesApi from '../services/moviesApi'
 
 import * as actions from '../actions'
+import { ActionDispatcher } from '../actions'
 
 // each entity defines 3 creators { request, success, failure }
 const { movies } = actions
 
-function* fetchEntity(entity, apiFn, body) {
+function* fetchEntity(
+  entity: ActionDispatcher,
+  apiFn: () => Promise<{ response?: unknown; error?: { status: number; message: string } }>,
+  body: unknown
+) {
   yield put(entity.request(body))
   const { response, error } = yield call(apiFn, body)
   if (response) yield put(entity.success(body, response))
@@ -19,14 +24,14 @@ function* fetchEntity(entity, apiFn, body) {
 
 // yeah! we can also bind Generators
 export const moviesFetch: (
-  body: any
+  body: unknown
 ) => Generator<PutEffect<any> | CallEffect<unknown>, void, { response: any; error: any }> = fetchEntity.bind(null, movies, moviesApi.movies)
 
 /** *************************************************************************** */
 /** ******************************* SAGAS ************************************* */
 /** *************************************************************************** */
 
-function* getMovies(dispatchKind): SagaIterator {
+function* getMovies(dispatchKind: string): SagaIterator {
   const cleanable = yield select(moviesCleanable)
   if (cleanable) {
     yield put(actions.clearMovies())

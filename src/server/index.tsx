@@ -133,7 +133,6 @@ app.use((req: Request, res: Response) => {
   store.close()
 })
 
-app.listen(PORT, err => {
-  if (err) console.log(err)
-  else console.log(`App SSR running ${process.env.NODE_ENV === 'production' ? `port : ${PORT}` : `http://localhost:${PORT}`} 🌎`)
+app.listen(PORT, () => {
+  console.log(`App SSR running ${process.env.NODE_ENV === 'production' ? `port : ${PORT}` : `http://localhost:${PORT}`} 🌎`)
 })

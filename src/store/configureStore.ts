@@ -1,4 +1,4 @@
-import { createBrowserHistory, createMemoryHistory } from 'history'
+import { createBrowserHistory, createMemoryHistory, History } from 'history'
 import { applyMiddleware, createStore } from 'redux'
 import createSagaMiddleware, { END, SagaMiddleware } from 'redux-saga'
 
@@ -6,6 +6,7 @@ import { routerMiddleware } from 'connected-react-router'
 import { createLogger } from 'redux-logger'
 
 import createRootReducer from './rootReducer'
+import { AppState } from './reducers'
 
 export const createHistory = (initialEntries = ['/']) => {
   if (process.env.BROWSER) {
@@ -18,7 +19,7 @@ export const createHistory = (initialEntries = ['/']) => {
   return createMemoryHistory({ initialEntries })
 }
 
-export default function configureStore(preloadedState, history) {
+export default function configureStore(preloadedState: { app: Partial<AppState> }, history: History) {
   const sagaMiddleware = createSagaMiddleware()
 
   const middlewares: any[] = []

@@ -1,4 +1,14 @@
-const renderFullPage = (html, css, fontAwesomeCss, styleTags, store, helmet, scriptTags) => `<!DOCTYPE html>
+import { HelmetServerState } from 'react-helmet-async'
+
+const renderFullPage = (
+  html: string,
+  css: string,
+  fontAwesomeCss: string,
+  styleTags: string,
+  store: string,
+  helmet: HelmetServerState,
+  scriptTags: string
+): string => `<!DOCTYPE html>
 <html ${helmet.htmlAttributes.toString()}>
   <head>
     <meta charset="utf-8" />

@@ -69,7 +69,7 @@ function getOffset(val, div = 1) {
   return `${parse / div}${String(val).replace(String(parse), '') || 'px'}`
 }
 
-function generateGutter(theme, breakpoint) {
+function generateGutter(theme, breakpoint: string) {
   const styles = {}
 
   SPACINGS.forEach(spacing => {
