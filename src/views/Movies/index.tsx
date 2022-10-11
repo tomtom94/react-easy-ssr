@@ -13,7 +13,7 @@ import { triggerMovies, clearMovies } from '../../store/actions/index'
 import Loading from '../Exception/Loading'
 
 type Props = {
-  routeComponent: RouteComponentProps
+  routeComponent?: RouteComponentProps
 }
 
 const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {

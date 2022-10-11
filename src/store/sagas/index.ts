@@ -13,7 +13,7 @@ const { movies } = actions
 
 function* fetchEntity(
   entity: ActionDispatcher,
-  apiFn: () => Promise<{ response?: unknown; error?: { status: number; message: string } }>,
+  apiFn: () => Promise<{ response?: any; error?: { status: any; message: any } }>,
   body: unknown
 ) {
   yield put(entity.request(body))

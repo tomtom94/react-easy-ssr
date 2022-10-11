@@ -2,6 +2,13 @@ import { combineReducers } from 'redux'
 
 import * as ActionTypes from '../actions'
 
+interface ActionDispatch {
+  type: string
+  body: { dispatchKind?: string }
+  response?: { results: unknown }
+  error?: { message: string; status: number }
+}
+
 interface MainState {
   language: undefined | string
   timezone: undefined | string
@@ -16,7 +23,7 @@ const INITIAL_STATE_MAIN: MainState = {
   hostname: undefined
 }
 
-const main = (state = INITIAL_STATE_MAIN, action) => {
+const main = (state = INITIAL_STATE_MAIN, action: ActionDispatch) => {
   const copyState = JSON.parse(JSON.stringify(state))
   switch (action.type) {
     default:
@@ -26,7 +33,7 @@ const main = (state = INITIAL_STATE_MAIN, action) => {
 
 interface MoviesState {
   isLoading: boolean
-  data: any[]
+  data: unknown[]
   error?: { message: string; status: number; isBrowser: boolean }
 }
 
@@ -35,7 +42,7 @@ const INITIAL_STATE_MOVIES: MoviesState = {
   data: []
 }
 
-const movies = (state = INITIAL_STATE_MOVIES, action) => {
+const movies = (state = INITIAL_STATE_MOVIES, action: ActionDispatch) => {
   const copyState = JSON.parse(JSON.stringify(state)) // Avoid JS mutation
   switch (action.type) {
     case ActionTypes.MOVIES.REQUEST:

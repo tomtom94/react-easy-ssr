@@ -13,9 +13,7 @@ export const MOVIES = createRequestTypes('MOVIES')
 export const TRIGGER_MOVIES = 'TRIGGER_MOVIES'
 export const CLEAR_MOVIES = 'CLEAR_MOVIES'
 
-const action = <T = { body?: unknown; error?: unknown }>(type: string, payload?: T) => {
-  return { type, ...payload }
-}
+const action = <T = { body: unknown; response: unknown }>(type: string, payload?: T): { type: string } & T => ({ type, ...payload })
 
 export interface ActionDispatcher {
   request: (body: unknown) => { type: string } & { body: unknown }

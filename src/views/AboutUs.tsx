@@ -10,7 +10,7 @@ import aboutUsStyle from '../assets/jss/views/aboutUsStyle'
 import { ReduxState } from '../store/rootReducer'
 
 type Props = {
-  routeComponent: RouteComponentProps
+  routeComponent?: RouteComponentProps
 }
 
 const AboutUs: FC<Props> = ({ children, routeComponent, ...props }) => {

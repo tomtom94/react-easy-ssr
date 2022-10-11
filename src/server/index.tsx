@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import path from 'path'
 import compression from 'compression'
 import cors from 'cors'
-import { Helmet, HelmetProvider, FilledContext } from 'react-helmet-async'
+import { Helmet, HelmetProvider, FilledContext, HelmetServerState } from 'react-helmet-async'
 import express, { Request, Response, NextFunction } from 'express'
 import { dom } from '@fortawesome/fontawesome-svg-core'
 import { JssProvider, SheetsRegistry, createGenerateId, jss } from 'react-jss'
@@ -58,7 +58,7 @@ app.use((req: Request, res: Response) => {
   const userAgent = new UAParser(req.headers['user-agent']).getResult()
   const acceptedLanguages = Array.isArray(req.acceptsLanguages()) ? req.acceptsLanguages()[0] : req.acceptsLanguages()
   const hostname = req.header('host')
-  let language = 'fr-FR'
+  let language: string | string[] = 'fr-FR'
   const timezone = 'Europe/Paris'
 
   if (acceptedLanguages && acceptedLanguages !== '*') {
@@ -97,7 +97,7 @@ app.use((req: Request, res: Response) => {
     .toPromise()
     .then(async () => {
       const staticContext: StaticRouterContext = {}
-      const helmetContext = { helmet: {} }
+      const helmetContext: { helmet: Partial<HelmetServerState> } = { helmet: {} }
       const generateId = createGenerateId()
       const sheets = new SheetsRegistry()
       const html = renderToString(
@@ -123,7 +123,7 @@ app.use((req: Request, res: Response) => {
         .status(staticContext.statusCode || 200)
         .send(renderFullPage(html, css, fontAwesomeCss, styleTags, serialize(store.getState()), helmet, scriptTags))
     })
-    .catch(e => {
+    .catch((e: Error) => {
       console.log(e.message)
       res.status(500).send(e.message)
     })

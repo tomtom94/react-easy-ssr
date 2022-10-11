@@ -1,9 +1,9 @@
-import baseLoadable, { LoadableComponent } from '@loadable/component'
+import baseLoadable, { DefaultComponent, LoadableComponent } from '@loadable/component'
 import React from 'react'
 import Loading from './Exception/Loading'
 
 // https://github.com/gregberge/loadable-components/issues/669#issuecomment-741539840
-const loadable = importer => {
+const loadable = (importer: () => Promise<DefaultComponent<unknown>>) => {
   const withoutForwardRef = process.env.BROWSER ? C => props => <C {...props} /> : C => C
   return withoutForwardRef(
     baseLoadable(importer, {
@@ -25,7 +25,7 @@ export interface Route {
   exact?: boolean
   path?: string | string[]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Component: LoadableComponent<any>
+  Component: LoadableComponent<unknown>
 }
 
 const indexRoutes: Route[] = [
