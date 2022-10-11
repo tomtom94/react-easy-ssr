@@ -18,6 +18,7 @@ import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 import { UAParser } from 'ua-parser-js'
 import CleanCSS from 'clean-css'
+import { AppState } from '../store/reducers'
 import configureStore, { createHistory } from '../store/configureStore'
 import App from '../App'
 import renderFullPage from './renderFullPage'
@@ -65,7 +66,7 @@ app.use((req: Request, res: Response) => {
     language = acceptedLanguages
   }
 
-  const initialState = {
+  const initialState: { app: Partial<AppState> } = {
     app: {
       main: {
         language,

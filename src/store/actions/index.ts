@@ -2,12 +2,12 @@ const REQUEST = 'REQUEST'
 const SUCCESS = 'SUCCESS'
 const FAILURE = 'FAILURE'
 
-function createRequestTypes(base: string): { [key: string]: string } {
-  return [REQUEST, SUCCESS, FAILURE].reduce((acc, type) => {
+const createRequestTypes = (base: string): { [key: string]: string } =>
+  [REQUEST, SUCCESS, FAILURE].reduce((acc, type) => {
     acc[type] = `${base}_${type}`
     return acc
-  }, {})
-}
+  }, {} as Record<string, string>)
+
 export const MOVIES = createRequestTypes('MOVIES')
 
 export const TRIGGER_MOVIES = 'TRIGGER_MOVIES'

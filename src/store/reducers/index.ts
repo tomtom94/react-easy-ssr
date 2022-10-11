@@ -10,7 +10,7 @@ interface ActionDispatch {
 }
 
 interface MainState {
-  language: undefined | string
+  language: undefined | string | string[]
   timezone: undefined | string
   userAgent: undefined | any
   hostname: undefined | string

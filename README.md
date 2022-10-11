@@ -18,6 +18,7 @@ Check out this app in live [reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc
 
 - [Motivations](#motivations)
 - [Getting started](#Getting-started)
+  - [Requirements](#Requirements)
   - [Start in dev mode](#Start-in-dev-mode)
   - [Start in production mode](#Start-in-production-mode)
     - [With Node.js](#With-Nodejs)
@@ -63,6 +64,16 @@ git clone https://github.com/tomtom94/react-easy-ssr.git
 ```git
 cd react-easy-ssr
 ```
+
+### Requirements
+
+Node.js version 16 minimum. Hopefully you got `nvm` command (best way to install node) already installed, hence just do
+
+```nvm
+nvm use
+```
+
+it's gonna use the `.nvmrc` file with v16.17.1
 
 ### Start in dev mode
 

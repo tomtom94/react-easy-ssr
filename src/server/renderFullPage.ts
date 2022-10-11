@@ -6,10 +6,10 @@ const renderFullPage = (
   fontAwesomeCss: string,
   styleTags: string,
   store: string,
-  helmet: HelmetServerState,
+  helmet: Partial<HelmetServerState>,
   scriptTags: string
 ): string => `<!DOCTYPE html>
-<html ${helmet.htmlAttributes.toString()}>
+<html ${helmet?.htmlAttributes?.toString()}>
   <head>
     <meta charset="utf-8" />
     <meta
@@ -20,9 +20,9 @@ const renderFullPage = (
       process.env.STATIC_FILES_URL ? `${process.env.STATIC_FILES_URL}/static/bundle.css` : `/static/bundle.css`
     }" />
     
-    ${helmet.title.toString()}
-    ${helmet.meta.toString()}
-    ${helmet.link.toString()}
+    ${helmet?.title?.toString()}
+    ${helmet?.meta?.toString()}
+    ${helmet?.link?.toString()}
     ${styleTags}
     <style id="jss-server-side">${css}</style>
     <style id="fontawesome-server-side">${fontAwesomeCss}</style>
