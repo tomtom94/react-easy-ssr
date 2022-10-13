@@ -1,3 +1,5 @@
+import { CallApiResponse, ErrorCallApiResponse, SuccessCallApiResponse } from '../services/callApi'
+
 const REQUEST = 'REQUEST'
 const SUCCESS = 'SUCCESS'
 const FAILURE = 'FAILURE'
@@ -13,12 +15,19 @@ export const MOVIES = createRequestTypes('MOVIES')
 export const TRIGGER_MOVIES = 'TRIGGER_MOVIES'
 export const CLEAR_MOVIES = 'CLEAR_MOVIES'
 
-const action = <T = { body: unknown; response: unknown }>(type: string, payload?: T): { type: string } & T => ({ type, ...payload })
+const action = (
+  type: string,
+  payload?: { dispatchKind?: string; body?: unknown; response?: SuccessCallApiResponse; error?: ErrorCallApiResponse }
+) => ({
+  type,
+  ...payload
+})
 
+type ActionDispatcherResponse = { type: string; body?: unknown } & CallApiResponse
 export interface ActionDispatcher {
-  request: (body: unknown) => { type: string } & { body: unknown }
-  success: (body: unknown, response: unknown) => { type: string } & { body: unknown; response: unknown }
-  failure: (body: unknown, error: unknown) => { type: string } & { body: unknown; error: unknown }
+  request: (body: unknown) => ActionDispatcherResponse
+  success: (body: unknown, response: SuccessCallApiResponse) => ActionDispatcherResponse
+  failure: (body: unknown, error: ErrorCallApiResponse) => ActionDispatcherResponse
 }
 
 export const movies: ActionDispatcher = {

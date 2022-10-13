@@ -4,7 +4,12 @@ import 'isomorphic-fetch'
 
 const BASE_URL = process.env.BACKEND_BASE_URL
 
-export default (endpoint: string, params: RequestInit): Promise<{ response?: any; error?: { status: any; message: any } }> => {
+export type ErrorCallApiResponse = { status: number; message: string }
+export type SuccessCallApiResponse = { results: unknown }
+
+export type CallApiResponse = { response?: SuccessCallApiResponse; error?: ErrorCallApiResponse }
+
+export default (endpoint: string, params: RequestInit): Promise<CallApiResponse> => {
   const url = new URL(`${BASE_URL}${endpoint}`)
   return fetch(url.href, params)
     .then(response => {

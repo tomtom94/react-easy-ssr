@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux'
+import { CallApiResponse, ErrorCallApiResponse, SuccessCallApiResponse } from '../services/callApi'
 
 import * as ActionTypes from '../actions'
 
 interface ActionDispatch {
   type: string
   body: { dispatchKind?: string }
-  response?: { results: unknown }
-  error?: { message: string; status: number }
+  response?: SuccessCallApiResponse
+  error?: ErrorCallApiResponse
 }
 
 interface MainState {
@@ -34,7 +35,7 @@ const main = (state = INITIAL_STATE_MAIN, action: ActionDispatch) => {
 interface MoviesState {
   isLoading: boolean
   data: unknown[]
-  error?: { message: string; status: number; isBrowser: boolean }
+  error?: ErrorCallApiResponse & { isBrowser: boolean }
 }
 
 const INITIAL_STATE_MOVIES: MoviesState = {
@@ -53,9 +54,9 @@ const movies = (state = INITIAL_STATE_MOVIES, action: ActionDispatch) => {
       }
     case ActionTypes.MOVIES.SUCCESS:
       delete copyState.error
-      let data = []
+      let data: unknown = []
       if (action.body.dispatchKind === 'GET_MOVIES') {
-        data = action.response.results
+        data = action.response?.results
       }
       return {
         ...copyState,
@@ -66,7 +67,7 @@ const movies = (state = INITIAL_STATE_MOVIES, action: ActionDispatch) => {
       return {
         ...copyState,
         isLoading: false,
-        error: { message: action.error.message, status: action.error.status, isBrowser: process.env.BROWSER }
+        error: { message: action.error?.message, status: action.error?.status, isBrowser: process.env.BROWSER }
       }
     case ActionTypes.CLEAR_MOVIES:
       delete copyState.error
