@@ -11,17 +11,17 @@ interface ActionDispatch {
 }
 
 interface MainState {
-  language: undefined | string | string[]
-  timezone: undefined | string
-  userAgent: undefined | any
-  hostname: undefined | string
+  language: null | string | string[]
+  timezone: null | string
+  userAgent: null | unknown
+  hostname: null | string
 }
 
-const INITIAL_STATE_MAIN: MainState = {
-  language: undefined,
-  timezone: undefined,
-  userAgent: undefined,
-  hostname: undefined
+export const INITIAL_STATE_MAIN: MainState = {
+  language: null,
+  timezone: null,
+  userAgent: null,
+  hostname: null
 }
 
 const main = (state = INITIAL_STATE_MAIN, action: ActionDispatch) => {
@@ -34,11 +34,11 @@ const main = (state = INITIAL_STATE_MAIN, action: ActionDispatch) => {
 
 interface MoviesState {
   isLoading: boolean
-  data: unknown[]
+  data: { id: string; poster_path: string; title: string; overview: string; release_date: string }[]
   error?: ErrorCallApiResponse & { isBrowser: boolean }
 }
 
-const INITIAL_STATE_MOVIES: MoviesState = {
+export const INITIAL_STATE_MOVIES: MoviesState = {
   isLoading: true,
   data: []
 }

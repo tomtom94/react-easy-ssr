@@ -4,6 +4,7 @@ import { StaticRouter, matchPath } from 'react-router-dom'
 import ReactDOMServer, { renderToString, renderToNodeStream } from 'react-dom/server'
 import { ChunkExtractor } from '@loadable/server'
 import { Provider } from 'react-redux'
+import { PreloadedState } from 'redux'
 import path from 'path'
 import compression from 'compression'
 import cors from 'cors'
@@ -18,7 +19,9 @@ import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 import { UAParser } from 'ua-parser-js'
 import CleanCSS from 'clean-css'
-import { AppState } from '../store/reducers'
+import { RouterState } from 'connected-react-router'
+import { ReduxState } from 'store/rootReducer'
+import { AppState, INITIAL_STATE_MOVIES } from '../store/reducers'
 import configureStore, { createHistory } from '../store/configureStore'
 import App from '../App'
 import renderFullPage from './renderFullPage'
@@ -66,14 +69,15 @@ app.use((req: Request, res: Response) => {
     language = acceptedLanguages
   }
 
-  const initialState: { app: Partial<AppState> } = {
+  const initialState: Partial<PreloadedState<ReduxState>> = {
     app: {
       main: {
         language,
         timezone,
-        hostname,
+        hostname: hostname || null,
         userAgent
-      }
+      },
+      movies: INITIAL_STATE_MOVIES
     }
   }
 

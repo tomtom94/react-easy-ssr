@@ -1,11 +1,11 @@
 import { createBrowserHistory, createMemoryHistory, History } from 'history'
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, legacy_createStore, PreloadedState } from 'redux'
 import createSagaMiddleware, { END, SagaMiddleware } from 'redux-saga'
 
-import { routerMiddleware } from 'connected-react-router'
+import { routerMiddleware, RouterState } from 'connected-react-router'
 import { createLogger } from 'redux-logger'
 
-import createRootReducer from './rootReducer'
+import createRootReducer, { ReduxState } from './rootReducer'
 import { AppState } from './reducers'
 
 export const createHistory = (initialEntries = ['/']) => {
@@ -19,7 +19,7 @@ export const createHistory = (initialEntries = ['/']) => {
   return createMemoryHistory({ initialEntries })
 }
 
-export default function configureStore(preloadedState: { app: Partial<AppState> }, history: History) {
+export default function configureStore(preloadedState: Partial<PreloadedState<ReduxState>>, history: History) {
   const sagaMiddleware = createSagaMiddleware()
 
   const middlewares: any[] = []
@@ -29,7 +29,11 @@ export default function configureStore(preloadedState: { app: Partial<AppState> 
     middlewares.push(createLogger())
   }
 
-  const store: any = createStore(createRootReducer(history), preloadedState, applyMiddleware(...middlewares, routerMiddleware(history)))
+  const store: any = legacy_createStore(
+    createRootReducer(history),
+    preloadedState,
+    applyMiddleware(...middlewares, routerMiddleware(history))
+  )
 
   // Hot reloading
   if (module.hot) {
