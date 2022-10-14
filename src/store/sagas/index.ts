@@ -7,15 +7,12 @@ import * as moviesApi from '../services/moviesApi'
 
 import * as actions from '../actions'
 import { ActionDispatcher } from '../actions'
+import { CallApiResponse } from '../services/callApi'
 
 // each entity defines 3 creators { request, success, failure }
 const { movies } = actions
 
-function* fetchEntity(
-  entity: ActionDispatcher,
-  apiFn: () => Promise<{ response?: any; error?: { status: any; message: any } }>,
-  body: unknown
-) {
+function* fetchEntity(entity: ActionDispatcher, apiFn: () => Promise<CallApiResponse>, body: unknown) {
   yield put(entity.request(body))
   const { response, error } = yield call(apiFn, body)
   if (response) yield put(entity.success(body, response))

@@ -103,7 +103,7 @@ const App: FC<Props> = ({ children, ...props }) => {
                 exact={typeof exact !== 'undefined' ? exact : false}
                 path={path}
                 key={i}
-                render={({ ...routeComponent }) => <Component routeComponent={routeComponent} />}
+                render={routeComponent => <Component routeComponent={routeComponent} />}
               />
             ))}
           </Switch>

@@ -1,10 +1,20 @@
 import baseLoadable, { DefaultComponent, LoadableComponent } from '@loadable/component'
-import React from 'react'
+import React, { ReactNode } from 'react'
+import { RouteComponentProps } from 'react-router'
 import Loading from './Exception/Loading'
 
 // https://github.com/gregberge/loadable-components/issues/669#issuecomment-741539840
-const loadable = (importer: () => Promise<DefaultComponent<unknown>>) => {
-  const withoutForwardRef = process.env.BROWSER ? C => props => <C {...props} /> : C => C
+const loadable = (importer: () => Promise<DefaultComponent<{ routeComponent: RouteComponentProps }>>) => {
+  const withoutForwardRef = process.env.BROWSER
+    ? (C: LoadableComponent<{ routeComponent: RouteComponentProps }>) => (props: { routeComponent: RouteComponentProps }) => (
+        // eslint-disable-next-line react/jsx-props-no-spreading, react/jsx-indent
+        <C {...props} />
+      )
+    : (C: LoadableComponent<{ routeComponent: RouteComponentProps }>) => (props: { routeComponent: RouteComponentProps }) => (
+        // eslint-disable-next-line react/jsx-indent
+        <C routeComponent={props.routeComponent} />
+      )
+
   return withoutForwardRef(
     baseLoadable(importer, {
       fallback: <Loading />
@@ -24,8 +34,7 @@ export interface Route {
   name?: string
   exact?: boolean
   path?: string | string[]
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Component: LoadableComponent<unknown>
+  Component: (props: { routeComponent: RouteComponentProps }) => JSX.Element
 }
 
 const indexRoutes: Route[] = [

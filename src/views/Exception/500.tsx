@@ -8,7 +8,7 @@ import exceptionPageStyle from '../../assets/jss/views/exceptionPageStyle'
 import ExceptionImageUrl, { ReactComponent as ExceptionImage } from '../../assets/images/500.svg'
 
 type Props = {
-  routeComponent?: RouteComponentProps
+  routeComponent: RouteComponentProps
 }
 
 const Exception: FC<Props> = ({ children, routeComponent, ...props }) => {

@@ -10,7 +10,7 @@ import homeStyle from '../../assets/jss/views/homeStyle'
 import { ReduxState } from '../../store/rootReducer'
 
 type Props = {
-  routeComponent?: RouteComponentProps
+  routeComponent: RouteComponentProps
 }
 
 const Home: FC<Props> = ({ children, routeComponent, ...props }) => {
