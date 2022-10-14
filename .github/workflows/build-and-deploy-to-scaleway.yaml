@@ -2,11 +2,8 @@ name: 2) Build and deploy to Scaleway
 
 on:
   push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -18,6 +15,10 @@ jobs:
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           
+      - name: Bump version in package.json file
+        run: |
+          sed -i '0,/"version": "/{s/"version": "\([^#]*\)",/"version": "${{ github.ref_name }}",/}' package.json package-lock.json
+
       - uses: EndBug/add-and-commit@v9
         with:
           message: Bump version to ${{ github.ref_name }}
@@ -35,3 +36,57 @@ jobs:
 
       - run: npm run prettier
 
+      - run: npx browserslist@latest --update-db
+
+      - run: npm run build
+        env:
+          BACKEND_BASE_URL: ''
+          STATIC_FILES_URL: 'https://reacteasyssrjckf9fbl-reacteasyssrstatic.functions.fnc.fr-par.scw.cloud'
+
+      - name: Copy past new static files
+        uses: canastro/copy-file-action@master
+        with:
+          source: dist/client/static/.
+          target: public/static/
+          flags: '-r'
+
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        name: Build & push Docker image
+        with:
+          image: reacteasyssrstatic
+          tags: ${{ github.ref_name }}
+          registry: rg.fr-par.scw.cloud/funcscwreacteasyssrjckf9fbl
+          directory: public
+          dockerfile: public/Dockerfile
+          username: ${{ secrets.SCW_ACCESS_KEY }}
+          password: ${{ secrets.SCW_SECRET_TOKEN }}
+
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        name: Build & push Docker image
+        with:
+          image: reacteasyssrfront
+          tags: ${{ github.ref_name }}
+          registry: rg.fr-par.scw.cloud/funcscwreacteasyssrjckf9fbl
+          dockerfile: Dockerfile
+          username: ${{ secrets.SCW_ACCESS_KEY }}
+          password: ${{ secrets.SCW_SECRET_TOKEN }}
+
+      - name: Patch Scaleway Serverless container front
+        uses: wei/curl@v1
+        with:
+          args: --location --request PATCH https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/3dbe3a9e-3329-45de-98ef-479424641d35 --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{\"registry_image\":\"rg.fr-par.scw.cloud/funcscwreacteasyssrjckf9fbl/reacteasyssrfront:${{ github.ref_name }}\"}'
+
+      - name: Patch Scaleway Serverless container static
+        uses: wei/curl@v1
+        with:
+          args: --location --request PATCH https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/410315e0-ee07-4d4c-9044-bd7af9055966 --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{\"registry_image\":\"rg.fr-par.scw.cloud/funcscwreacteasyssrjckf9fbl/reacteasyssrstatic:${{ github.ref_name }}\"}'
+
+      - name: Deploy Scaleway Serverless container front
+        uses: wei/curl@v1
+        with:
+          args: --location --request POST https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/3dbe3a9e-3329-45de-98ef-479424641d35/deploy --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{}'
+
+      - name: Deploy Scaleway Serverless container static
+        uses: wei/curl@v1
+        with:
+          args: --location --request POST https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/410315e0-ee07-4d4c-9044-bd7af9055966/deploy --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{}'
