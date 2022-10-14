@@ -6,23 +6,25 @@ import { moviesLoadable, moviesCleanable } from '../reducers/selectors'
 import * as moviesApi from '../services/moviesApi'
 
 import * as actions from '../actions'
-import { ActionDispatcher } from '../actions'
+import { ActionDispatcher, ActionDispatcherResponse } from '../actions'
 import { CallApiResponse } from '../services/callApi'
 
 // each entity defines 3 creators { request, success, failure }
 const { movies } = actions
 
-function* fetchEntity(entity: ActionDispatcher, apiFn: () => Promise<CallApiResponse>, body: unknown) {
+function* fetchEntity(
+  entity: ActionDispatcher,
+  apiFn: () => Promise<CallApiResponse>,
+  body: unknown
+): Generator<PutEffect<ActionDispatcherResponse> | CallEffect<CallApiResponse>, void, CallApiResponse> {
   yield put(entity.request(body))
-  const { response, error } = yield call(apiFn, body)
+  const { response, error } = yield call<(this: () => Promise<CallApiResponse>, ...args: any[]) => Promise<CallApiResponse>>(apiFn, body)
   if (response) yield put(entity.success(body, response))
-  else yield put(entity.failure(body, error))
+  else if (error) yield put(entity.failure(body, error))
 }
 
 // yeah! we can also bind Generators
-export const moviesFetch: (
-  body: unknown
-) => Generator<PutEffect<any> | CallEffect<unknown>, void, { response: any; error: any }> = fetchEntity.bind(null, movies, moviesApi.movies)
+export const moviesFetch = fetchEntity.bind(null, movies, moviesApi.movies)
 
 /** *************************************************************************** */
 /** ******************************* SAGAS ************************************* */

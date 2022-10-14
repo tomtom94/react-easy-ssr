@@ -23,7 +23,7 @@ const action = (
   ...payload
 })
 
-type ActionDispatcherResponse = { type: string; body?: unknown } & CallApiResponse
+export type ActionDispatcherResponse = { type: string; body?: unknown } & CallApiResponse
 export interface ActionDispatcher {
   request: (body: unknown) => ActionDispatcherResponse
   success: (body: unknown, response: SuccessCallApiResponse) => ActionDispatcherResponse
