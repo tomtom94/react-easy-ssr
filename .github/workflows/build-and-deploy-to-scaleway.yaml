@@ -30,6 +30,12 @@ jobs:
 
       - run: npm install
 
+      - run: npm run tsc
+
+      - run: npm run lint
+
+      - run: npm run prettier
+
       - run: npx browserslist@latest --update-db
 
       - run: npm run build

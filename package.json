@@ -22,7 +22,7 @@
     "start": "node dist/server/index.js",
     "dev": "node scripts/dev.js",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "tsc": "tsc --noEmit",
+    "tsc": "tsc",
     "prettier": "prettier --check \"**/*.ts*\" \"**/*.js*\"",
     "install:clean": "rm -rf node_modules/ && rm -rf dist/ && rm -rf package-lock.json && npm install"
   },
