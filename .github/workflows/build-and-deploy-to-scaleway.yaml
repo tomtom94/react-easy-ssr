@@ -2,8 +2,11 @@ name: 2) Build and deploy to Scaleway
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -15,10 +18,6 @@ jobs:
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
           
-      - name: Bump version in package.json file
-        run: |
-          sed -i '0,/"version": "/{s/"version": "\([^#]*\)",/"version": "${{ github.ref_name }}",/}' package.json package-lock.json
-
       - uses: EndBug/add-and-commit@v9
         with:
           message: Bump version to ${{ github.ref_name }}
