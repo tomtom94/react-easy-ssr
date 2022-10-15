@@ -66,6 +66,11 @@ jobs:
           username: ${{ secrets.SCW_ACCESS_KEY }}
           password: ${{ secrets.SCW_SECRET_TOKEN }}
 
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: Bump version to ${{ github.ref_name }}
+          push: origin HEAD:master
+
       - name: Patch Scaleway Serverless container front
         uses: wei/curl@v1
         with:
@@ -86,7 +91,3 @@ jobs:
         with:
           args: --location --request POST https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/410315e0-ee07-4d4c-9044-bd7af9055966/deploy --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{}'
 
-      - uses: EndBug/add-and-commit@v9
-        with:
-          message: Bump version to ${{ github.ref_name }}
-          push: origin HEAD:master
