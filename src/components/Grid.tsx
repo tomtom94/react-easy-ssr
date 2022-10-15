@@ -19,8 +19,8 @@ const SPACINGS: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const GRID_SIZES: (string | number | true)[] = ['auto', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
 function generateGrid(globalStyles: Partial<CSSStyleDeclaration>, theme: Theme, breakpoint: BreakpointsKeys) {
-  const styles: { [key: string]: { [key: string]: string | number } } = {}
-  const noMediaClassNames: { [key: string]: { [key: string]: string } } = {}
+  const styles: Record<string, Record<string, string | number>> = {}
+  const noMediaClassNames: Record<string, Record<string, string>> = {}
 
   GRID_SIZES.forEach(size => {
     const key = `grid-${breakpoint}-${size}`
@@ -77,7 +77,7 @@ function getOffset(val: string | number, div = 1) {
 }
 
 function generateGutter(theme: Theme, breakpoint: string) {
-  const styles: { [key: string]: { [key: string]: string | { [key: string]: string } } } = {}
+  const styles: Record<string, Record<string, string | Record<string, string>>> = {}
 
   SPACINGS.forEach(spacing => {
     const themeSpacing = theme.spacing(spacing)
@@ -250,7 +250,7 @@ const Grid: FC<Props> = ({
   zeroMinWidth = false,
   ...props
 }) => {
-  const classes: { [key: string]: string } = styles(props)
+  const classes: Record<string, string> = styles(props)
 
   const className = classNames(
     classes.root,

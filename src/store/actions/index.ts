@@ -4,7 +4,7 @@ const REQUEST = 'REQUEST'
 const SUCCESS = 'SUCCESS'
 const FAILURE = 'FAILURE'
 
-const createRequestTypes = (base: string): { [key: string]: string } =>
+const createRequestTypes = (base: string) =>
   [REQUEST, SUCCESS, FAILURE].reduce((acc, type) => {
     acc[type] = `${base}_${type}`
     return acc
