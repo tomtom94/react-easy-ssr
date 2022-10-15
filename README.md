@@ -30,7 +30,7 @@ Check out this app in live [reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc
   - [Data-fetching and SSR](#Data-fetching-and-SSR)
   - [ES6 Imports possible in JSX](#ES6-Imports-possible-in-JSX)
   - [Disadvantages of redux-saga and react-jss](#Disadvantages-of-redux-saga-and-react-jss)
-  - [I want to use renderToNodeStream to make a top notch app](#I-want-to-use-renderToNodeStream-to-make-a-top-notch-app)
+  - [I want to use renderToPipeableStream to make a top notch app](#I-want-to-use-renderToPipeableStream-to-make-a-top-notch-app)
 - [Notes](#Notes)
 
 ## Motivations
@@ -48,7 +48,7 @@ Please find the list of disadvantages of frameworks
 - You won't have access to what happen on the Server Side. Just go to [this project's page and you are done mate](https://github.com/tomtom94/react-easy-ssr/blob/master/src/server/index.tsx) :flushed:
 - According to `Next.js` you can just install `redux-thunk` not the other ones, so bad how can we play with `redux-saga`or `redux-observable` ? :rage:
 - You won't be able to touch the webpack compilation and all the parameters (what if you want to put the polyfills in dynamic imports because modern browsers don't need them you make win 119kb at opening time). How can you manage the complex module `workbox-webpack-plugin` to make a PWA, apparently it's already all done by Next.js [look at that this messy code](https://github.com/vercel/next.js/blob/canary/examples/progressive-web-app/next.config.js), we doubt it's done like you want. Look at this poor guy, it took him 2 years (from 2017 to 2019 lol) to make something special works with an easy webpack plugin [check the github issue](https://github.com/vercel/next.js/issues/3444) :grin:
-- You won't ever be able to use `renderToNodeStream` with Next.js & Gatsby.js forget it. You will only be able to use the old one React function `renderToString`, [so bad just check this github issue on their roadmap](https://github.com/vercel/next.js/issues/1209) and for [Gatsby.js they are even not talking about this check their issues](https://github.com/gatsbyjs/gatsby/issues?q=is%3Aissue+renderToNodeStream+). To me you can't make a switch to use one function or the other just with a boolean parameter true or false. It requires you to change part of the App's architecture, and also some modules you are using may not be compatible with (`redux-saga` and `react-jss` for example but we'll see this that later)
+- You won't ever be able to use `renderToPipeableStream` with Next.js & Gatsby.js forget it. You will only be able to use the old one React function `renderToString`, [so bad just check this github issue on their roadmap](https://github.com/vercel/next.js/issues/1209) and for [Gatsby.js they are even not talking about this check their issues](https://github.com/gatsbyjs/gatsby/issues?q=is%3Aissue+renderToPipeableStream+). To me you can't make a switch to use one function or the other just with a boolean parameter true or false. It requires you to change part of the App's architecture, and also some modules you are using may not be compatible with (`redux-saga` and `react-jss` for example but we'll see this that later)
 - Do you find other reasons why not to use a framework ? make a contribution and commit something here
 
 We are making this because we need to make lobbying us, the developers. Upper-layer module of React are kind of side effect of open source community perfectionism. We are making upper-layer module of upper-layer module WTF ?
@@ -198,11 +198,8 @@ You can add more Webpack `loader` to your project...
 
 ### Some disadvantages
 
-- With this configuration you can't use the powerful React function unveiled in 2018 called `renderToNodeStream`. We must use the old one which is (from 2015) `rendeToString`. But no worries 90% of React Apps are on the old one `rendeToString`.
-List of modules not compatible with `renderToNodeStream` (We are telling you the ones we are sure of, this is not an exhaustive list)
-  - `redux-saga` check out this issue [on github](https://github.com/redux-saga/redux-saga/issues/2112)
-  - `react-jss` check out this issue [on github](https://github.com/cssinjs/jss/issues/807)
-  - `redux-observable` check out this issue [on github](https://github.com/redux-observable/redux-observable/issues?q=is%3Aissue+is%3Aopen+rendertonodestream)
+- With this configuration you can't easily use the powerful React function unveiled in `react` 17 called `renderToPipeableStream`. We must use the old one which is (from 2015) `rendeToString`. But no worries 99% of React Apps are on the old one `rendeToString`.
+List of modules not compatible with `renderToPipeableStream` (We are telling you the ones we are sure of, this is not an exhaustive list). For example with `react-jss` check this issue [on github](https://github.com/cssinjs/jss/issues/807)
 
 - Another important issue to know is the split code, the first time your frontend server reads one of your page it'll be blind of redux actions. This is so much interesting try to investigate yourself (use Postman and check if you have data in your redux store in the `__PRELOADED_STATE__` window attribute, turn off and on your server check again in Postman, then refresh again)
 This is in fact a normal behavior check this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760). After a new deployment the first time you render a page, data-fetching during SSR is something `loadable-component` could not carry about (because even your server is a casualty of split code). So the Google robot would not be able to treat a complete page in the DOM (this would be empty of data from the redux store except if another user has already opened this page before the Google robot) in this case only the client side will render. All the other times your page will open perfectly with data fetched. To conclude your app must always be able to render on the server & client side independantly.
@@ -212,9 +209,9 @@ Let's illustrate this last point with an example : you have 5 million pages to d
 Please note, in the world there are approximately 10 big crawlers (Russian, American, European, Asian...) which will open a page around every 20 seconds each on your App, this is a statistic home made but quite reliable. Just watch by yourself in your Nginx router who opens your page it's written ;) This is something to take into account for your servers performances, internet network is crazy busy when you have 5 million pages for real in a `sitemap.xml`. Don't think Google robot would read your App if you just do CSR Client Side Rendering. You don't make loose time to crawlers if you wanna have a good SEO score in search engines, moreover if you have 5 million pages to crawl. 
 According to my statistics I just said above this would take more than 3 years in the best case scenario for the Google robot to crawl all your 5 million pages this is why you can play with a parameter in your `sitemap.xml` files to set priorities in pages to crawl first.
 
-### I want to use renderToNodeStream to make a top notch app
+### I want to use renderToPipeableStream to make a top notch app
 
-Then you must use `redux-thunk` and/or a `apollographql` (but I don't recommend stupid graphql) which is gonna give you easy promises to handle on server side, but make the right choice. And don't use `react-jss`, just use a classical SASS, LESS or CSS style. And you are good to go.
+Actually you can do it, but this would cost you too much computer power to aim the same goal. `redux-saga` needs to generate the dom fist via `renderToString` to get all its data fetched before finally rendering. `react-jss` it's the same also to make its stylesheets.
 
 ## Notes
 
