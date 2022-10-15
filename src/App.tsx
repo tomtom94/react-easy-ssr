@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root'
-import React, { FC, useEffect, useRef } from 'react'
+import React, { FC, ReactChild, ReactElement, ReactNode, useEffect, useRef } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { ThemeProvider } from 'react-jss'
@@ -33,7 +33,9 @@ import './assets/fonts/stylesheet.css'
 
 library.add(faFacebook, faTwitter, faSpinner, faBars, faExclamationTriangle, faGithub)
 
-type Props = {}
+type Props = {
+  children?: ReactNode
+}
 
 const AppProvider: FC<Props> = ({ children, ...props }) => (
   <ThemeProvider theme={defaultTheme}>

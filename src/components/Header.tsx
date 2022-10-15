@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root'
-import React, { useEffect, useState, useRef, useCallback, FC } from 'react'
+import React, { useEffect, useState, useRef, useCallback, FC, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,7 +9,7 @@ import headerStyle from '../assets/jss/components/headerStyle'
 import CloseImageUrl, { ReactComponent as CloseImage } from '../assets/images/61155.svg'
 import { ReduxState } from '../store/rootReducer'
 
-type Props = {}
+type Props = { children?: ReactNode }
 
 const Header: FC<Props> = ({ children, ...props }) => {
   const classes = headerStyle(props)

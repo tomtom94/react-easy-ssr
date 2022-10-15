@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root'
-import React, { FC, useEffect, useState, useRef } from 'react'
+import React, { FC, useEffect, useState, useRef, ReactNode } from 'react'
 import { useHistory } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
@@ -8,7 +8,8 @@ import Button from './Button'
 import CloseImageUrl, { ReactComponent as CloseImage } from '../assets/images/61155.svg'
 
 interface Props {
-  message: any
+  children?: ReactNode
+  message: string
   event: 'error' | 'success'
   refresh?: boolean
   onClose?: () => void
@@ -19,8 +20,8 @@ const EventMessage: FC<Props> = ({ message, event, refresh, onClose, children, .
   const history = useHistory()
   const [isNotificationOpened, setIsNotificationOpened] = useState(false)
 
-  const timeout1 = useRef<number>()
-  const timeout2 = useRef<number>()
+  const timeout1 = useRef<NodeJS.Timeout>()
+  const timeout2 = useRef<NodeJS.Timeout>()
   useEffect(() => {
     if (onClose) {
       setTimeout(() => {

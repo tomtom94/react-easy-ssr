@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root'
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { RouteComponentProps } from 'react-router'
 
 import { Helmet } from 'react-helmet-async'
@@ -8,6 +8,7 @@ import exceptionPageStyle from '../../assets/jss/views/exceptionPageStyle'
 import ExceptionImageUrl, { ReactComponent as ExceptionImage } from '../../assets/images/404.svg'
 
 type Props = {
+  children?: ReactNode
   routeComponent: RouteComponentProps
 }
 

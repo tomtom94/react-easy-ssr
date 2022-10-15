@@ -1,12 +1,12 @@
 import { hot } from 'react-hot-loader/root'
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import footerStyle from '../assets/jss/components/footerStyle'
 
-type Props = {}
+type Props = { children?: ReactNode }
 
 const Footer: FC<Props> = ({ children, ...props }) => {
   const classes = footerStyle(props)

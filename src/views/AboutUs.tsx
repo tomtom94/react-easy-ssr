@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root'
-import React, { Component, PureComponent, useEffect, FC } from 'react'
+import React, { Component, PureComponent, useEffect, FC, ReactNode } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
 import { RouteComponentProps } from 'react-router'
@@ -10,6 +10,7 @@ import aboutUsStyle from '../assets/jss/views/aboutUsStyle'
 import { ReduxState } from '../store/rootReducer'
 
 type Props = {
+  children?: ReactNode
   routeComponent: RouteComponentProps
 }
 

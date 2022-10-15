@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root'
-import React, { FC, useRef, useEffect } from 'react'
+import React, { FC, useRef, useEffect, ReactNode } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
 import { RouteComponentProps } from 'react-router'
@@ -13,6 +13,7 @@ import { triggerMovies, clearMovies } from '../../store/actions/index'
 import Loading from '../Exception/Loading'
 
 type Props = {
+  children?: ReactNode
   routeComponent: RouteComponentProps
 }
 
