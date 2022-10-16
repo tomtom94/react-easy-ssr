@@ -1,4 +1,4 @@
-name: 1) Pull Request checks before merge
+name: Pull Request checks before merge
 
 on:
   pull_request:

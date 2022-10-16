@@ -1,4 +1,4 @@
-name: 2) Build and deploy to Scaleway
+name: Build and deploy to Scaleway
 
 on:
   push:
