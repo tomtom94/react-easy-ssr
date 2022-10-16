@@ -1,0 +1,28 @@
+name: 1) Pull Request checks before merge
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  check:
+    name: Check Typescript ESlint and Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: Check out code
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.17.1'
+
+      - run: npm install
+
+      - run: npm run tsc
+
+      - run: npm run lint
+
+      - run: npm run prettier
