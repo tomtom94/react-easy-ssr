@@ -25,11 +25,11 @@ jss.use(vendorPrefixer())
 const Main = () => {
   useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side')
-    if (jssStyles && jssStyles.parentNode) {
+    if (jssStyles?.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles)
     }
     const fontAwesomeCssStyles = document.querySelector('#fontawesome-server-side')
-    if (fontAwesomeCssStyles && fontAwesomeCssStyles.parentNode) {
+    if (fontAwesomeCssStyles?.parentNode) {
       fontAwesomeCssStyles.parentNode.removeChild(fontAwesomeCssStyles)
     }
   }, [])

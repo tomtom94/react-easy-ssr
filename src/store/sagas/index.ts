@@ -1,32 +1,37 @@
-import { take, put, call, fork, select, delay, all, takeEvery, takeLatest, PutEffect, CallEffect } from 'redux-saga/effects'
-import { Saga, SagaIterator } from 'redux-saga'
+import { take, put, call, fork, select, all, PutEffect, CallEffect } from 'redux-saga/effects'
+import { SagaIterator } from 'redux-saga'
 
 import { moviesLoadable, moviesCleanable } from '../reducers/selectors'
 
 import * as moviesApi from '../services/moviesApi'
 
 import * as actions from '../actions'
+import { ActionDispatcher, ActionDispatcherResponse } from '../actions'
+import { CallApiResponse } from '../services/callApi'
 
 // each entity defines 3 creators { request, success, failure }
 const { movies } = actions
 
-function* fetchEntity(entity, apiFn, body) {
+function* fetchEntity(
+  entity: ActionDispatcher,
+  apiFn: () => Promise<CallApiResponse>,
+  body: unknown
+): Generator<PutEffect<ActionDispatcherResponse> | CallEffect<CallApiResponse>, void, CallApiResponse> {
   yield put(entity.request(body))
-  const { response, error } = yield call(apiFn, body)
+  // eslint-disable-next-line no-unused-vars
+  const { response, error } = yield call<(body: unknown) => Promise<CallApiResponse>>(apiFn, body)
   if (response) yield put(entity.success(body, response))
-  else yield put(entity.failure(body, error))
+  else if (error) yield put(entity.failure(body, error))
 }
 
 // yeah! we can also bind Generators
-export const moviesFetch: (
-  body: any
-) => Generator<PutEffect<any> | CallEffect<unknown>, void, { response: any; error: any }> = fetchEntity.bind(null, movies, moviesApi.movies)
+export const moviesFetch = fetchEntity.bind(null, movies, moviesApi.movies)
 
 /** *************************************************************************** */
 /** ******************************* SAGAS ************************************* */
 /** *************************************************************************** */
 
-function* getMovies(dispatchKind): SagaIterator {
+function* getMovies(dispatchKind: string): SagaIterator {
   const cleanable = yield select(moviesCleanable)
   if (cleanable) {
     yield put(actions.clearMovies())

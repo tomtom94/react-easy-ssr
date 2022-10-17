@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs')
 
 const appDirectory = fs.realpathSync(process.cwd())
-const resolveApp = relativePath => path.resolve(appDirectory, relativePath)
+const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
 const paths = {
   dist: resolveApp('dist'),
   publicPath: '/static/',
@@ -19,20 +19,20 @@ const compilerListener = (name, compiler) => {
       console.log(`Compiling ${name} please wait...`)
     })
 
-    compiler.hooks.failed.tap(name, error => {
+    compiler.hooks.failed.tap(name, (error) => {
       reject(error)
     })
-    compiler.hooks.done.tap(name, stats => {
+    compiler.hooks.done.tap(name, (stats) => {
       if (!stats.hasErrors()) {
         resolve()
       }
       if (stats.hasErrors()) {
-        stats.compilation.errors.forEach(error => {
+        stats.compilation.errors.forEach((error) => {
           reject(error)
         })
       }
       if (stats.hasWarnings()) {
-        stats.compilation.warnings.forEach(warning => {
+        stats.compilation.warnings.forEach((warning) => {
           console.warn(warning)
         })
       }

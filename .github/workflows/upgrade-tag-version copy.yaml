@@ -1,12 +1,9 @@
-name: 1) Upgrade tag version
+name: Upgrade tag version
 
 on:
   push:
     branches:
       - master
-  # pull_request:
-  #   branches:
-  #     - master
 
 jobs:
   build:

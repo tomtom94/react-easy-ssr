@@ -11,17 +11,18 @@
 
 import React, { ReactNode, FC } from 'react'
 import classNames from 'classnames'
-import { createUseStyles, useTheme } from 'react-jss'
+import { createUseStyles } from 'react-jss'
+import { BreakpointsKeys } from '../assets/jss/theme/breakpoints'
 import { Theme } from '../assets/jss/theme/index'
 
 const SPACINGS: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const GRID_SIZES: (string | number | true)[] = ['auto', true, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
-function generateGrid(globalStyles, theme, breakpoint) {
-  const styles = {}
-  const noMediaClassNames = {}
+function generateGrid(globalStyles: Partial<CSSStyleDeclaration>, theme: Theme, breakpoint: BreakpointsKeys) {
+  const styles: Record<string, Record<string, string | number>> = {}
+  const noMediaClassNames: Record<string, Record<string, string>> = {}
 
-  GRID_SIZES.forEach((size: any) => {
+  GRID_SIZES.forEach((size) => {
     const key = `grid-${breakpoint}-${size}`
     noMediaClassNames[key] = {}
 
@@ -43,16 +44,17 @@ function generateGrid(globalStyles, theme, breakpoint) {
       }
       return
     }
+    if (typeof size === 'number') {
+      // Keep 7 significant numbers.
+      const width = `${Math.round((size / 12) * 10e7) / 10e5}%`
 
-    // Keep 7 significant numbers.
-    const width = `${Math.round((size / 12) * 10e7) / 10e5}%`
-
-    // Close to the bootstrap implementation:
-    // https://github.com/twbs/bootstrap/blob/8fccaa2439e97ec72a4b7dc42ccc1f649790adb0/scss/mixins/_grid.scss#L41
-    styles[key] = {
-      flexBasis: width,
-      flexGrow: 0,
-      maxWidth: width
+      // Close to the bootstrap implementation:
+      // https://github.com/twbs/bootstrap/blob/8fccaa2439e97ec72a4b7dc42ccc1f649790adb0/scss/mixins/_grid.scss#L41
+      styles[key] = {
+        flexBasis: width,
+        flexGrow: 0,
+        maxWidth: width
+      }
     }
   })
 
@@ -64,15 +66,20 @@ function generateGrid(globalStyles, theme, breakpoint) {
   }
 }
 
-function getOffset(val, div = 1) {
-  const parse = parseFloat(val)
+function getOffset(val: string | number, div = 1) {
+  let parse
+  if (typeof val === 'string') {
+    parse = parseFloat(val)
+  } else {
+    parse = val
+  }
   return `${parse / div}${String(val).replace(String(parse), '') || 'px'}`
 }
 
-function generateGutter(theme, breakpoint) {
-  const styles = {}
+function generateGutter(theme: Theme, breakpoint: string) {
+  const styles: Record<string, Record<string, string | Record<string, string>>> = {}
 
-  SPACINGS.forEach(spacing => {
+  SPACINGS.forEach((spacing) => {
     const themeSpacing = theme.spacing(spacing)
 
     if (themeSpacing === 0) {
@@ -194,11 +201,11 @@ export const styles = createUseStyles((theme: Theme) => {
       justifyContent: 'space-evenly'
     },
     ...generateGutter(theme, 'xs'),
-    ...theme.breakpoints.keys.reduce((accumulator, key) => {
+    ...theme.breakpoints.keys.reduce((acc, key) => {
       // Use side effect over immutability for better performance.
-      generateGrid(accumulator, theme, key)
+      generateGrid(acc, theme, key)
 
-      return accumulator
+      return acc
     }, {})
   }
 })
@@ -243,7 +250,7 @@ const Grid: FC<Props> = ({
   zeroMinWidth = false,
   ...props
 }) => {
-  const classes = styles(props)
+  const classes: Record<string, string> = styles(props)
 
   const className = classNames(
     classes.root,
@@ -266,6 +273,7 @@ const Grid: FC<Props> = ({
     classNameProp
   )
 
+  // eslint-disable-next-line react/jsx-props-no-spreading
   return <div className={className} {...(id && { id })} {...(children && { children })} />
 }
 

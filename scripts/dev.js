@@ -27,8 +27,8 @@ const start = async () => {
 
     const multiCompiler = webpack([clientConfig, serverConfig])
 
-    const clientCompiler = multiCompiler.compilers.find(compiler => compiler.name === 'client')
-    const serverCompiler = multiCompiler.compilers.find(compiler => compiler.name === 'server')
+    const clientCompiler = multiCompiler.compilers.find((compiler) => compiler.name === 'client')
+    const serverCompiler = multiCompiler.compilers.find((compiler) => compiler.name === 'server')
 
     app.use(cors())
 
@@ -59,7 +59,7 @@ const start = async () => {
 
     await Promise.all([compilerListener('client', clientCompiler), compilerListener('server', serverCompiler)])
 
-    app.listen(PORT, err => {
+    app.listen(PORT, (err) => {
       if (err) console.log(err)
       else console.log(`Hot dev server middleware port : ${PORT} 🌎`)
     })

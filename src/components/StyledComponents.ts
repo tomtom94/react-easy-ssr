@@ -1,9 +1,8 @@
-import styled, { keyframes, css } from 'styled-components'
+import styled from 'styled-components'
 
-export const TestComponentForNothing: any = styled.ul`
-  ${(props: any) =>
-    css`
-      display: flex;
-      background-color: ${props.position};
-    `}
-`
+export const TestComponentForNothing = styled.ul(
+  (props: { color: string }) => `
+  display: flex;
+  background-color: ${props.color};
+  `
+)

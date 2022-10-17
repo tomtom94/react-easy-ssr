@@ -1,5 +1,15 @@
-const renderFullPage = (html, css, fontAwesomeCss, styleTags, store, helmet, scriptTags) => `<!DOCTYPE html>
-<html ${helmet.htmlAttributes.toString()}>
+import { HelmetServerState } from 'react-helmet-async'
+
+const renderFullPage = (
+  html: string,
+  css: string,
+  fontAwesomeCss: string,
+  styleTags: string,
+  store: string,
+  helmet: Partial<HelmetServerState>,
+  scriptTags: string
+): string => `<!DOCTYPE html>
+<html ${helmet?.htmlAttributes?.toString()}>
   <head>
     <meta charset="utf-8" />
     <meta
@@ -10,9 +20,9 @@ const renderFullPage = (html, css, fontAwesomeCss, styleTags, store, helmet, scr
       process.env.STATIC_FILES_URL ? `${process.env.STATIC_FILES_URL}/static/bundle.css` : `/static/bundle.css`
     }" />
     
-    ${helmet.title.toString()}
-    ${helmet.meta.toString()}
-    ${helmet.link.toString()}
+    ${helmet?.title?.toString()}
+    ${helmet?.meta?.toString()}
+    ${helmet?.link?.toString()}
     ${styleTags}
     <style id="jss-server-side">${css}</style>
     <style id="fontawesome-server-side">${fontAwesomeCss}</style>

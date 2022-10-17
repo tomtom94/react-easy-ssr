@@ -1,22 +1,22 @@
 import { hot } from 'react-hot-loader/root'
-import React, { useEffect, useState, useRef, useCallback, FC } from 'react'
+import React, { useEffect, useState, useRef, FC, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector } from 'react-redux'
 import Drawer from './Drawer'
 import headerStyle from '../assets/jss/components/headerStyle'
-import CloseImageUrl, { ReactComponent as CloseImage } from '../assets/images/61155.svg'
+import CloseImageUrl from '../assets/images/61155.svg'
 import { ReduxState } from '../store/rootReducer'
 
-type Props = {}
+type Props = { children?: ReactNode }
 
 const Header: FC<Props> = ({ children, ...props }) => {
   const classes = headerStyle(props)
   const [mobileOpen, setMobileOpen] = useState(false)
   const oldMobileOpen = useRef(false)
 
-  const { pathname, search } = useSelector((state: ReduxState) => state.router.location)
+  const { pathname } = useSelector((state: ReduxState) => state.router.location)
 
   const oldPage = useRef(pathname)
 
@@ -53,7 +53,7 @@ const Header: FC<Props> = ({ children, ...props }) => {
         <button
           type="button"
           aria-label="close drawer"
-          onKeyDown={e => {
+          onKeyDown={(e) => {
             if (e.key === 'Escape') {
               setMobileOpen(false)
             }

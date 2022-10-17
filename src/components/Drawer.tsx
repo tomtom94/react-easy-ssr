@@ -1,5 +1,5 @@
 import { hot } from 'react-hot-loader/root'
-import React, { useEffect, useState, useRef, useCallback, FC, ReactNode } from 'react'
+import React, { useEffect, useState, FC, ReactNode, KeyboardEvent } from 'react'
 
 import classNames from 'classnames'
 
@@ -31,7 +31,7 @@ const Drawer: FC<Props> = ({ children, open, onClose, id, ...props }) => {
     }
   }, [open, drawer])
 
-  const onKeyDownHandler = e => {
+  const onKeyDownHandler = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       onClose()
     }

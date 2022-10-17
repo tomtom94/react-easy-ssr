@@ -1,7 +1,7 @@
 function isWebTarget(caller) {
   return Boolean(caller && caller.target === 'web')
 }
-module.exports = api => {
+module.exports = (api) => {
   api.cache.using(() => process.env.NODE_ENV)
   const web = api.caller(isWebTarget)
 

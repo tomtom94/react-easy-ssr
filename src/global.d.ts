@@ -1,3 +1,5 @@
+declare module 'global/window'
+declare module 'autoprefixer'
 declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV: 'development' | 'production'
@@ -35,6 +37,6 @@ declare module '*.svg' {
 }
 
 interface Window {
-  browserHistory: any
-  __PRELOADED_STATE__: any
+  browserHistory: unknown
+  __PRELOADED_STATE__: string
 }

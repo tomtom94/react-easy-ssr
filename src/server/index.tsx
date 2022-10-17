@@ -1,14 +1,15 @@
 import React from 'react'
 
-import { StaticRouter, matchPath } from 'react-router-dom'
-import ReactDOMServer, { renderToString, renderToNodeStream } from 'react-dom/server'
+import { StaticRouter } from 'react-router-dom'
+import { renderToString } from 'react-dom/server'
 import { ChunkExtractor } from '@loadable/server'
 import { Provider } from 'react-redux'
+import { PreloadedState } from 'redux'
 import path from 'path'
 import compression from 'compression'
 import cors from 'cors'
-import { Helmet, HelmetProvider, FilledContext } from 'react-helmet-async'
-import express, { Request, Response, NextFunction } from 'express'
+import { HelmetProvider, HelmetServerState } from 'react-helmet-async'
+import express, { Request, Response } from 'express'
 import { dom } from '@fortawesome/fontawesome-svg-core'
 import { JssProvider, SheetsRegistry, createGenerateId, jss } from 'react-jss'
 import serialize from 'serialize-javascript'
@@ -18,6 +19,8 @@ import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 import { UAParser } from 'ua-parser-js'
 import CleanCSS from 'clean-css'
+import { ReduxState } from 'store/rootReducer'
+import { INITIAL_STATE_MOVIES } from '../store/reducers'
 import configureStore, { createHistory } from '../store/configureStore'
 import App from '../App'
 import renderFullPage from './renderFullPage'
@@ -58,21 +61,22 @@ app.use((req: Request, res: Response) => {
   const userAgent = new UAParser(req.headers['user-agent']).getResult()
   const acceptedLanguages = Array.isArray(req.acceptsLanguages()) ? req.acceptsLanguages()[0] : req.acceptsLanguages()
   const hostname = req.header('host')
-  let language = 'fr-FR'
+  let language: string | string[] = 'fr-FR'
   const timezone = 'Europe/Paris'
 
   if (acceptedLanguages && acceptedLanguages !== '*') {
     language = acceptedLanguages
   }
 
-  const initialState = {
+  const initialState: Partial<PreloadedState<ReduxState>> = {
     app: {
       main: {
         language,
         timezone,
-        hostname,
+        hostname: hostname || null,
         userAgent
-      }
+      },
+      movies: INITIAL_STATE_MOVIES
     }
   }
 
@@ -97,7 +101,7 @@ app.use((req: Request, res: Response) => {
     .toPromise()
     .then(async () => {
       const staticContext: StaticRouterContext = {}
-      const helmetContext = { helmet: {} }
+      const helmetContext: { helmet: Partial<HelmetServerState> } = { helmet: {} }
       const generateId = createGenerateId()
       const sheets = new SheetsRegistry()
       const html = renderToString(
@@ -123,7 +127,7 @@ app.use((req: Request, res: Response) => {
         .status(staticContext.statusCode || 200)
         .send(renderFullPage(html, css, fontAwesomeCss, styleTags, serialize(store.getState()), helmet, scriptTags))
     })
-    .catch(e => {
+    .catch((e: Error) => {
       console.log(e.message)
       res.status(500).send(e.message)
     })
@@ -133,7 +137,6 @@ app.use((req: Request, res: Response) => {
   store.close()
 })
 
-app.listen(PORT, err => {
-  if (err) console.log(err)
-  else console.log(`App SSR running ${process.env.NODE_ENV === 'production' ? `port : ${PORT}` : `http://localhost:${PORT}`} 🌎`)
+app.listen(PORT, () => {
+  console.log(`App SSR running ${process.env.NODE_ENV === 'production' ? `port : ${PORT}` : `http://localhost:${PORT}`} 🌎`)
 })

@@ -15,7 +15,7 @@ export interface Breakpoints {
   keys: BreakpointsKeys[]
 }
 
-export const breakpointValues = {
+export const breakpointValues: BreakpointsValues = {
   xs: 0,
   sm: 600,
   md: 960,
@@ -31,15 +31,15 @@ export default (direction: 'up' | 'down', key: BreakpointsKeys) => {
     lg: string
     xl: string
   }
-  const keys = ['xs', 'sm', 'md', 'lg', 'xl'].reduce((accumulator, currentValue, index, array) => {
+  const keys = ['xs', 'sm', 'md', 'lg', 'xl'].reduce((acc, curr) => {
     let cssMedia
     if (direction === 'up') {
-      cssMedia = `@media (min-width: ${breakpointValues[currentValue]}px)`
+      cssMedia = `@media (min-width: ${breakpointValues[curr as BreakpointsKeys]}px)`
     }
     if (direction === 'down') {
-      cssMedia = `@media (max-width: ${Math.max(0, breakpointValues[currentValue] - 0.02)}px)`
+      cssMedia = `@media (max-width: ${Math.max(0, breakpointValues[curr as BreakpointsKeys] - 0.02)}px)`
     }
-    return Object.assign(accumulator, { [currentValue]: cssMedia })
+    return Object.assign(acc, { [curr]: cssMedia })
   }, {} as Keys)
 
   return keys[key]

@@ -1,4 +1,4 @@
-name: 2) Build and deploy to Scaleway
+name: Build and deploy to Scaleway
 
 on:
   push:
@@ -19,16 +19,17 @@ jobs:
         run: |
           sed -i '0,/"version": "/{s/"version": "\([^#]*\)",/"version": "${{ github.ref_name }}",/}' package.json package-lock.json
 
-      - uses: EndBug/add-and-commit@v9
-        with:
-          message: Bump version to ${{ github.ref_name }}
-          push: origin HEAD:master
-
       - uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version: '16.17.1'
 
       - run: npm install
+
+      - run: npm run tsc
+
+      - run: npm run lint
+
+      - run: npm run prettier
 
       - run: npx browserslist@latest --update-db
 
@@ -65,6 +66,11 @@ jobs:
           username: ${{ secrets.SCW_ACCESS_KEY }}
           password: ${{ secrets.SCW_SECRET_TOKEN }}
 
+      - uses: EndBug/add-and-commit@v9
+        with:
+          message: Bump version to ${{ github.ref_name }}
+          push: origin HEAD:master
+
       - name: Patch Scaleway Serverless container front
         uses: wei/curl@v1
         with:
@@ -84,3 +90,4 @@ jobs:
         uses: wei/curl@v1
         with:
           args: --location --request POST https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/410315e0-ee07-4d4c-9044-bd7af9055966/deploy --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{}'
+

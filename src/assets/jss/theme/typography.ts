@@ -1,16 +1,16 @@
 import palette from './palette'
 
 export interface Typography {
-  h1: any
-  h2: any
-  h3: any
-  h4: any
-  h5: any
-  h6: any
-  subtitle1: any
-  subtitle2: any
-  body1: any
-  body2: any
+  h1: Record<string, string | number | Record<string, string | number>>
+  h2: Record<string, string | number | Record<string, string | number>>
+  h3: Record<string, string | number | Record<string, string | number>>
+  h4: Record<string, string | number | Record<string, string | number>>
+  h5: Record<string, string | number | Record<string, string | number>>
+  h6: Record<string, string | number | Record<string, string | number>>
+  subtitle1: Record<string, string | number | Record<string, string | number>>
+  subtitle2: Record<string, string | number | Record<string, string | number>>
+  body1: Record<string, string | number | Record<string, string | number>>
+  body2: Record<string, string | number | Record<string, string | number>>
 }
 
 const typography = {

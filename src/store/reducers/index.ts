@@ -1,22 +1,30 @@
 import { combineReducers } from 'redux'
+import { ErrorCallApiResponse, SuccessCallApiResponse } from '../services/callApi'
 
 import * as ActionTypes from '../actions'
 
+interface ActionDispatch {
+  type: string
+  body: { dispatchKind?: string }
+  response?: SuccessCallApiResponse
+  error?: ErrorCallApiResponse
+}
+
 interface MainState {
-  language: undefined | string
-  timezone: undefined | string
-  userAgent: undefined | any
-  hostname: undefined | string
+  language: null | string | string[]
+  timezone: null | string
+  userAgent: null | unknown
+  hostname: null | string
 }
 
-const INITIAL_STATE_MAIN: MainState = {
-  language: undefined,
-  timezone: undefined,
-  userAgent: undefined,
-  hostname: undefined
+export const INITIAL_STATE_MAIN: MainState = {
+  language: null,
+  timezone: null,
+  userAgent: null,
+  hostname: null
 }
 
-const main = (state = INITIAL_STATE_MAIN, action) => {
+const main = (state = INITIAL_STATE_MAIN, action: ActionDispatch) => {
   const copyState = JSON.parse(JSON.stringify(state))
   switch (action.type) {
     default:
@@ -26,16 +34,16 @@ const main = (state = INITIAL_STATE_MAIN, action) => {
 
 interface MoviesState {
   isLoading: boolean
-  data: any[]
-  error?: { message: string; status: number; isBrowser: boolean }
+  data: { id: string; poster_path: string; title: string; overview: string; release_date: string }[]
+  error?: ErrorCallApiResponse & { isBrowser: boolean }
 }
 
-const INITIAL_STATE_MOVIES: MoviesState = {
+export const INITIAL_STATE_MOVIES: MoviesState = {
   isLoading: true,
   data: []
 }
 
-const movies = (state = INITIAL_STATE_MOVIES, action) => {
+const movies = (state = INITIAL_STATE_MOVIES, action: ActionDispatch) => {
   const copyState = JSON.parse(JSON.stringify(state)) // Avoid JS mutation
   switch (action.type) {
     case ActionTypes.MOVIES.REQUEST:
@@ -46,9 +54,10 @@ const movies = (state = INITIAL_STATE_MOVIES, action) => {
       }
     case ActionTypes.MOVIES.SUCCESS:
       delete copyState.error
-      let data = []
+      // eslint-disable-next-line no-case-declarations
+      let data: unknown = []
       if (action.body.dispatchKind === 'GET_MOVIES') {
-        data = action.response.results
+        data = action.response?.results
       }
       return {
         ...copyState,
@@ -59,7 +68,7 @@ const movies = (state = INITIAL_STATE_MOVIES, action) => {
       return {
         ...copyState,
         isLoading: false,
-        error: { message: action.error.message, status: action.error.status, isBrowser: process.env.BROWSER }
+        error: { message: action.error?.message, status: action.error?.status, isBrowser: process.env.BROWSER }
       }
     case ActionTypes.CLEAR_MOVIES:
       delete copyState.error

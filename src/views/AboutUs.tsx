@@ -1,24 +1,18 @@
 import { hot } from 'react-hot-loader/root'
-import React, { Component, PureComponent, useEffect, FC } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { FC, ReactNode } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { RouteComponentProps } from 'react-router'
 
 import Grid from '../components/Grid'
 import aboutUsStyle from '../assets/jss/views/aboutUsStyle'
 
-import { ReduxState } from '../store/rootReducer'
-
 type Props = {
+  children?: ReactNode
   routeComponent: RouteComponentProps
 }
 
 const AboutUs: FC<Props> = ({ children, routeComponent, ...props }) => {
   const classes = aboutUsStyle(props)
-
-  const dispatch = useDispatch()
-  const app = useSelector((state: ReduxState) => state.app)
-  const { pathname, search } = routeComponent.location
 
   const title = 'About us'
   const description = 'Details about the app'
