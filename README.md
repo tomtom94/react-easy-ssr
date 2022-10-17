@@ -67,7 +67,7 @@ cd react-easy-ssr
 
 ### Requirements
 
-Node.js version 16 minimum. Hopefully you got `nvm` command (best way to install node) already installed, hence just do
+Node.js version 16 minimum (because we need to use the js opational chaining operator). Hopefully you got `nvm` command already installed (best way to install node), hence just do
 
 ```nvm
 nvm use
@@ -207,11 +207,11 @@ This is in fact a normal behavior check this issue [on github](https://github.co
 Let's illustrate this last point with an example : you have 5 million pages to display with 5 React routes, each route renders a component which deals with 1 million different pages, you just have to open 1 page (by yourself or a crawler like Google robot, Bing robot etc...) and the other 999999 will render perfectly.
 
 Please note, in the world there are approximately 10 big crawlers (Russian, American, European, Asian...) which will open a page around every 20 seconds each on your App, this is a statistic home made but quite reliable. Just watch by yourself in your Nginx router who opens your page it's written ;) This is something to take into account for your servers performances, internet network is crazy busy when you have 5 million pages for real in a `sitemap.xml`. Don't think Google robot would read your App if you just do CSR Client Side Rendering. You don't make loose time to crawlers if you wanna have a good SEO score in search engines, moreover if you have 5 million pages to crawl. 
-According to my statistics I just said above this would take more than 3 years in the best case scenario for the Google robot to crawl all your 5 million pages this is why you can play with a parameter in your `sitemap.xml` files to set priorities in pages to crawl first.
+According to my statistics I just said above this would take more than 3 years in the best case scenario for the Google robot to crawl all your 5 million pages this is why you can play with a parameter in your `sitemap.xml` files to set priority orders in pages to crawl first.
 
 ### I want to use renderToPipeableStream to make a top notch app
 
-Actually you can do it, but this would cost you too much computer power to aim the same goal. `redux-saga` needs to generate the dom fist via `renderToString` to get all its data fetched before finally rendering. `react-jss` it's the same also to make its stylesheets.
+Actually you can do it, but this would cost you too much computer power to aim the same goal. `redux-saga` needs to generate the dom first via `renderToString` to get all its data fetched before finally rendering. And `react-jss` it's the same also to make its stylesheets.
 
 ## Notes
 
