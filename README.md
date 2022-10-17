@@ -67,7 +67,7 @@ cd react-easy-ssr
 
 ### Requirements
 
-Node.js version 16 minimum (because we need to use the js opational chaining operator). Hopefully you got `nvm` command already installed (best way to install node), hence just do
+Node.js version 16 minimum (because we need to use the js optional chaining operator). Hopefully you got `nvm` command already installed (best way to install node), hence just do
 
 ```nvm
 nvm use
