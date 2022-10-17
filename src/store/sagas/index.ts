@@ -1,5 +1,5 @@
-import { take, put, call, fork, select, delay, all, takeEvery, takeLatest, PutEffect, CallEffect } from 'redux-saga/effects'
-import { Saga, SagaIterator } from 'redux-saga'
+import { take, put, call, fork, select, all, PutEffect, CallEffect } from 'redux-saga/effects'
+import { SagaIterator } from 'redux-saga'
 
 import { moviesLoadable, moviesCleanable } from '../reducers/selectors'
 
@@ -18,7 +18,8 @@ function* fetchEntity(
   body: unknown
 ): Generator<PutEffect<ActionDispatcherResponse> | CallEffect<CallApiResponse>, void, CallApiResponse> {
   yield put(entity.request(body))
-  const { response, error } = yield call<(this: () => Promise<CallApiResponse>, ...args: any[]) => Promise<CallApiResponse>>(apiFn, body)
+  // eslint-disable-next-line no-unused-vars
+  const { response, error } = yield call<(body: unknown) => Promise<CallApiResponse>>(apiFn, body)
   if (response) yield put(entity.success(body, response))
   else if (error) yield put(entity.failure(body, error))
 }

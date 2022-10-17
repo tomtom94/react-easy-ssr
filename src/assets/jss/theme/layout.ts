@@ -1,11 +1,10 @@
-import transition from './transition'
-import breakpoints, { breakpointValues, BreakpointsKeys } from './breakpoints'
+import breakpoints, { breakpointValues } from './breakpoints'
 import spacing from './spacing'
 
 export interface Layout {
-  containerFluid: any
-  container: any
-  box: any
+  containerFluid: Record<string, string | number | undefined | Record<string, string | number | undefined>>
+  container: Record<string, string | number | undefined | Record<string, string | number | undefined>>
+  box: Record<string, string | number | undefined | Record<string, string | number | undefined>>
 }
 
 const containerFluid = {

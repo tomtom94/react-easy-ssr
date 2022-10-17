@@ -16,7 +16,7 @@ export interface Theme {
 
 const theme: Theme = {
   transition,
-  spacing: coef => spacing(coef),
+  spacing: (coef) => spacing(coef),
   breakpoints: {
     up: (key: BreakpointsKeys) => breakpoints('up', key),
     down: (key: BreakpointsKeys) => breakpoints('down', key),

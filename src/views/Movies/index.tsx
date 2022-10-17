@@ -22,7 +22,6 @@ const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {
 
   const dispatch = useDispatch()
   const { movies } = useSelector((state: ReduxState) => state.app)
-  const { pathname, search } = routeComponent.location
 
   const willMount = useRef(true)
   if (willMount.current && !process.env.BROWSER) {
@@ -69,7 +68,7 @@ const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {
               )}
               {movies.data.length > 0 && (
                 <ul className={classes.listMovies}>
-                  {movies.data.map(e => (
+                  {movies.data.map((e) => (
                     <li key={e.id}>
                       <div className={classes.movieJacket}>
                         <img src={`https://image.tmdb.org/t/p/original${e.poster_path}`} alt="jacket" />

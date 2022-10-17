@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router'
 import { Helmet } from 'react-helmet-async'
 
 import exceptionPageStyle from '../../assets/jss/views/exceptionPageStyle'
-import ExceptionImageUrl, { ReactComponent as ExceptionImage } from '../../assets/images/404.svg'
+import ExceptionImageUrl from '../../assets/images/404.svg'
 
 type Props = {
   children?: ReactNode

@@ -31,7 +31,7 @@ export default (direction: 'up' | 'down', key: BreakpointsKeys) => {
     lg: string
     xl: string
   }
-  const keys = ['xs', 'sm', 'md', 'lg', 'xl'].reduce((acc, curr, index, array) => {
+  const keys = ['xs', 'sm', 'md', 'lg', 'xl'].reduce((acc, curr) => {
     let cssMedia
     if (direction === 'up') {
       cssMedia = `@media (min-width: ${breakpointValues[curr as BreakpointsKeys]}px)`

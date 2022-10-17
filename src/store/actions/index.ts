@@ -31,7 +31,7 @@ export interface ActionDispatcher {
 }
 
 export const movies: ActionDispatcher = {
-  request: body => action(MOVIES[REQUEST], { body }),
+  request: (body) => action(MOVIES[REQUEST], { body }),
   success: (body, response) => action(MOVIES[SUCCESS], { body, response }),
   failure: (body, error) => action(MOVIES[FAILURE], { body, error })
 }

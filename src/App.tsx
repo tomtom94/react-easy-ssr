@@ -1,7 +1,7 @@
 import { hot } from 'react-hot-loader/root'
-import React, { FC, ReactChild, ReactElement, ReactNode, useEffect, useRef } from 'react'
+import React, { FC, ReactNode, useEffect, useRef } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { ThemeProvider } from 'react-jss'
 import { Helmet } from 'react-helmet-async'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -46,9 +46,7 @@ const AppProvider: FC<Props> = ({ children, ...props }) => (
 const App: FC<Props> = ({ children, ...props }) => {
   const classes = appStyle(props)
 
-  const dispatch = useDispatch()
-  const app = useSelector((state: ReduxState) => state.app)
-  const { pathname, search } = useSelector((state: ReduxState) => state.router.location)
+  const { pathname } = useSelector((state: ReduxState) => state.router.location)
 
   const oldPage = useRef(pathname)
   useEffect(() => {
@@ -105,7 +103,7 @@ const App: FC<Props> = ({ children, ...props }) => {
                 exact={typeof exact !== 'undefined' ? exact : false}
                 path={path}
                 key={i}
-                render={routeComponent => <Component routeComponent={routeComponent} />}
+                render={(routeComponent) => <Component routeComponent={routeComponent} />}
               />
             ))}
           </Switch>

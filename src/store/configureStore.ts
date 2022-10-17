@@ -1,12 +1,12 @@
 import { createBrowserHistory, createMemoryHistory, History } from 'history'
 import { applyMiddleware, legacy_createStore, PreloadedState } from 'redux'
-import createSagaMiddleware, { END, SagaMiddleware } from 'redux-saga'
+import createSagaMiddleware, { END } from 'redux-saga'
 
-import { routerMiddleware, RouterState } from 'connected-react-router'
+import { routerMiddleware } from 'connected-react-router'
 import { createLogger } from 'redux-logger'
+import window from 'global/window'
 
 import createRootReducer, { ReduxState } from './rootReducer'
-import { AppState } from './reducers'
 
 export const createHistory = (initialEntries = ['/']) => {
   if (process.env.BROWSER) {
@@ -39,6 +39,7 @@ export default function configureStore(preloadedState: Partial<PreloadedState<Re
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('./rootReducer', () => {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const nextRootReducer = require('./rootReducer').default
       store.replaceReducer(nextRootReducer(history))
     })

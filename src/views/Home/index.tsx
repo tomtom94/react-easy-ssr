@@ -1,13 +1,10 @@
 import { hot } from 'react-hot-loader/root'
 import React, { FC, ReactNode } from 'react'
 import { RouteComponentProps } from 'react-router'
-import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
 
 import Grid from '../../components/Grid'
 import homeStyle from '../../assets/jss/views/homeStyle'
-
-import { ReduxState } from '../../store/rootReducer'
 
 type Props = {
   children?: ReactNode
@@ -16,10 +13,6 @@ type Props = {
 
 const Home: FC<Props> = ({ children, routeComponent, ...props }) => {
   const classes = homeStyle(props)
-
-  const dispatch = useDispatch()
-  const app = useSelector((state: ReduxState) => state.app)
-  const { pathname, search } = routeComponent.location
 
   const title = 'Home page'
   const description = 'Welcome'

@@ -1,11 +1,10 @@
 import { hot } from 'react-hot-loader/root'
 import React, { FC, useEffect, useState, useRef, ReactNode } from 'react'
-import { useHistory } from 'react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import eventMessageStyle from '../assets/jss/components/eventMessageStyle'
 import Button from './Button'
-import CloseImageUrl, { ReactComponent as CloseImage } from '../assets/images/61155.svg'
+import CloseImageUrl from '../assets/images/61155.svg'
 
 interface Props {
   children?: ReactNode
@@ -17,7 +16,6 @@ interface Props {
 
 const EventMessage: FC<Props> = ({ message, event, refresh, onClose, children, ...props }) => {
   const classes = eventMessageStyle(props)
-  const history = useHistory()
   const [isNotificationOpened, setIsNotificationOpened] = useState(false)
 
   const timeout1 = useRef<NodeJS.Timeout>()
@@ -57,7 +55,7 @@ const EventMessage: FC<Props> = ({ message, event, refresh, onClose, children, .
             type="button"
             className={classes.closingButton}
             onClick={onClose}
-            onKeyDown={e => {
+            onKeyDown={(e) => {
               if (e.key === 'Escape') {
                 onClose()
               }

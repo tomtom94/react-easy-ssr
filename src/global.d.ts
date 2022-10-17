@@ -37,6 +37,6 @@ declare module '*.svg' {
 }
 
 interface Window {
-  browserHistory: any
-  __PRELOADED_STATE__: any
+  browserHistory: unknown
+  __PRELOADED_STATE__: string
 }

@@ -11,7 +11,7 @@
 
 import React, { ReactNode, FC } from 'react'
 import classNames from 'classnames'
-import { createUseStyles, useTheme } from 'react-jss'
+import { createUseStyles } from 'react-jss'
 import { BreakpointsKeys } from '../assets/jss/theme/breakpoints'
 import { Theme } from '../assets/jss/theme/index'
 
@@ -22,7 +22,7 @@ function generateGrid(globalStyles: Partial<CSSStyleDeclaration>, theme: Theme, 
   const styles: Record<string, Record<string, string | number>> = {}
   const noMediaClassNames: Record<string, Record<string, string>> = {}
 
-  GRID_SIZES.forEach(size => {
+  GRID_SIZES.forEach((size) => {
     const key = `grid-${breakpoint}-${size}`
     noMediaClassNames[key] = {}
 
@@ -79,7 +79,7 @@ function getOffset(val: string | number, div = 1) {
 function generateGutter(theme: Theme, breakpoint: string) {
   const styles: Record<string, Record<string, string | Record<string, string>>> = {}
 
-  SPACINGS.forEach(spacing => {
+  SPACINGS.forEach((spacing) => {
     const themeSpacing = theme.spacing(spacing)
 
     if (themeSpacing === 0) {
@@ -273,6 +273,7 @@ const Grid: FC<Props> = ({
     classNameProp
   )
 
+  // eslint-disable-next-line react/jsx-props-no-spreading
   return <div className={className} {...(id && { id })} {...(children && { children })} />
 }
 
