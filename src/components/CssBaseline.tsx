@@ -1,9 +1,9 @@
-import React, { FC, ReactChild } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 import cssBaseline from '../assets/jss/components/cssBaselineStyle'
 
 interface Props {
-  children?: ReactChild
+  children?: ReactNode
 }
 
 const CssBaseline: FC<Props> = ({ children, ...props }) => {
