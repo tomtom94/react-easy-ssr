@@ -1,13 +1,14 @@
+import { NormalCssProperties } from '.'
 import breakpoints, { breakpointValues } from './breakpoints'
 import spacing from './spacing'
 
 export interface Layout {
-  containerFluid: Record<string, string | number | undefined | Record<string, string | number | undefined>>
-  container: Record<string, string | number | undefined | Record<string, string | number | undefined>>
-  box: Record<string, string | number | undefined | Record<string, string | number | undefined>>
+  containerFluid: NormalCssProperties
+  container: NormalCssProperties
+  box: NormalCssProperties
 }
 
-const containerFluid = {
+const containerFluid: NormalCssProperties = {
   width: '100%',
   marginLeft: 'auto',
   boxSizing: 'border-box',
@@ -28,7 +29,7 @@ const containerFluid = {
   }
 }
 
-const container = {
+const container: NormalCssProperties = {
   width: '100%',
   marginLeft: 'auto',
   boxSizing: 'border-box',
@@ -56,7 +57,7 @@ const container = {
   }
 }
 
-const box = {
+const box: NormalCssProperties = {
   boxSizing: 'border-box',
   display: 'flex',
   flexGrow: 1,

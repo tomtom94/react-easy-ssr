@@ -93,6 +93,7 @@
     "@typescript-eslint/parser": "^5.40.0",
     "babel-loader": "^8.2.5",
     "css-loader": "^3.2.1",
+    "csstype": "^3.1.1",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",

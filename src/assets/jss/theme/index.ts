@@ -4,6 +4,9 @@ import spacing, { Spacing } from './spacing'
 import layout, { Layout } from './layout'
 import palette, { Palette } from './palette'
 import typography, { Typography } from './typography'
+import { Properties as CSSProperties } from 'csstype'
+
+export type NormalCssProperties = CSSProperties<string | number>
 
 export interface Theme {
   transition: Transition

@@ -1,16 +1,17 @@
+import { NormalCssProperties } from '.'
 import palette from './palette'
 
 export interface Typography {
-  h1: Record<string, string | number | Record<string, string | number>>
-  h2: Record<string, string | number | Record<string, string | number>>
-  h3: Record<string, string | number | Record<string, string | number>>
-  h4: Record<string, string | number | Record<string, string | number>>
-  h5: Record<string, string | number | Record<string, string | number>>
-  h6: Record<string, string | number | Record<string, string | number>>
-  subtitle1: Record<string, string | number | Record<string, string | number>>
-  subtitle2: Record<string, string | number | Record<string, string | number>>
-  body1: Record<string, string | number | Record<string, string | number>>
-  body2: Record<string, string | number | Record<string, string | number>>
+  h1: NormalCssProperties
+  h2: NormalCssProperties
+  h3: NormalCssProperties
+  h4: NormalCssProperties
+  h5: NormalCssProperties
+  h6: NormalCssProperties
+  subtitle1: NormalCssProperties
+  subtitle2: NormalCssProperties
+  body1: NormalCssProperties
+  body2: NormalCssProperties
 }
 
 const typography = {
