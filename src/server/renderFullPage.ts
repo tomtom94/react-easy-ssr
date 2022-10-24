@@ -17,7 +17,7 @@ const renderFullPage = (
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
     <link rel="stylesheet" type="text/css" href="${
-      process.env.STATIC_FILES_URL ? `${process.env.STATIC_FILES_URL}/static/bundle.css` : `/static/bundle.css`
+      process.env.STATIC_FILES_URL ? `${process.env.STATIC_FILES_URL}/bundle.css` : `/bundle.css`
     }" />
     
     ${helmet?.title?.toString()}

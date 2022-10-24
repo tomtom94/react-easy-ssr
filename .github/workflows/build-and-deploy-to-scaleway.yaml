@@ -38,10 +38,10 @@ jobs:
           BACKEND_BASE_URL: ''
           STATIC_FILES_URL: 'https://reacteasyssrjckf9fbl-reacteasyssrstatic.functions.fnc.fr-par.scw.cloud'
 
-      - name: Copy past new static files
+      - name: Copy past client static files
         uses: canastro/copy-file-action@master
         with:
-          source: dist/client/static/.
+          source: dist/client/.
           target: public/static/
           flags: '-r'
 
