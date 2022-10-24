@@ -5,7 +5,7 @@ const appDirectory = fs.realpathSync(process.cwd())
 const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath)
 const paths = {
   dist: resolveApp('dist'),
-  publicPath: '/static/',
+  publicPath: '/',
   clientBuild: resolveApp('dist/client'),
   serverBuild: resolveApp('dist/server'),
   srcClient: resolveApp('src/index.tsx'),

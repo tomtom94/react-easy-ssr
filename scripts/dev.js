@@ -66,7 +66,7 @@ const start = async () => {
 
     const script = nodemon({
       script: `${paths.serverBuild}/index.js`,
-      ignore: ['src', 'webpack', 'scripts', 'dist/client'],
+      ignore: ['src', 'webpack', 'scripts', `${paths.clientBuild}`, 'public', 'node_modules'], // We just want paths.serverBuild to be watched
       delay: 200
     })
 
