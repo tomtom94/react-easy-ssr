@@ -13,9 +13,6 @@
     "name": "Thomas Aumaitre",
     "email": "thomas.aumaitre@gmail.com"
   },
-  "browserslist": [
-    "defaults"
-  ],
   "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "build": "node scripts/build.js",
