@@ -17,21 +17,21 @@ Check out this app in live [reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc
 ## Table of contents
 
 - [Motivations](#motivations)
-- [Getting started](#Getting-started)
-  - [Requirements](#Requirements)
-  - [Start in dev mode](#Start-in-dev-mode)
-  - [Start in production mode](#Start-in-production-mode)
-    - [With Node.js](#With-Nodejs)
-    - [With Docker](#With-Docker)
-- [Must know about the app](#Must-know-about-the-app)
-  - [Continuous Integration and Continuous Delivery](#Continuous-Integration-and-Continuous-Delivery)
-  - [Checks to do sometimes](#Checks-to-do-sometimes)
-  - [Components](#Components)
-  - [Data-fetching and SSR](#Data-fetching-and-SSR)
-  - [ES6 Imports possible in JSX](#ES6-Imports-possible-in-JSX)
-  - [Disadvantages of redux-saga and react-jss](#Disadvantages-of-redux-saga-and-react-jss)
-  - [I want to use renderToPipeableStream to make a top notch app](#I-want-to-use-renderToPipeableStream-to-make-a-top-notch-app)
-- [Notes](#Notes)
+- [Getting started](#getting-started)
+  - [Requirements](#requirements)
+  - [Start in dev mode](#start-in-dev-mode)
+  - [Start in production mode](#start-in-production-mode)
+    - [With Node.js](#with-nodejs)
+    - [With Docker](#with-docker)
+- [Must know about the app](#must-know-about-the-app)
+  - [Continuous Integration and Continuous Delivery](#continuous-integration-and-continuous-delivery)
+  - [Checks to do sometimes](#checks-to-do-sometimes)
+  - [Components](#components)
+  - [Data-fetching and SSR](#data-fetching-and-ssr)
+  - [ES6 Imports possible in JSX](#es6-imports-possible-in-jsx)
+  - [Some disadvantages](#some-disadvantages)
+  - [I want to use renderToPipeableStream to make a top notch app](#i-want-to-use-rendertopipeablestream-to-make-a-top-notch-app)
+- [Notes](#notes)
 
 ## Motivations
 
@@ -142,6 +142,10 @@ git commit -m "#major this is a big commit"
 ```
 
 ```git
+git commit -m "#minor this is a medium commit"
+```
+
+```git
 git commit -m "#patch this is a tiny commit"
 ```
 
@@ -199,7 +203,7 @@ You can add more Webpack `loader` to your project...
 ### Some disadvantages
 
 - With this configuration you can't easily use the powerful React function unveiled in `react` 17 called `renderToPipeableStream`. We must use the old one which is (from 2015) `rendeToString`. But no worries 99% of React Apps are on the old one `rendeToString`.
-List of modules not compatible with `renderToPipeableStream` (We are telling you the ones we are sure of, this is not an exhaustive list). For example with `react-jss` check this issue [on github](https://github.com/cssinjs/jss/issues/807)
+Some modules may not be compatible with `renderToPipeableStream`, for example `react-jss` check this issue [on github](https://github.com/cssinjs/jss/issues/807).
 
 - Another important issue to know is the split code, the first time your frontend server reads one of your page it'll be blind of redux actions. This is so much interesting try to investigate yourself (use Postman and check if you have data in your redux store in the `__PRELOADED_STATE__` window attribute, turn off and on your server check again in Postman, then refresh again)
 This is in fact a normal behavior check this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760). After a new deployment the first time you render a page, data-fetching during SSR is something `loadable-component` could not carry about (because even your server is a casualty of split code). So the Google robot would not be able to treat a complete page in the DOM (this would be empty of data from the redux store except if another user has already opened this page before the Google robot) in this case only the client side will render. All the other times your page will open perfectly with data fetched. To conclude your app must always be able to render on the server & client side independantly.
