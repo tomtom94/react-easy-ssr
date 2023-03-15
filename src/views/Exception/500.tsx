@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React, { FC, ReactNode } from 'react'
 import { RouteComponentProps } from 'react-router'
 
@@ -37,4 +36,4 @@ const Exception: FC<Props> = ({ children, routeComponent, ...props }) => {
   )
 }
 
-export default hot(Exception)
+export default Exception

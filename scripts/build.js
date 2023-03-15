@@ -11,8 +11,8 @@ const build = async () => {
     const [clientConfig, serverConfig] = webpackConfig
     const multiCompiler = webpack([clientConfig, serverConfig])
 
-    const clientCompiler = multiCompiler.compilers.find((compiler) => compiler.name === 'client')
-    const serverCompiler = multiCompiler.compilers.find((compiler) => compiler.name === 'server')
+    const clientCompiler = multiCompiler.compilers.find((compiler) => compiler.options.target === 'web')
+    const serverCompiler = multiCompiler.compilers.find((compiler) => compiler.options.target === 'node')
 
     serverCompiler.run((err, stats) => compilation(err, stats, serverConfig.stats))
     clientCompiler.run((err, stats) => compilation(err, stats, clientConfig.stats))

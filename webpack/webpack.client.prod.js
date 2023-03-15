@@ -8,7 +8,6 @@ const LoadablePlugin = require('@loadable/webpack-plugin')
 const { paths } = require('../scripts/utils')
 
 module.exports = {
-  name: 'client',
   mode: 'production',
   target: 'web',
   entry: {

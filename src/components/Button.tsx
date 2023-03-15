@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React, { FC, ReactNode } from 'react'
 import classNames from 'classnames'
 import { Link } from 'react-router-dom'
@@ -38,4 +37,4 @@ const Button: FC<Props> = ({ children, link, model, onClick, ...props }) => {
   )
 }
 
-export default hot(Button)
+export default Button

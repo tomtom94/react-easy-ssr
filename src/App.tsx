@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React, { FC, ReactNode, useEffect, useRef } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -114,4 +113,4 @@ const App: FC<Props> = ({ children, ...props }) => {
   )
 }
 
-export default hot(AppProvider)
+export default AppProvider
