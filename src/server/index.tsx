@@ -21,7 +21,7 @@ import { UAParser } from 'ua-parser-js'
 import CleanCSS from 'clean-css'
 import { ReduxState } from 'store/rootReducer'
 import { INITIAL_STATE_MOVIES } from '../store/reducers'
-import configureStore, { createHistory } from '../store/configureStore'
+import configureStore from '../store/configureStore'
 import App from '../App'
 import renderFullPage from './renderFullPage'
 import rootSaga from '../store/sagas'
@@ -83,8 +83,7 @@ app.use((req: Request, res: Response) => {
     statsFile: path.join(paths.clientBuild, paths.publicPath, 'loadable-stats.json'),
     entrypoints: ['bundle']
   })
-  const history = createHistory([req.url])
-  const store = configureStore(initialState, history)
+  const store = configureStore(initialState)
   const sheet = new ServerStyleSheet()
   const jsx = (context = {}, helmetContext = { helmet: {} }) => (
     <StaticRouter location={req.url} context={context}>

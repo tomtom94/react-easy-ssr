@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { ConnectedRouter } from 'connected-react-router'
 import { HelmetProvider } from 'react-helmet-async'
 
 import { Provider } from 'react-redux'
@@ -9,15 +8,14 @@ import { JssProvider, jss } from 'react-jss'
 
 import window from 'global/window'
 import vendorPrefixer from 'jss-plugin-vendor-prefixer'
-import configureStore, { createHistory } from './store/configureStore'
+import configureStore from './store/configureStore'
 import App from './App'
 import rootSaga from './store/sagas'
+import { BrowserRouter } from 'react-router-dom'
 
 const preloadedState = window.__PRELOADED_STATE__
 
-const history = createHistory()
-
-const store = configureStore(preloadedState, history)
+const store = configureStore(preloadedState)
 store.runSaga(rootSaga)
 
 jss.use(vendorPrefixer())
@@ -35,13 +33,11 @@ const Main = () => {
   }, [])
   return (
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <HelmetProvider>
-          <JssProvider jss={jss} classNamePrefix="app-">
-            <App />
-          </JssProvider>
-        </HelmetProvider>
-      </ConnectedRouter>
+      <HelmetProvider>
+        <JssProvider jss={jss} classNamePrefix="app-">
+          <App />
+        </JssProvider>
+      </HelmetProvider>
     </Provider>
   )
 }
@@ -56,7 +52,12 @@ const clientApp = () => {
         hostname === '192.168.0.20'))
   ) {
     loadableReady(() => {
-      ReactDOM.hydrate(<Main />, document.querySelector('#root'))
+      ReactDOM.hydrate(
+        <BrowserRouter>
+          <Main />
+        </BrowserRouter>,
+        document.querySelector('#root')
+      )
     })
   } else {
     // We don't want Google Cache to use our bundles JS and make whatever he wants with it

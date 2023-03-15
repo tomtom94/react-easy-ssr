@@ -1,6 +1,5 @@
 import React, { FC, ReactNode, useEffect, useRef } from 'react'
-import { Route, Switch } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Route, Switch, useLocation } from 'react-router-dom'
 import { ThemeProvider } from 'react-jss'
 import { Helmet } from 'react-helmet-async'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -11,7 +10,6 @@ import defaultTheme from './assets/jss/theme'
 import Footer from './components/Footer'
 import Header from './components/Header'
 
-import { ReduxState } from './store/rootReducer'
 import appStyle from './assets/jss/views/appStyle'
 import appleTouchIcon57 from './assets/images/icons/apple-icon-57x57.png'
 import appleTouchIcon60 from './assets/images/icons/apple-icon-60x60.png'
@@ -45,7 +43,7 @@ const AppProvider: FC<Props> = ({ children, ...props }) => (
 const App: FC<Props> = ({ children, ...props }) => {
   const classes = appStyle(props)
 
-  const { pathname } = useSelector((state: ReduxState) => state.router.location)
+  const { pathname } = useLocation()
 
   const oldPage = useRef(pathname)
   useEffect(() => {
