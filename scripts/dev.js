@@ -27,8 +27,8 @@ const start = async () => {
 
     const multiCompiler = webpack([clientConfig, serverConfig])
 
-    const clientCompiler = multiCompiler.compilers.find((compiler) => compiler.name === 'client')
-    const serverCompiler = multiCompiler.compilers.find((compiler) => compiler.name === 'server')
+    const clientCompiler = multiCompiler.compilers.find((compiler) => compiler.options.target === 'web')
+    const serverCompiler = multiCompiler.compilers.find((compiler) => compiler.options.target === 'node')
 
     app.use(cors())
 
@@ -60,14 +60,14 @@ const start = async () => {
     await Promise.all([compilerListener('client', clientCompiler), compilerListener('server', serverCompiler)])
 
     app.listen(PORT, (err) => {
-      if (err) console.log(err)
+      if (err) console.error(err)
       else console.log(`Hot dev server middleware port : ${PORT} 🌎`)
     })
 
     const script = nodemon({
       script: `${paths.serverBuild}/index.js`,
       ignore: ['src', 'webpack', 'scripts', `${paths.clientBuild}`, 'public', 'node_modules'], // We just want paths.serverBuild to be watched
-      delay: 200
+      delay: 100 // take into account serverCompiler changes
     })
 
     script.on('restart', () => {

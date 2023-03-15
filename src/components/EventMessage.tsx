@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React, { FC, useEffect, useState, useRef, ReactNode } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
@@ -86,4 +85,4 @@ const EventMessage: FC<Props> = ({ message, event, refresh, onClose, children, .
   )
 }
 
-export default hot(EventMessage)
+export default EventMessage

@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React, { useEffect, useState, FC, ReactNode, KeyboardEvent } from 'react'
 
 import classNames from 'classnames'
@@ -66,4 +65,4 @@ const Drawer: FC<Props> = ({ children, open, onClose, id, ...props }) => {
   )
 }
 
-export default hot(Drawer)
+export default Drawer

@@ -1,9 +1,6 @@
-function isWebTarget(caller) {
-  return Boolean(caller && caller.target === 'web')
-}
 module.exports = (api) => {
   api.cache.using(() => process.env.NODE_ENV)
-  const web = api.caller(isWebTarget)
+  const web = api.caller((caller) => Boolean(caller && caller.target === 'web'))
 
   const presets = [
     [
@@ -25,7 +22,11 @@ module.exports = (api) => {
     '@babel/preset-typescript'
   ]
 
-  const plugins = ['react-hot-loader/babel', '@loadable/babel-plugin']
+  const plugins = ['@loadable/babel-plugin']
+
+  if (web && process.env.NODE_ENV === 'development') {
+    plugins.push('react-refresh/babel')
+  }
 
   return {
     presets,

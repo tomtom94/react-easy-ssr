@@ -4,7 +4,6 @@ const { paths } = require('../scripts/utils')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  name: 'server',
   mode: 'production',
   target: 'node',
   entry: {

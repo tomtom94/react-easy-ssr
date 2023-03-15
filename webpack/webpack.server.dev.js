@@ -3,9 +3,9 @@ const webpack = require('webpack')
 const { paths } = require('../scripts/utils')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const LoadablePlugin = require('@loadable/webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 module.exports = {
-  name: 'server',
   mode: 'development',
   target: 'node',
   entry: {
@@ -19,10 +19,7 @@ module.exports = {
   },
   resolve: {
     modules: [paths.src, 'node_modules'],
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
-    alias: {
-      'react-dom': '@hot-loader/react-dom'
-    }
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
   module: require('./loaders.server.js'),
   plugins: [

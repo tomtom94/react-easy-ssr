@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React, { FC, ReactNode } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { RouteComponentProps } from 'react-router'
@@ -42,4 +41,4 @@ const AboutUs: FC<Props> = ({ children, routeComponent, ...props }) => {
   )
 }
 
-export default hot(AboutUs)
+export default AboutUs

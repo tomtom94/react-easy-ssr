@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React, { useEffect, useState, useRef, FC, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
@@ -99,4 +98,4 @@ const Header: FC<Props> = ({ children, ...props }) => {
   )
 }
 
-export default hot(Header)
+export default Header

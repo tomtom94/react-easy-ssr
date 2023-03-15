@@ -8,7 +8,7 @@
 
 React App with SSR Server Side Rendering. Webpack 5 installed manually. In dev mode we use live reload thanks to `webpack-dev-middleware` & `webpack-hot-middleware` modules.
 
-Main modules used are `redux-saga`, `loadable-component`, `react-jss` and `typescript`.
+Main modules used are `redux-saga`, `loadable-component`, `react-refresh`, `react-jss` and `typescript`.
 
 <img src="https://gifimage.net/wp-content/uploads/2017/10/new-icon-gif-animation-14.gif" width="25" alt="star github"> [Free and easy to use CI/CD](#Continuous-Integration-and-Continuous-Delivery) with Github Actions and Scaleway.
 
@@ -35,23 +35,7 @@ Check out this app in live [reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc
 
 ## Motivations
 
-All this project is turned about SSR Server Side Rendering. And this is not an easy task. This would be legitimate to wonder why do we make such a complicated setup ?
-
-You can use a Framework to do all of this, but to me you are locking yourself behind walls.
-You can use `Next.js` or `Gatsby.js` but you will loose some powerful React functions.
-
-React is a library, then we would say don't put yourself in a framework. Which is great by the way ;)
-
-Please find the list of disadvantages of frameworks
-
-- The `React-router`module : you won't be able to handle this wonderful module, so bad with `Next.js` you create a file and it's added to your router automatically :sob:.
-- You won't have access to what happen on the Server Side. Just go to [this project's page and you are done mate](https://github.com/tomtom94/react-easy-ssr/blob/master/src/server/index.tsx) :flushed:
-- According to `Next.js` you can just install `redux-thunk` not the other ones, so bad how can we play with `redux-saga`or `redux-observable` ? :rage:
-- You won't be able to touch the webpack compilation and all the parameters. Look at this poor guy, it took him 2 years (from 2017 to 2019 lol) to make something special works with an easy webpack plugin [check the github issue](https://github.com/vercel/next.js/issues/3444) :grin: How can you manage the complex module `workbox-webpack-plugin` to make a PWA, apparently it's already all done by Next.js [look at that this messy code](https://github.com/vercel/next.js/blob/canary/examples/progressive-web-app/next.config.js), we doubt it's done like you want.
-- You won't ever be able to use `renderToPipeableStream` with Next.js & Gatsby.js forget it. You will only be able to use the old one React function `renderToString`, [so bad just check this github issue on their roadmap](https://github.com/vercel/next.js/issues/1209) and for [Gatsby.js they are even not talking about this check their issues](https://github.com/gatsbyjs/gatsby/issues?q=is%3Aissue+renderToPipeableStream+). To me you can't make a switch to use one function or the other just with a boolean parameter true or false. It requires you to change part of the App's architecture, and also some modules you are using may not be compatible with (`redux-saga` and `react-jss` for example but we'll see this that later)
-- Do you find other reasons why to not use a framework ? make a contribution and commit something here
-
-We are making this because we need to make lobbying us, the developers. Upper-layer module of React are kind of side effect of open source community perfectionism. We are making upper-layer module of upper-layer module WTF ?
+All this project is turned about SSR Server Side Rendering. And this is not an easy task. This boilerplate repository allows to overcome this work.
 
 ## Getting started
 

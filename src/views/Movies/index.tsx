@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React, { FC, useRef, useEffect, ReactNode } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
@@ -90,4 +89,4 @@ const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {
   )
 }
 
-export default hot(Movies)
+export default Movies

@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React, { FC, ReactNode } from 'react'
 
 import classNames from 'classnames'
@@ -40,4 +39,4 @@ const Footer: FC<Props> = ({ children, ...props }) => {
   )
 }
 
-export default hot(Footer)
+export default Footer
