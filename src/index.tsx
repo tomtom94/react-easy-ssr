@@ -15,8 +15,8 @@ import { BrowserRouter } from 'react-router-dom'
 
 const preloadedState = window.__PRELOADED_STATE__
 
-const store = configureStore(preloadedState)
-store.runSaga(rootSaga)
+const { store, runSaga } = configureStore(preloadedState)
+runSaga(rootSaga)
 
 jss.use(vendorPrefixer())
 
