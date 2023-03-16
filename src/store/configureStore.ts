@@ -1,33 +1,28 @@
-import { applyMiddleware, legacy_createStore, PreloadedState } from 'redux'
 import createSagaMiddleware, { END } from 'redux-saga'
-
-import { createLogger } from 'redux-logger'
-
+import { configureStore, PreloadedState, Middleware } from '@reduxjs/toolkit'
+import logger from 'redux-logger'
 import createRootReducer, { ReduxState } from './rootReducer'
 
-export default function configureStore(preloadedState: Partial<PreloadedState<ReduxState>>) {
+export default (preloadedState: Partial<PreloadedState<ReduxState>>) => {
   const sagaMiddleware = createSagaMiddleware()
 
-  const middlewares: any[] = []
-  middlewares.push(sagaMiddleware)
+  const middlewares: Middleware[] = [sagaMiddleware]
 
   if (process.env.BROWSER && process.env.NODE_ENV === 'development') {
-    middlewares.push(createLogger())
+    middlewares.push(logger)
   }
 
-  const store: any = legacy_createStore(createRootReducer(), preloadedState, applyMiddleware(...middlewares))
+  const store = configureStore({
+    reducer: createRootReducer(),
+    middleware: middlewares,
+    devTools: process.env.BROWSER && process.env.NODE_ENV === 'development',
+    preloadedState
+  })
 
-  // Hot reloading
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./rootReducer', () => {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const nextRootReducer = require('./rootReducer').default
-      store.replaceReducer(nextRootReducer())
-    })
+  if (process.env.BROWSER && process.env.NODE_ENV === 'development' && module.hot) {
+    // https://redux.js.org/usage/configuring-your-store#hot-reloading
+    module.hot.accept('./rootReducer', () => store.replaceReducer(createRootReducer()))
   }
 
-  store.runSaga = sagaMiddleware.run
-  store.close = () => store.dispatch(END)
-  return store
+  return { store, runSaga: sagaMiddleware.run, close: () => store.dispatch(END) }
 }

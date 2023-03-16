@@ -4,7 +4,7 @@ import { StaticRouter } from 'react-router-dom'
 import { renderToString } from 'react-dom/server'
 import { ChunkExtractor } from '@loadable/server'
 import { Provider } from 'react-redux'
-import { PreloadedState } from 'redux'
+import { PreloadedState } from '@reduxjs/toolkit'
 import path from 'path'
 import compression from 'compression'
 import cors from 'cors'
@@ -83,7 +83,7 @@ app.use((req: Request, res: Response) => {
     statsFile: path.join(paths.clientBuild, paths.publicPath, 'loadable-stats.json'),
     entrypoints: ['bundle']
   })
-  const store = configureStore(initialState)
+  const { store, runSaga, close } = configureStore(initialState)
   const sheet = new ServerStyleSheet()
   const jsx = (context = {}, helmetContext = { helmet: {} }) => (
     <StaticRouter location={req.url} context={context}>
@@ -94,8 +94,8 @@ app.use((req: Request, res: Response) => {
       </Provider>
     </StaticRouter>
   )
-  store
-    .runSaga(rootSaga)
+
+  runSaga(rootSaga)
     .toPromise()
     .then(async () => {
       const staticContext: StaticRouterContext = {}
@@ -132,7 +132,7 @@ app.use((req: Request, res: Response) => {
 
   renderToString(jsx())
 
-  store.close()
+  close()
 })
 
 app.listen(PORT, () => {
