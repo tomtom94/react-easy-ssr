@@ -1,16 +1,14 @@
 import React, { FC, ReactNode } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { RouteComponentProps } from 'react-router'
 
 import Grid from '../components/Grid'
 import aboutUsStyle from '../assets/jss/views/aboutUsStyle'
 
 type Props = {
   children?: ReactNode
-  routeComponent: RouteComponentProps
 }
 
-const AboutUs: FC<Props> = ({ children, routeComponent, ...props }) => {
+const AboutUs: FC<Props> = ({ children, ...props }) => {
   const classes = aboutUsStyle(props)
 
   const title = 'About us'

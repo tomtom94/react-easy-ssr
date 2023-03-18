@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from 'react'
-import { RouteComponentProps } from 'react-router'
 
 import { Helmet } from 'react-helmet-async'
 
@@ -8,10 +7,9 @@ import exceptionPageStyle from '../../assets/jss/views/exceptionPageStyle'
 
 type Props = {
   children?: ReactNode
-  routeComponent?: RouteComponentProps
 }
 
-const Exception: FC<Props> = ({ children, routeComponent, ...props }) => {
+const Exception: FC<Props> = ({ children, ...props }) => {
   const classes = exceptionPageStyle(props)
   return (
     <>

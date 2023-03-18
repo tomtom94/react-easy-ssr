@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom'
+import { hydrateRoot } from 'react-dom/client'
 import { HelmetProvider } from 'react-helmet-async'
 
 import { Provider } from 'react-redux'
@@ -51,14 +51,17 @@ const clientApp = () => {
         hostname === 'localhost' ||
         hostname === '192.168.0.20'))
   ) {
-    loadableReady(() => {
-      ReactDOM.hydrate(
-        <BrowserRouter>
-          <Main />
-        </BrowserRouter>,
-        document.querySelector('#root')
-      )
-    })
+    const domNode = document.querySelector('#root')
+    if (domNode) {
+      loadableReady(() => {
+        hydrateRoot(
+          domNode,
+          <BrowserRouter>
+            <Main />
+          </BrowserRouter>
+        )
+      })
+    }
   } else {
     // We don't want Google Cache to use our bundles JS and make whatever he wants with it
     console.error('Forbidden hostname')
