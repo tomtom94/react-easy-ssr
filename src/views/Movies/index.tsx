@@ -73,7 +73,12 @@ const Movies: FC<Props> = ({ children, ...props }) => {
                       <div className={classes.movieDetails}>
                         <h2>{e.title}</h2>
                         <p>{e.overview}</p>
-                        <p>{`Release date ${new Date(e.release_date).toLocaleDateString()}`}</p>
+                        <p>{`Release date ${new Date(e.release_date).toLocaleDateString('en-US', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}`}</p>
                       </div>
                     </li>
                   ))}
