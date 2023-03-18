@@ -31,7 +31,10 @@ const indexRoutes: Route[] = [
     path: '/about-us',
     Component: AboutUs
   },
-  { Component: NoMatch }
+  {
+    path: '*',
+    Component: NoMatch
+  }
 ]
 
 export default indexRoutes
