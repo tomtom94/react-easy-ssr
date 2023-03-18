@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { StaticRouter } from 'react-router-dom'
+import { StaticRouter } from 'react-router-dom/server'
 import { renderToString } from 'react-dom/server'
 import { ChunkExtractor } from '@loadable/server'
 import { Provider } from 'react-redux'
@@ -14,7 +14,6 @@ import { dom } from '@fortawesome/fontawesome-svg-core'
 import { JssProvider, SheetsRegistry, createGenerateId, jss } from 'react-jss'
 import serialize from 'serialize-javascript'
 import { ServerStyleSheet } from 'styled-components'
-import { StaticRouterContext } from 'react-router'
 import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 import { UAParser } from 'ua-parser-js'
@@ -26,6 +25,7 @@ import App from '../App'
 import renderFullPage from './renderFullPage'
 import rootSaga from '../store/sagas'
 import { paths } from '../../scripts/utils'
+import StaticContextProvider from './StaticContext'
 
 const PORT = process.env.PORT || 3000
 
@@ -85,26 +85,29 @@ app.use((req: Request, res: Response) => {
   })
   const { store, runSaga, close } = configureStore(initialState)
   const sheet = new ServerStyleSheet()
-  const jsx = (context = {}, helmetContext = { helmet: {} }) => (
-    <StaticRouter location={req.url} context={context}>
-      <Provider store={store}>
-        <HelmetProvider context={helmetContext}>
-          <App />
-        </HelmetProvider>
-      </Provider>
-    </StaticRouter>
+  const staticContext = { statusCode: 200 }
+
+  const jsx = (helmetContext = { helmet: {} }) => (
+    <StaticContextProvider staticContext={staticContext}>
+      <StaticRouter location={req.url}>
+        <Provider store={store}>
+          <HelmetProvider context={helmetContext}>
+            <App />
+          </HelmetProvider>
+        </Provider>
+      </StaticRouter>
+    </StaticContextProvider>
   )
 
   runSaga(rootSaga)
     .toPromise()
     .then(async () => {
-      const staticContext: StaticRouterContext = {}
       const helmetContext: { helmet: Partial<HelmetServerState> } = { helmet: {} }
       const generateId = createGenerateId()
       const sheets = new SheetsRegistry()
       const html = renderToString(
         <JssProvider jss={jss} registry={sheets} generateId={generateId} classNamePrefix="app-">
-          {sheet.collectStyles(extractor.collectChunks(jsx(staticContext, helmetContext)))}
+          {sheet.collectStyles(extractor.collectChunks(jsx(helmetContext)))}
         </JssProvider>
       )
 
@@ -122,7 +125,7 @@ app.use((req: Request, res: Response) => {
       const scriptTags = extractor.getScriptTags()
 
       res
-        .status(staticContext.statusCode || 200)
+        .status(staticContext.statusCode)
         .send(renderFullPage(html, css, fontAwesomeCss, styleTags, serialize(store.getState()), helmet, scriptTags))
     })
     .catch((e: Error) => {

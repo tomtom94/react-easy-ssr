@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useEffect, useRef } from 'react'
-import { Route, Switch, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import { ThemeProvider } from 'react-jss'
 import { Helmet } from 'react-helmet-async'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -94,16 +94,11 @@ const App: FC<Props> = ({ children, ...props }) => {
       <main className={classes.app}>
         <Header />
         <section className={classes.section}>
-          <Switch>
-            {routes.map(({ Component, exact, path }, i) => (
-              <Route
-                exact={typeof exact !== 'undefined' ? exact : false}
-                path={path}
-                key={i}
-                render={(routeComponent) => <Component routeComponent={routeComponent} />}
-              />
+          <Routes>
+            {routes.map(({ Component, path }, i) => (
+              <Route path={path} key={i} element={<Component />} />
             ))}
-          </Switch>
+          </Routes>
         </section>
         <Footer />
       </main>

@@ -1,5 +1,4 @@
 import React, { FC, ReactNode } from 'react'
-import { RouteComponentProps } from 'react-router'
 import { Helmet } from 'react-helmet-async'
 
 import Grid from '../../components/Grid'
@@ -7,10 +6,9 @@ import homeStyle from '../../assets/jss/views/homeStyle'
 
 type Props = {
   children?: ReactNode
-  routeComponent: RouteComponentProps
 }
 
-const Home: FC<Props> = ({ children, routeComponent, ...props }) => {
+const Home: FC<Props> = ({ children, ...props }) => {
   const classes = homeStyle(props)
 
   const title = 'Home page'

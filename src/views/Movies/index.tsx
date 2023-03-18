@@ -1,7 +1,6 @@
-import React, { FC, useRef, useEffect, ReactNode } from 'react'
+import React, { FC, useRef, useEffect, ReactNode, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
-import { RouteComponentProps } from 'react-router'
 import EventMessage from '../../components/EventMessage'
 
 import Grid from '../../components/Grid'
@@ -10,18 +9,18 @@ import moviesStyle from '../../assets/jss/views/moviesStyle'
 import { ReduxState } from '../../store/rootReducer'
 import { triggerMovies, clearMovies } from '../../store/actions/index'
 import Loading from '../Exception/Loading'
+import { StaticContext } from '../../server/StaticContext'
 
 type Props = {
   children?: ReactNode
-  routeComponent: RouteComponentProps
 }
 
-const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {
+const Movies: FC<Props> = ({ children, ...props }) => {
   const classes = moviesStyle(props)
 
   const dispatch = useDispatch()
   const { movies } = useSelector((state: ReduxState) => state.app)
-
+  const staticContext = useContext(StaticContext)
   const willMount = useRef(true)
   if (willMount.current && !process.env.BROWSER) {
     dispatch(triggerMovies('GET_MOVIES'))
@@ -35,9 +34,8 @@ const Movies: FC<Props> = ({ children, routeComponent, ...props }) => {
     }
   }, [dispatch])
 
-  if (routeComponent.staticContext && movies.error) {
-    // eslint-disable-next-line no-param-reassign
-    routeComponent.staticContext.statusCode = movies.error.status
+  if (!process.env.BROWSER && staticContext && movies.error) {
+    staticContext.statusCode = movies.error.status
   }
 
   if (movies.isLoading) {

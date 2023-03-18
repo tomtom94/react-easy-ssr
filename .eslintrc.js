@@ -14,7 +14,7 @@ module.exports = {
     }
   },
   rules: {
-    'no-unused-vars': ['error', { argsIgnorePattern: 'children|routeComponent', args: 'none' }],
+    'no-unused-vars': ['error', { argsIgnorePattern: 'children', args: 'none' }],
     'react/jsx-props-no-spreading': 'warn'
   },
   env: {

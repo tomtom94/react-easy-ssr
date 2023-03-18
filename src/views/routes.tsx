@@ -1,6 +1,5 @@
 import loadable, { LoadableComponent } from '@loadable/component'
 import React from 'react'
-import { RouteComponentProps } from 'react-router'
 import Loading from './Exception/Loading'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
@@ -14,15 +13,13 @@ const Movies = loadable(() => import(/* webpackChunkName: "Movies" */ './Movies/
 const AboutUs = loadable(() => import(/* webpackChunkName: "AboutUs" */ './AboutUs'), { fallback: <Loading /> })
 
 export interface Route {
-  name?: string
-  exact?: boolean
-  path?: string | string[]
-  Component: LoadableComponent<{ routeComponent: RouteComponentProps }>
+  caseSensitive?: boolean
+  path?: string | undefined
+  Component: LoadableComponent<Record<string, unknown>>
 }
 
 const indexRoutes: Route[] = [
   {
-    exact: true,
     path: '/',
     Component: Home
   },
@@ -34,7 +31,7 @@ const indexRoutes: Route[] = [
     path: '/about-us',
     Component: AboutUs
   },
-  { name: 'NoMatch', Component: NoMatch }
+  { Component: NoMatch }
 ]
 
 export default indexRoutes
