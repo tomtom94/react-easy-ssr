@@ -4,11 +4,12 @@ import { ThemeProvider } from 'react-jss'
 import { Helmet } from 'react-helmet-async'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faFacebook, faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons'
-import { faBars, faExclamationTriangle, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faExclamationTriangle, faSpinner, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import CssBaseline from './components/CssBaseline'
 import defaultTheme from './assets/jss/theme'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import { EventContextProvider } from './components/EventMessage'
 
 import appStyle from './assets/jss/views/appStyle'
 import appleTouchIcon57 from './assets/images/icons/apple-icon-57x57.png'
@@ -28,7 +29,7 @@ import msApplication144 from './assets/images/icons/ms-icon-144x144.png'
 import routes from './views/routes'
 import './assets/fonts/stylesheet.css'
 
-library.add(faFacebook, faTwitter, faSpinner, faBars, faExclamationTriangle, faGithub)
+library.add(faFacebook, faTwitter, faSpinner, faThumbsUp, faBars, faExclamationTriangle, faGithub)
 
 type Props = {
   children?: ReactNode
@@ -36,7 +37,9 @@ type Props = {
 
 const AppProvider: FC<Props> = ({ children, ...props }) => (
   <ThemeProvider theme={defaultTheme}>
-    <App />
+    <EventContextProvider>
+      <App />
+    </EventContextProvider>
   </ThemeProvider>
 )
 
