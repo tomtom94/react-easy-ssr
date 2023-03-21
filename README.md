@@ -29,8 +29,6 @@ Check out this app in live [reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc
   - [Components](#components)
   - [Data-fetching and SSR](#data-fetching-and-ssr)
   - [ES6 Imports possible in JSX](#es6-imports-possible-in-jsx)
-  - [Some disadvantages](#some-disadvantages)
-  - [I want to use renderToPipeableStream to make a top notch app](#i-want-to-use-rendertopipeablestream-to-make-a-top-notch-app)
 - [Notes](#notes)
 
 ## Motivations
@@ -168,7 +166,7 @@ useEffect(() => {
 }, [dispatch])
 ```
 
-- 1st part is only for server side, we dispatch the redux action : with `useRef` you can be sure the action won't be trigger multiple times in an infinite loop.
+- 1st part is only for server side, we dispatch the redux action : with `useRef` you can be sure the action won't be triggered multiple times in an infinite loop.
 - 2nd part is only for client side, we dispatch the redux action : but when you trigger this action there is a [redux-saga selector](https://github.com/tomtom94/react-easy-ssr/blob/master/src/store/reducers/selectors.ts) which will check if data hasn't been already fetched during 1st part, if yes no need to fetch again. And we clear the error if there are some before leaving the component.
 
 This way your App is able to fetch data on the server & client side independantly.
@@ -183,23 +181,6 @@ Webpack setup only allows us to import files with ES6 in type
 - .css (remember `react-jss` generates its own stylesheet via its own plugins, not via webpack loaders)
 
 You can add more Webpack `loader` to your project...
-
-### Some disadvantages
-
-- With this configuration you can't easily use the powerful React function unveiled in `react` 17 called `renderToPipeableStream`. We must use the old one which is (from 2015) `rendeToString`. But no worries 99% of React Apps are on the old one `rendeToString`.
-Some modules may not be compatible with `renderToPipeableStream`, for example `react-jss` check this issue [on github](https://github.com/cssinjs/jss/issues/807).
-
-- Another important issue to know is the split code, the first time your frontend server reads one of your page it'll be blind of redux actions. This is so much interesting try to investigate yourself (use Postman and check if you have data in your redux store in the `__PRELOADED_STATE__` window attribute, turn off and on your server check again in Postman, then refresh again)
-This is in fact a normal behavior check this issue [on github](https://github.com/gregberge/loadable-components/issues/473#issuecomment-561973760). After a new deployment the first time you render a page, data-fetching during SSR is something `loadable-component` could not carry about (because even your server is a casualty of split code). So the Google robot would not be able to treat a complete page in the DOM (this would be empty of data from the redux store except if another user has already opened this page before the Google robot) in this case only the client side will render. All the other times your page will open perfectly with data fetched. To conclude your app must always be able to render on the server & client side independantly.
-
-Let's illustrate this last point with an example : you have 5 million pages to display with 5 React routes, each route renders a component which deals with 1 million different pages, you just have to open 1 page (by yourself or a crawler like Google robot, Bing robot etc...) and the other 999999 will render perfectly.
-
-Please note, in the world there are approximately 10 big crawlers (Russian, American, European, Asian...) which will open a page around every 20 seconds each on your App, this is a statistic home made but quite reliable. Just watch by yourself in your Nginx router who opens your page it's written ;) This is something to take into account for your servers performances, internet network is crazy busy when you have 5 million pages for real in a `sitemap.xml`. Don't think Google robot would read your App if you just do CSR Client Side Rendering. You don't make loose time to crawlers if you wanna have a good SEO score in search engines, moreover if you have 5 million pages to crawl. 
-According to my statistics I just said above this would take more than 3 years in the best case scenario for the Google robot to crawl all your 5 million pages this is why you can play with a parameter in your `sitemap.xml` files to set priority orders in pages to crawl first.
-
-### I want to use renderToPipeableStream to make a top notch app
-
-Actually you can do it, but this would cost you too much computer power to aim the same goal. `redux-saga` needs to generate the dom first via `renderToString` to get all its data fetched before finally rendering. And `react-jss` it's the same also to make its stylesheets.
 
 ## Notes
 
