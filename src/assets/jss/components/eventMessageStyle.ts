@@ -2,30 +2,6 @@ import { createUseStyles } from 'react-jss'
 import { Theme } from '../theme'
 
 export default createUseStyles((theme: Theme) => ({
-  containerBlock: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: '2rem'
-  },
-  containerNotification: {
-    position: 'fixed',
-    zIndex: 3000,
-    bottom: -400,
-    right: '2rem',
-    [theme.breakpoints.down('sm')]: {
-      right: '1rem'
-    },
-    transition: `all 350ms ${theme.transition.easing.easeInOut}`
-  },
-  containerNotificationOpen: {
-    bottom: '2rem',
-    [theme.breakpoints.down('sm')]: {
-      bottom: '1rem'
-    }
-  },
-
   message: {
     borderRadius: 3,
     display: 'flex',

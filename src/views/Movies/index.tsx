@@ -1,7 +1,7 @@
 import React, { FC, useRef, useEffect, ReactNode, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Helmet } from 'react-helmet-async'
-import EventMessage from '../../components/EventMessage'
+import EventMessage, { EventContext } from '../../components/EventMessage'
 
 import Grid from '../../components/Grid'
 import moviesStyle from '../../assets/jss/views/moviesStyle'
@@ -10,6 +10,7 @@ import { ReduxState } from '../../store/rootReducer'
 import { triggerMovies, clearMovies } from '../../store/actions/index'
 import Loading from '../Exception/Loading'
 import { StaticContext } from '../../server/StaticContext'
+import Button from 'components/Button'
 
 type Props = {
   children?: ReactNode
@@ -21,6 +22,7 @@ const Movies: FC<Props> = ({ children, ...props }) => {
   const dispatch = useDispatch()
   const { movies } = useSelector((state: ReduxState) => state.app)
   const staticContext = useContext(StaticContext)
+  const eventContext = useContext(EventContext)
   const willMount = useRef(true)
   if (willMount.current && !process.env.BROWSER) {
     dispatch(triggerMovies('GET_MOVIES'))
@@ -58,6 +60,9 @@ const Movies: FC<Props> = ({ children, ...props }) => {
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
               <h1 className={classes.title}>{title}</h1>
               <h1 className={classes.subtitle}>{description}</h1>
+              <Button onClick={() => eventContext?.addNewEvent({ message: 'Hello World!', event: 'success' })}>
+                Just a notification for fun
+              </Button>
               {movies.error && (
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                   <EventMessage event="error" message={movies.error.message} refresh />
