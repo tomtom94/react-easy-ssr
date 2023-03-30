@@ -1,7 +1,6 @@
-import React, { FC, ReactNode } from 'react'
-
+import React, { FC, useContext, ReactNode } from 'react'
 import { Helmet } from 'react-helmet-async'
-
+import { StaticContext } from '../../server/StaticContext'
 import exceptionPageStyle from '../../assets/jss/views/exceptionPageStyle'
 import ExceptionImageUrl from '../../assets/images/403.svg'
 
@@ -11,6 +10,11 @@ type Props = {
 
 const Exception: FC<Props> = ({ children, ...props }) => {
   const classes = exceptionPageStyle(props)
+  const staticContext = useContext(StaticContext)
+
+  if (!process.env.BROWSER && staticContext) {
+    staticContext.statusCode = 403
+  }
   return (
     <>
       <Helmet>

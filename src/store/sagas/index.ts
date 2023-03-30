@@ -14,7 +14,8 @@ const { movies } = actions
 
 function* fetchEntity(
   entity: ActionDispatcher,
-  apiFn: () => Promise<CallApiResponse>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  apiFn: (...args: any[]) => Promise<CallApiResponse>,
   body: unknown
 ): Generator<PutEffect<ActionDispatcherResponse> | CallEffect<CallApiResponse>, void, CallApiResponse> {
   yield put(entity.request(body))
