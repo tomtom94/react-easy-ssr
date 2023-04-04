@@ -6,8 +6,8 @@ import * as ActionTypes from '../actions'
 interface ActionDispatch {
   type: string
   body: { dispatchKind?: string }
-  response?: SuccessCallApiResponse
-  error?: ErrorCallApiResponse
+  response: SuccessCallApiResponse
+  error: ErrorCallApiResponse
 }
 
 interface MainState {

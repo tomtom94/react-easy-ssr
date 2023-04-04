@@ -42,7 +42,7 @@ const Main = () => {
   )
 }
 
-const clientApp = () => {
+const bootstrapClientApp = () => {
   const { hostname } = window.location
   if (
     process.env.NODE_ENV === 'development' ||
@@ -68,4 +68,4 @@ const clientApp = () => {
   }
 }
 
-clientApp()
+bootstrapClientApp()

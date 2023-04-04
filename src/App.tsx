@@ -10,7 +10,8 @@ import defaultTheme from './assets/jss/theme'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import { EventContextProvider } from './components/EventMessage'
-
+import { ErrorBoundary } from 'react-error-boundary'
+import InternalErrorServer from './views/Exception/500'
 import appStyle from './assets/jss/views/appStyle'
 import appleTouchIcon57 from './assets/images/icons/apple-icon-57x57.png'
 import appleTouchIcon60 from './assets/images/icons/apple-icon-60x60.png'
@@ -34,14 +35,6 @@ library.add(faFacebook, faTwitter, faSpinner, faThumbsUp, faBars, faExclamationT
 type Props = {
   children?: ReactNode
 }
-
-const AppProvider: FC<Props> = ({ children, ...props }) => (
-  <ThemeProvider theme={defaultTheme}>
-    <EventContextProvider>
-      <App />
-    </EventContextProvider>
-  </ThemeProvider>
-)
 
 const App: FC<Props> = ({ children, ...props }) => {
   const classes = appStyle(props)
@@ -97,11 +90,13 @@ const App: FC<Props> = ({ children, ...props }) => {
       <main className={classes.app}>
         <Header />
         <section className={classes.section}>
-          <Routes>
-            {routes.map(({ Component, path }, i) => (
-              <Route path={path} key={i} element={<Component />} />
-            ))}
-          </Routes>
+          <ErrorBoundary fallback={<InternalErrorServer />}>
+            <Routes>
+              {routes.map(({ Component, path }, i) => (
+                <Route path={path} key={i} element={<Component />} />
+              ))}
+            </Routes>
+          </ErrorBoundary>
         </section>
         <Footer />
       </main>
@@ -109,4 +104,11 @@ const App: FC<Props> = ({ children, ...props }) => {
   )
 }
 
+const AppProvider: FC<Props> = ({ children, ...props }) => (
+  <ThemeProvider theme={defaultTheme}>
+    <EventContextProvider>
+      <App />
+    </EventContextProvider>
+  </ThemeProvider>
+)
 export default AppProvider
