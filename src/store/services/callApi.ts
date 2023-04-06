@@ -15,19 +15,19 @@ export default (endpoint: string, params: RequestInit): Promise<CallApiResponse>
         .json()
         .then((json) => ({ json, response }))
         .catch((error) => {
-          Object.assign(error, { message: 'Unexpected reponse from the server', status: 404 })
+          Object.assign(error, { message: 'Internal Server Error', status: 500 })
           return Promise.reject(error)
         })
     })
     .then(({ json, response }) => {
       if (!response.ok) {
-        const error = { message: json.message || 'Internal Server Error', status: response.status }
+        const error = { message: json.message, status: response.status }
         return Promise.reject(error)
       }
       return json
     })
     .then(
       (response) => ({ response }),
-      (error) => ({ error: { status: error.status, message: error.message || 'Something bad happened' } })
+      (error) => ({ error: { status: error.status || 500, message: error.message || 'Internal Server Error' } })
     )
 }
