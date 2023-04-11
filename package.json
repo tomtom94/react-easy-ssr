@@ -57,7 +57,7 @@
     "redux-saga": "^1.2.2",
     "serialize-javascript": "^6.0.0",
     "styled-components": "^5.3.6",
-    "ua-parser-js": "^1.0.2"
+    "ua-parser-js": "^1.0.33"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",
