@@ -4,7 +4,7 @@
   "description": "React easy SSR application",
   "main": "dist/server/index.js",
   "engines": {
-    "node": "16.17.1"
+    "node": ">=16.3.0"
   },
   "repository": {
     "type": "git"

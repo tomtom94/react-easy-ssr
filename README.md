@@ -55,7 +55,7 @@ Node.js version v16.3.0 minimum (because we need to use the [js optional chainin
 nvm use
 ```
 
-it's gonna use the `.nvmrc` file with v16.17.1
+it's gonna use the `.nvmrc` file with v16.20.0
 
 ### Start in dev mode
 
