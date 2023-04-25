@@ -33,7 +33,7 @@
     "@loadable/server": "^5.15.2",
     "@loadable/webpack-plugin": "^5.15.2",
     "@reduxjs/toolkit": "^1.9.3",
-    "@svgr/webpack": "^6.3.1",
+    "@svgr/webpack": "^7.0.0",
     "autoprefixer": "^9.8.8",
     "classnames": "^2.3.1",
     "clean-css": "^4.2.4",
