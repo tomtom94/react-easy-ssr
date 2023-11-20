@@ -35,6 +35,7 @@ jobs:
 
       - run: npm run build
         env:
+          NODE_ENV: 'production'
           BACKEND_BASE_URL: 'https://api.themoviedb.org'
           STATIC_FILES_URL: 'https://reacteasyssrjckf9fbl-reacteasyssrstatic.functions.fnc.fr-par.scw.cloud'
 
