@@ -59,6 +59,12 @@ it's gonna use the `.nvmrc` file with v16.20.0
 
 ### Start in dev mode
 
+Get prepared with the env vars
+
+```sh
+cp .env-development .env
+```
+
 ```npm
 npm install
 ```

@@ -35,7 +35,7 @@ jobs:
 
       - run: npm run build
         env:
-          BACKEND_BASE_URL: ''
+          BACKEND_BASE_URL: 'https://api.themoviedb.org'
           STATIC_FILES_URL: 'https://reacteasyssrjckf9fbl-reacteasyssrstatic.functions.fnc.fr-par.scw.cloud'
 
       - name: Copy past client static files

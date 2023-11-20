@@ -54,15 +54,10 @@ const movies = (state = INITIAL_STATE_MOVIES, action: ActionDispatch) => {
       }
     case ActionTypes.MOVIES.SUCCESS:
       delete copyState.error
-      // eslint-disable-next-line no-case-declarations
-      let data: unknown = []
-      if (action.body.dispatchKind === 'GET_MOVIES') {
-        data = action.response?.results
-      }
       return {
         ...copyState,
         isLoading: false,
-        data
+        ...(action.body.dispatchKind === 'GET_MOVIES' && { data: action.response.results })
       }
     case ActionTypes.MOVIES.FAILURE:
       return {
