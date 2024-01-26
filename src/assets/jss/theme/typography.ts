@@ -26,51 +26,51 @@ export default {
   h1: {
     ...typography,
     fontSize: 60,
-    letterSpacing: -1.1
+    letterSpacing: -0.9
   },
   h2: {
     ...typography,
     fontSize: 48,
-    letterSpacing: -0.9
+    letterSpacing: -0.7
   },
   h3: {
     ...typography,
     fontSize: 40,
-    letterSpacing: -0.6
+    letterSpacing: -0.5
   },
   h4: {
     ...typography,
     fontSize: 34,
-    letterSpacing: -0.4
+    letterSpacing: -0.3
   },
   h5: {
     ...typography,
     fontSize: 26,
-    letterSpacing: -0.3
+    letterSpacing: -0.1
   },
   h6: {
     ...typography,
     fontSize: 22,
-    letterSpacing: -0.2
+    letterSpacing: 0
   },
   subtitle1: {
     ...typography,
     fontSize: 18,
-    letterSpacing: -0.1
+    letterSpacing: 0.05
   },
   subtitle2: {
     ...typography,
     fontSize: 16,
-    letterSpacing: -0.05
+    letterSpacing: 0.1
   },
   body1: {
     ...typography,
     fontSize: 14,
-    letterSpacing: 0
+    letterSpacing: 0.2
   },
   body2: {
     ...typography,
     fontSize: 12,
-    letterSpacing: 0
+    letterSpacing: 0.3
   }
 }
