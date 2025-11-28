@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useContext } from 'react'
+import React, { FC, ReactNode, useContext, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 
 import Grid from '../../components/Grid'
@@ -6,7 +6,8 @@ import moviesStyle from '../../assets/jss/views/moviesStyle'
 
 import Loading from '../Exception/Loading'
 import { StaticContext } from '../../server/StaticContext'
-import { useGetMoviesQuery } from 'store/features/moviesApiSlice'
+import { moviesApiSlice, useGetMoviesQuery } from 'store/features/moviesApiSlice'
+import { useAppDispatch } from 'store/hooks'
 
 type Props = {
   children?: ReactNode
@@ -14,8 +15,15 @@ type Props = {
 
 const Movies: FC<Props> = ({ children, ...props }) => {
   const classes = moviesStyle(props)
+  const dispatch = useAppDispatch()
 
   const { data, error, isLoading, isSuccess, isError } = useGetMoviesQuery(undefined)
+
+  const willMount = useRef(true)
+  if (willMount.current && !!process.env.BROWSER && !isSuccess) {
+    dispatch(moviesApiSlice.util.resetApiState())
+    willMount.current = false
+  }
 
   const staticContext = useContext(StaticContext)
 

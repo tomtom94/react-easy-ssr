@@ -156,10 +156,17 @@ Either you install `material-ui` plus `tailwind` and you make all your css compo
 Let's see how we fetch our data to feed our redux store. You can find this code in the `<Movies />` [component](https://github.com/tomtom94/react-easy-ssr/blob/master/src/views/Movies/index.tsx).
 
 ```react
-const { data, error, isLoading, isSuccess, isError } = useGetMoviesQuery(undefined)
+  const { data, error, isLoading, isSuccess, isError } = useGetMoviesQuery(undefined)
+
+  const willMount = useRef(true)
+  if (willMount.current && !!process.env.BROWSER && !isSuccess) {
+    dispatch(moviesApiSlice.util.resetApiState())
+    willMount.current = false
+  }
 ```
 
-It's gonna be used by either the SSR and CSR, however the second one won't fetch if the first did.
+- 1st part it's a hook which is gonna be used by either the SSR and CSR, however the second one won't fetch if the first did.
+- 2nd part is the most complicated, it is a function executed only on client side which role is to reset the api only once during a certain situation. This reset is been done only once when mounted due to split code side effect. When the app is started, client & server sides are all blind of the pages due to `@loadable/component`, no cache yet for them until they are opened once.
 
 This way your App is able to fetch data on the server & client side independantly.
 

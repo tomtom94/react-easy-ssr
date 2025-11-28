@@ -97,6 +97,7 @@ app.use(async (req: Request, res: Response) => {
     const helmetContext: { helmet: Partial<HelmetServerState> } = { helmet: {} }
     const generateId = createGenerateId()
     const sheets = new SheetsRegistry()
+
     /**
      * Below we are gonna execute all the React hook by doing the first renderToString
      */
@@ -113,6 +114,7 @@ app.use(async (req: Request, res: Response) => {
         {sheet.collectStyles(extractor.collectChunks(jsx(helmetContext)))}
       </JssProvider>
     )
+
     let css = sheets.toString()
     const prefixer = postcss([autoprefixer])
     const cleanCSS = new CleanCSS()
