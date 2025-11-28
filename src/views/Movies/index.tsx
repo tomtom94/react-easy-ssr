@@ -1,13 +1,11 @@
 import React, { FC, ReactNode, useContext } from 'react'
 import { Helmet } from 'react-helmet-async'
-import EventMessage, { EventContext } from '../../components/EventMessage'
 
 import Grid from '../../components/Grid'
 import moviesStyle from '../../assets/jss/views/moviesStyle'
 
 import Loading from '../Exception/Loading'
 import { StaticContext } from '../../server/StaticContext'
-import Button from 'components/Button'
 import { useGetMoviesQuery } from 'store/features/moviesApiSlice'
 
 type Props = {
@@ -20,7 +18,6 @@ const Movies: FC<Props> = ({ children, ...props }) => {
   const { data, error, isLoading, isSuccess, isError } = useGetMoviesQuery(undefined)
 
   const staticContext = useContext(StaticContext)
-  const eventContext = useContext(EventContext)
 
   if (!process.env.BROWSER && staticContext && isError) {
     staticContext.statusCode = 'status' in error && typeof error.status === 'number' ? error.status : 500
@@ -46,21 +43,18 @@ const Movies: FC<Props> = ({ children, ...props }) => {
             <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
               <h1 className={classes.title}>{title}</h1>
               <h1 className={classes.subtitle}>{description}</h1>
-              <Button onClick={() => eventContext?.addNewEvent({ message: 'Hello World!', event: 'success' })}>
-                Just a notification for fun
-              </Button>
               {isError && (
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                   {error && 'data' in error && typeof error.data === 'object' && error.data && 'message' in error.data && (
                     <>
-                      {Array.isArray(error.data.message) ? (
-                        error.data.message.map((message: string, index: number) => (
+                      {Array.isArray((error.data as { message: string | string[] }).message) ? (
+                        (error.data as { message: string[] }).message.map((message: string, index: number) => (
                           <p key={`error-${index}`} className="text-red-500 text-sm">
                             {message}
                           </p>
                         ))
                       ) : (
-                        <p className="text-red-500 text-sm">{error.data.message as string}</p>
+                        <p className="text-red-500 text-sm">{(error.data as { message: string }).message}</p>
                       )}
                     </>
                   )}

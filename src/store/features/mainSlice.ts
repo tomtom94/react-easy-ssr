@@ -21,5 +21,5 @@ export const mainSlice = createSlice({
   selectors: {}
 })
 
-export const {} = mainSlice.actions
-export const {} = mainSlice.selectors
+// export const {} = mainSlice.actions
+// export const {} = mainSlice.selectors
