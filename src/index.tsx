@@ -8,15 +8,13 @@ import { JssProvider, jss } from 'react-jss'
 
 import window from 'global/window'
 import vendorPrefixer from 'jss-plugin-vendor-prefixer'
-import configureStore from './store/configureStore'
+import { makeStore } from './store'
 import App from './App'
-import rootSaga from './store/sagas'
 import { BrowserRouter } from 'react-router-dom'
 
 const preloadedState = window.__PRELOADED_STATE__
 
-const { store, runSaga } = configureStore(preloadedState)
-runSaga(rootSaga)
+const store = makeStore(preloadedState)
 
 jss.use(vendorPrefixer())
 

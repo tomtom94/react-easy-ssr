@@ -1,16 +1,14 @@
-import React, { FC, useRef, useEffect, ReactNode, useContext } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { FC, ReactNode, useContext } from 'react'
 import { Helmet } from 'react-helmet-async'
 import EventMessage, { EventContext } from '../../components/EventMessage'
 
 import Grid from '../../components/Grid'
 import moviesStyle from '../../assets/jss/views/moviesStyle'
 
-import { ReduxState } from '../../store/rootReducer'
-import { triggerMovies, clearMovies } from '../../store/actions/index'
 import Loading from '../Exception/Loading'
 import { StaticContext } from '../../server/StaticContext'
 import Button from 'components/Button'
+import { useGetMoviesQuery } from 'store/features/moviesApiSlice'
 
 type Props = {
   children?: ReactNode
@@ -19,28 +17,16 @@ type Props = {
 const Movies: FC<Props> = ({ children, ...props }) => {
   const classes = moviesStyle(props)
 
-  const dispatch = useDispatch()
-  const { movies } = useSelector((state: ReduxState) => state.app)
+  const { data, error, isLoading, isSuccess, isError } = useGetMoviesQuery(undefined)
+
   const staticContext = useContext(StaticContext)
   const eventContext = useContext(EventContext)
-  const willMount = useRef(true)
-  if (willMount.current && !process.env.BROWSER) {
-    dispatch(triggerMovies('GET_MOVIES'))
-    willMount.current = false
+
+  if (!process.env.BROWSER && staticContext && isError) {
+    staticContext.statusCode = 'status' in error && typeof error.status === 'number' ? error.status : 500
   }
 
-  useEffect(() => {
-    dispatch(triggerMovies('GET_MOVIES'))
-    return () => {
-      dispatch(clearMovies())
-    }
-  }, [dispatch])
-
-  if (!process.env.BROWSER && staticContext && movies.error) {
-    staticContext.statusCode = movies.error.status
-  }
-
-  if (movies.isLoading) {
+  if (isLoading) {
     return <Loading />
   }
 
@@ -63,14 +49,26 @@ const Movies: FC<Props> = ({ children, ...props }) => {
               <Button onClick={() => eventContext?.addNewEvent({ message: 'Hello World!', event: 'success' })}>
                 Just a notification for fun
               </Button>
-              {movies.error && (
+              {isError && (
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                  <EventMessage event="error" message={movies.error.message} refresh />
+                  {error && 'data' in error && typeof error.data === 'object' && error.data && 'message' in error.data && (
+                    <>
+                      {Array.isArray(error.data.message) ? (
+                        error.data.message.map((message: string, index: number) => (
+                          <p key={`error-${index}`} className="text-red-500 text-sm">
+                            {message}
+                          </p>
+                        ))
+                      ) : (
+                        <p className="text-red-500 text-sm">{error.data.message as string}</p>
+                      )}
+                    </>
+                  )}
                 </Grid>
               )}
-              {movies.data.length > 0 && (
+              {isSuccess && data.results.length > 0 && (
                 <ul className={classes.listMovies}>
-                  {movies.data.map((e) => (
+                  {data.results.map((e) => (
                     <li key={e.id}>
                       <div className={classes.movieJacket}>
                         <img src={`https://image.tmdb.org/t/p/original${e.poster_path}`} alt="jacket" />
