@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        name: Check out code
+        name: Checkout code
         with:
           fetch-depth: 0
 

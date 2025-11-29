@@ -12,7 +12,7 @@ Main modules used are `@reduxjs/toolkit`, `@loadable/component`, `react-refresh`
 
 This project is accompanied with a [free and easy to use CI/CD](#Continuous-Integration-and-Continuous-Delivery) with Github Actions and Scaleway.
 
-Check out this app in live [reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud](https://reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud)
+Checkout this app in live [reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud](https://reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud)
 
 ## Table of contents
 
