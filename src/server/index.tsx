@@ -99,21 +99,33 @@ app.use(async (req: Request, res: Response) => {
     const sheets = new SheetsRegistry()
 
     /**
-     * Below we are gonna execute all the React hook by doing the first renderToString
+     * Step 1 we are gonna execute all the React hook by doing the first renderToString.
      */
     renderToString(jsx())
+
     /**
-     * Below you muse wait as much apiSlices as you have in your configureStore
+     * Step 2 you must wait as much apiSlices as you have in your configureStore.
      */
     await Promise.all(store.dispatch(moviesApiSlice.util.getRunningQueriesThunk()))
+
     /**
-     * Finally we are able to render all the html from React with the data inside thanks to this second call to renderToString
+     * Step 3 finally we are able to render all the html from React with the data inside thanks to this second call to renderToString.
      */
     const html = renderToString(
       <JssProvider jss={jss} registry={sheets} generateId={generateId} classNamePrefix="app-">
         {sheet.collectStyles(extractor.collectChunks(jsx(helmetContext)))}
       </JssProvider>
     )
+
+    /**
+     * Step 4 Due to side effect of split code on server side, reset queries stuck in pending status not detected in step 2.
+     * This happens only when the App just started once the first page is opened by the server.
+     * Split code from @loadable/component gets the server blind from the query hooks inside the page.
+     * Hooks would be triggered only in step 3, which is something we don't want because we were waiting for them in step 2.
+     */
+    if (Object.values(store.getState().moviesApi.queries).some((query) => query?.status === 'pending')) {
+      store.dispatch(moviesApiSlice.util.resetApiState())
+    }
 
     let css = sheets.toString()
     const prefixer = postcss([autoprefixer])
