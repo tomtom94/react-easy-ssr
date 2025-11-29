@@ -1,6 +1,6 @@
 # ⚛ Ultra fast React boilerplate App (with SSR)
 
-<img src="https://s1.qwant.com/thumbr/0x0/a/6/0907f0dc9f264507f87bd9e432db837ad058c8e565a07897fd2194c0a0873c/react-logo.png?u=https%3A%2F%2Fdaviseford.com%2Fblog%2Fpublic%2Fimg%2Fthumbnails%2Fmisc%2Freact-logo.png&q=0&b=1&p=0&a=0" width="100" alt="react"> <img src="https://s2.qwant.com/thumbr/0x380/e/6/a169601f165c89b10d94397e1f14ec4ccf40aec54061944b7ea8fb673563a5/1*xQCjgB2DVqhtqGoGw9E6TQ.png?u=https%3A%2F%2Fmiro.medium.com%2Fmax%2F2400%2F1*xQCjgB2DVqhtqGoGw9E6TQ.png&q=0&b=1&p=0&a=0" width="100" alt="webpack"> <img src="https://s2.qwant.com/thumbr/0x0/7/8/a90851441b2db05ae94e2ab8bb05a95330f319896e6589f7fe3f59f91ec669/babel_logo_in_react_js_best_practices_2016-1453212218011.png?u=http%3A%2F%2Fblog-assets.risingstack.com%2F2016%2FJan%2Fbabel_logo_in_react_js_best_practices_2016-1453212218011.png&q=0&b=1&p=0&a=0" width="120" alt="babel"> <img src="https://s1.qwant.com/thumbr/0x0/8/7/13bf8174f749ce452e6efaff7b2da4da691d8a5d5069c35d7b33f2fe80776b/jss-logo-2B9BC9020D-seeklogo.com.png?u=https%3A%2F%2Fseeklogo.com%2Fimages%2FJ%2Fjss-logo-2B9BC9020D-seeklogo.com.png&q=0&b=1&p=0&a=0" width="100" alt="jss"> <img src="https://s1.qwant.com/thumbr/700x0/1/3/fadead1ef131e117581618fe92a6d62d674ab25d68b4f1772e100b69a3ea7a/Redux-Saga-Logo-Landscape.png?u=https%3A%2F%2Fraw.githubusercontent.com%2Fmskims%2Fredux-saga-in-korean%2Fmaster%2Flogo%2F0800%2FRedux-Saga-Logo-Landscape.png&q=0&b=1&p=0&a=0" width="200" alt="jss"> <img src="https://raw.githubusercontent.com/gregberge/loadable-components/master/resources/loadable-components.png" width="100" alt="jss">
+<img src="https://s1.qwant.com/thumbr/0x0/a/6/0907f0dc9f264507f87bd9e432db837ad058c8e565a07897fd2194c0a0873c/react-logo.png?u=https%3A%2F%2Fdaviseford.com%2Fblog%2Fpublic%2Fimg%2Fthumbnails%2Fmisc%2Freact-logo.png&q=0&b=1&p=0&a=0" width="100" alt="react"> <img src="https://s2.qwant.com/thumbr/0x380/e/6/a169601f165c89b10d94397e1f14ec4ccf40aec54061944b7ea8fb673563a5/1*xQCjgB2DVqhtqGoGw9E6TQ.png?u=https%3A%2F%2Fmiro.medium.com%2Fmax%2F2400%2F1*xQCjgB2DVqhtqGoGw9E6TQ.png&q=0&b=1&p=0&a=0" width="100" alt="webpack"> <img src="https://s2.qwant.com/thumbr/0x0/7/8/a90851441b2db05ae94e2ab8bb05a95330f319896e6589f7fe3f59f91ec669/babel_logo_in_react_js_best_practices_2016-1453212218011.png?u=http%3A%2F%2Fblog-assets.risingstack.com%2F2016%2FJan%2Fbabel_logo_in_react_js_best_practices_2016-1453212218011.png&q=0&b=1&p=0&a=0" width="120" alt="babel"> <img src="https://s1.qwant.com/thumbr/0x0/8/7/13bf8174f749ce452e6efaff7b2da4da691d8a5d5069c35d7b33f2fe80776b/jss-logo-2B9BC9020D-seeklogo.com.png?u=https%3A%2F%2Fseeklogo.com%2Fimages%2FJ%2Fjss-logo-2B9BC9020D-seeklogo.com.png&q=0&b=1&p=0&a=0" width="100" alt="jss"> <img src="https://s1.qwant.com/thumbr/474x266/3/7/0509a7fe34d85f91138425088080ea3837a446c9fb0d869440219c333f4f20/OIP.6DMfZHtarN6LsCVFfTwBcgHaEK.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%2Fid%2FOIP.6DMfZHtarN6LsCVFfTwBcgHaEK%3Fpid%3DApi&q=0&b=1&p=0&a=0" width="200" alt="jss"> <img src="https://raw.githubusercontent.com/gregberge/loadable-components/master/resources/loadable-components.png" width="100" alt="jss">
 
 <img src="https://cdn.jsdelivr.net/gh/Readme-Workflows/Readme-Icons@main/icons/gifs/wave.gif" width="15" alt="star github"> Hello, thanks to give me a star for this project.
 
@@ -8,9 +8,9 @@
 
 React App with SSR Server Side Rendering. Webpack 5 installed manually. In dev mode we use live reload thanks to `webpack-dev-middleware` & `webpack-hot-middleware` modules.
 
-Main modules used are `redux-saga`, `loadable-component`, `react-refresh`, `react-jss` and `typescript`.
+Main modules used are `@reduxjs/toolkit`, `@loadable/component`, `react-refresh`, `react-jss` and `typescript`.
 
-<img src="https://gifimage.net/wp-content/uploads/2017/10/new-icon-gif-animation-14.gif" width="25" alt="star github"> [Free and easy to use CI/CD](#Continuous-Integration-and-Continuous-Delivery) with Github Actions and Scaleway.
+This project is accompanied with a [free and easy to use CI/CD](#Continuous-Integration-and-Continuous-Delivery) with Github Actions and Scaleway.
 
 Check out this app in live [reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud](https://reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud)
 
@@ -49,13 +49,13 @@ cd react-easy-ssr
 
 ### Requirements
 
-Node.js version v16.3.0 minimum (because we need to use the [js optional chaining operator](https://node.green/#ES2020)). Hopefully you got `nvm` command already installed (best way to install node), hence just do
+Node.js version v23.5.0 minimum (because we need to use the [js optional chaining operator](https://node.green/#ES2020)). Hopefully you got `nvm` command already installed (best way to install node), hence just do
 
 ```nvm
 nvm use
 ```
 
-it's gonna use the `.nvmrc` file with v16.20.0
+it's gonna use the `.nvmrc` file with v23.5.0
 
 ### Start in dev mode
 
@@ -85,7 +85,7 @@ it's gonna start an hot dev middleware with an express server ;) ready to work `
 npm install
 ```
 
-Write in your server provider the environment variables `BACKEND_BASE_URL`
+Write in your cloud provider the following environment variables `BACKEND_BASE_URL` & `STATIC_FILES_URL`
 
 Run build mode with
 
@@ -101,7 +101,7 @@ Then run in production mode
 npm run start
 ```
 
-;) it's gonna start the only one SSR express server out of the box for internet `http://localhost:3000` or environment port used.
+it's gonna start the only one SSR express server out of the box for internet `http://localhost:3000` or environment port used.
 
 #### With Docker
 
@@ -116,8 +116,6 @@ docker run -p 80:80 react-easy-ssr
 Then open `http://localhost:80`
 
 ## Must know about the app
-
-You better use a good search engine like [Qwant.com](https://qwant.com), don't use Google. please.
 
 ### Continuous Integration and Continuous Delivery
 
@@ -151,29 +149,17 @@ The main rule is we don't use a frontend framework. All components come from whe
 
 Please note we don't use classical CSS style. We use [JSS](https://cssinjs.org/react-jss) (it means js in css). `material-ui` module also uses `react-jss` this is why we didn't installed `material-ui` else it would be stupid to generate twice the `react-jss` stylesheet on the SSR, and inefficiente to make an ultra fast App.
 
-Either you install `material-ui` and you make all your css components with it (which is recommended if you do this for big company), or you get free and install `react-jss` like we did.
+Either you install `material-ui` plus `tailwind` and you make all your css components with it (which is recommended if you do this for big company), or you get free and install `react-jss` like we did.
 
 ### Data-fetching and SSR
 
 Let's see how we fetch our data to feed our redux store. You can find this code in the `<Movies />` [component](https://github.com/tomtom94/react-easy-ssr/blob/master/src/views/Movies/index.tsx).
 
 ```react
-const willMount = useRef(true)
-if (willMount.current && !process.env.BROWSER) {
-  dispatch(triggerMovies('GET_MOVIES'))
-  willMount.current = false
-}
-
-useEffect(() => {
-  dispatch(triggerMovies('GET_MOVIES'))
-  return () => {
-    dispatch(clearMovies())
-  }
-}, [dispatch])
+  const { data, error, isLoading, isSuccess, isError } = useGetMoviesQuery(undefined)
 ```
 
-- 1st part is only for server side, we dispatch the redux action : with `useRef` you can be sure the action won't be triggered multiple times in an infinite loop.
-- 2nd part is only for client side, we dispatch the redux action : but when you trigger this action there is a [redux-saga selector](https://github.com/tomtom94/react-easy-ssr/blob/master/src/store/reducers/selectors.ts) which will check if data hasn't been already fetched during 1st part, if yes no need to fetch again. And we clear the error if there are some before leaving the component.
+It's a hook which is gonna be used by either the SSR and CSR, however the second one won't fetch if the first already did.
 
 This way your App is able to fetch data on the server & client side independantly.
 

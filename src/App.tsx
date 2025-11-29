@@ -9,7 +9,6 @@ import CssBaseline from './components/CssBaseline'
 import defaultTheme from './assets/jss/theme'
 import Footer from './components/Footer'
 import Header from './components/Header'
-import { EventContextProvider } from './components/EventMessage'
 import { ErrorBoundary } from 'react-error-boundary'
 import InternalErrorServer from './views/Exception/500'
 import appStyle from './assets/jss/views/appStyle'
@@ -106,9 +105,7 @@ const App: FC<Props> = ({ children, ...props }) => {
 
 const AppProvider: FC<Props> = ({ children, ...props }) => (
   <ThemeProvider theme={defaultTheme}>
-    <EventContextProvider>
-      <App />
-    </EventContextProvider>
+    <App />
   </ThemeProvider>
 )
 export default AppProvider

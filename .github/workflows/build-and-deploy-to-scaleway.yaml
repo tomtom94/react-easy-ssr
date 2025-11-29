@@ -14,14 +14,14 @@ jobs:
         name: Check out code
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          
+
       - name: Bump version in package.json file
         run: |
           sed -i '0,/"version": "/{s/"version": "\([^#]*\)",/"version": "${{ github.ref_name }}",/}' package.json package-lock.json
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '16.20.0'
+          node-version: '23.5.0'
 
       - run: npm install
 
@@ -91,4 +91,3 @@ jobs:
         uses: wei/curl@v1
         with:
           args: --location --request POST https://api.scaleway.com/containers/v1beta1/regions/fr-par/containers/410315e0-ee07-4d4c-9044-bd7af9055966/deploy --header 'X-Auth-Token:${{ secrets.SCW_SECRET_TOKEN }}' --header 'Content-Type:application/json' --data-raw '{}'
-
