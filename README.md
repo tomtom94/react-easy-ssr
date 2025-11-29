@@ -143,7 +143,7 @@ git commit -m "#patch this is a tiny commit"
 
 ### Components
 
-The main rule is we don't use a frontend framework. All components come from wherever we need it, but we are not stick to one. No need of `material-ui`, no need of `bootstrap` etc... However we are used to copy past source code from them. For example we made a copy past of the wonderfull `material-ui` `<Grid />` which is so much powerful [check it out in this repo](https://github.com/tomtom94/react-easy-ssr/blob/master/src/components/Grid.tsx). We don't use many components that generate their own css stylesheet, because we need to control this carefully in order to make the famous SSR.
+The main rule is we don't use a frontend framework. All components come from wherever we need it, but we are not stick to one. No need of `material-ui`, no need of `bootstrap` etc... We don't use many components that generate their own css stylesheet, because we need to control this carefully in order to make the famous SSR.
 
 `style-components` and `fontawesome` modules are also installed if ever you wanna use it. And yes we care of them for the SSR also.
 
