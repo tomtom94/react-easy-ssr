@@ -1,6 +1,6 @@
 import React from 'react'
 import { StaticRouter } from 'react-router-dom/server'
-import { renderToString } from 'react-dom/server'
+import { renderToPipeableStream, renderToString } from 'react-dom/server'
 import { ChunkExtractor } from '@loadable/server'
 import { Provider } from 'react-redux'
 import path from 'path'
@@ -18,7 +18,6 @@ import { UAParser } from 'ua-parser-js'
 import CleanCSS from 'clean-css'
 import { makeStore, RootState } from '../store'
 import App from '../App'
-import renderFullPage from './renderFullPage'
 import { paths } from '../../scripts/utils'
 import StaticContextProvider from './StaticContext'
 import { moviesApiSlice } from 'store/features/moviesApiSlice'
@@ -109,46 +108,90 @@ app.use(async (req: Request, res: Response) => {
     await Promise.all(store.dispatch(moviesApiSlice.util.getRunningQueriesThunk()))
 
     /**
-     * Step 3 finally we are able to render all the html from React with the data inside thanks to this second call to renderToString.
+     * Step 3 finally we are able to render all the html from React with the data inside thanks to this call to renderToPipeableStream.
      */
-    const html = renderToString(
+    const { pipe, abort } = renderToPipeableStream(
       <JssProvider jss={jss} registry={sheets} generateId={generateId} classNamePrefix="app-">
         {sheet.collectStyles(extractor.collectChunks(jsx(helmetContext)))}
-      </JssProvider>
+      </JssProvider>,
+      {
+        onShellReady() {
+          let css = sheets.toString()
+          const prefixer = postcss([autoprefixer])
+          const cleanCSS = new CleanCSS()
+          const prefixerTreated = prefixer.process(css, { from: undefined })
+          css = prefixerTreated.css
+          css = cleanCSS.minify(css).styles
+
+          let fontAwesomeCss = dom.css()
+          fontAwesomeCss = cleanCSS.minify(fontAwesomeCss).styles
+          const styleTags = sheet.getStyleTags()
+          const { helmet } = helmetContext
+
+          res.status(staticContext.statusCode)
+          res.setHeader('Content-Type', 'text/html')
+          res.write(`<html ${helmet?.htmlAttributes?.toString()}>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="stylesheet" type="text/css" href="${
+      process.env.STATIC_FILES_URL ? `${process.env.STATIC_FILES_URL}/bundle.css` : `/bundle.css`
+    }" />
+    
+    ${helmet?.title?.toString()}
+    ${helmet?.meta?.toString()}
+    ${helmet?.link?.toString()}
+    ${styleTags}
+    <style id="jss-server-side">${css}</style>
+    <style id="fontawesome-server-side">${fontAwesomeCss}</style>
+  </head>
+  <body>
+    <noscript>Sorry, your browser does not support JavaScript!</noscript>
+    <div id="root">`)
+          pipe(res)
+        },
+        onShellError(error) {
+          console.error('Shell error:', error)
+          res.status(500).send('Shell error')
+        },
+        onAllReady() {
+          /**
+           * Step 4 Due to side effect of split code on server side, reset queries stuck in pending status not detected in step 2.
+           * This happens only when the App just started once the first page is opened by the server.
+           * Split code from @loadable/component gets the server blind from the query hooks inside the page.
+           * Hooks would be triggered only in step 3, which is something we don't want because we were waiting for them in step 2.
+           */
+          if (Object.values(store.getState().moviesApi.queries).some((query) => query?.status === 'pending')) {
+            store.dispatch(moviesApiSlice.util.resetApiState())
+          }
+          const scriptTags = extractor.getScriptTags()
+
+          res.write(`</div>
+    <script>window.__PRELOADED_STATE__ = ${serialize(store.getState())}</script>
+    ${scriptTags}
+  </body>
+</html>`)
+          res.end()
+        },
+        onError(error) {
+          console.error('Rendering error:', error)
+          res.status(500).send('Rendering error')
+        }
+      }
     )
 
-    /**
-     * Step 4 Due to side effect of split code on server side, reset queries stuck in pending status not detected in step 2.
-     * This happens only when the App just started once the first page is opened by the server.
-     * Split code from @loadable/component gets the server blind from the query hooks inside the page.
-     * Hooks would be triggered only in step 3, which is something we don't want because we were waiting for them in step 2.
-     */
-    if (Object.values(store.getState().moviesApi.queries).some((query) => query?.status === 'pending')) {
-      store.dispatch(moviesApiSlice.util.resetApiState())
-    }
-
-    let css = sheets.toString()
-    const prefixer = postcss([autoprefixer])
-    const cleanCSS = new CleanCSS()
-    const prefixerTreated = await prefixer.process(css, { from: undefined })
-    css = prefixerTreated.css
-    css = cleanCSS.minify(css).styles
-
-    let fontAwesomeCss = dom.css()
-    fontAwesomeCss = cleanCSS.minify(fontAwesomeCss).styles
-    const styleTags = sheet.getStyleTags()
-    const { helmet } = helmetContext
-    const scriptTags = extractor.getScriptTags()
-
-    res
-      .status(staticContext.statusCode)
-      .send(renderFullPage(html, css, fontAwesomeCss, styleTags, serialize(store.getState()), helmet, scriptTags))
+    setTimeout(() => {
+      abort()
+    }, 10000)
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.message)
+      console.error('Unknown error:', error.message)
       res.status(500).send(error.message)
     } else {
-      console.log('Unknown error')
+      console.error('Unknown error')
       res.status(500).send('Unknown error')
     }
   }
