@@ -21,6 +21,7 @@ import App from '../App'
 import { paths } from '../../scripts/utils'
 import StaticContextProvider from './StaticContext'
 import { moviesApiSlice } from 'store/features/moviesApiSlice'
+import { pageFirstPart, pageSecondPart } from './renderFullPage'
 
 const PORT = process.env.PORT || 3000
 
@@ -130,27 +131,7 @@ app.use(async (req: Request, res: Response) => {
 
           res.status(staticContext.statusCode)
           res.setHeader('Content-Type', 'text/html')
-          res.write(`<html ${helmet?.htmlAttributes?.toString()}>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <link rel="stylesheet" type="text/css" href="${
-      process.env.STATIC_FILES_URL ? `${process.env.STATIC_FILES_URL}/bundle.css` : `/bundle.css`
-    }" />
-    
-    ${helmet?.title?.toString()}
-    ${helmet?.meta?.toString()}
-    ${helmet?.link?.toString()}
-    ${styleTags}
-    <style id="jss-server-side">${css}</style>
-    <style id="fontawesome-server-side">${fontAwesomeCss}</style>
-  </head>
-  <body>
-    <noscript>Sorry, your browser does not support JavaScript!</noscript>
-    <div id="root">`)
+          res.write(pageFirstPart(css, fontAwesomeCss, styleTags, helmet))
           pipe(res)
         },
         onShellError(error) {
@@ -169,11 +150,7 @@ app.use(async (req: Request, res: Response) => {
           }
           const scriptTags = extractor.getScriptTags()
 
-          res.write(`</div>
-    <script>window.__PRELOADED_STATE__ = ${serialize(store.getState())}</script>
-    ${scriptTags}
-  </body>
-</html>`)
+          res.write(pageSecondPart(serialize(store.getState()), scriptTags))
           res.end()
         },
         onError(error) {
