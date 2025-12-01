@@ -12,7 +12,7 @@ Main modules used are `@reduxjs/toolkit`, `@loadable/component`, `react-refresh`
 
 This project is accompanied with a [free and easy to use CI/CD](#Continuous-Integration-and-Continuous-Delivery) with Github Actions and Scaleway.
 
-Checkout this app in live [reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud](https://reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud)
+Checkout this app in live [https://reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud](https://reacteasyssrjckf9fbl-reacteasyssrfront.functions.fnc.fr-par.scw.cloud) (this is a free sleepy server, around 20 seconds to wake up)
 
 ## Table of contents
 
@@ -159,9 +159,46 @@ Let's see how we fetch our data to feed our redux store. You can find this code 
   const { data, error, isLoading, isSuccess, isError } = useGetMoviesQuery(undefined)
 ```
 
-It's a hook which is gonna be used by either the SSR and CSR, however the second one won't fetch if the first already did.
+Its hook is gonna be used by either the SSR and CSR, however the second one won't fetch if the first already did.
 
 This way your App is able to fetch data on the server & client side independantly.
+
+Let's see how it's been done in your express [server](https://github.com/tomtom94/react-easy-ssr/blob/master/src/server/index.tsx).
+
+```node
+/**
+ * Step 1 we are gonna execute all the React hook by doing the first renderToString.
+ */
+renderToString(jsx())
+
+/**
+ * Step 2 you must wait as much apiSlices as you have in your configureStore.
+ */
+await Promise.all(store.dispatch(moviesApiSlice.util.getRunningQueriesThunk()))
+
+/**
+ * Step 3 finally we are able to render all the html from React with the data inside thanks to this call to renderToPipeableStream.
+ */
+const { pipe, abort } = renderToPipeableStream(
+  <JssProvider jss={jss} registry={sheets} generateId={generateId} classNamePrefix="app-">
+    {sheet.collectStyles(extractor.collectChunks(jsx(helmetContext)))}
+  </JssProvider>,
+  {
+    onShellReady() {
+      ...
+    },
+    onShellError(error) {
+      ...
+    },
+    onAllReady() {
+      ...
+    },
+    onError(error) {
+      ...
+    }
+  }
+)
+```
 
 ### ES6 Imports possible in JSX
 
