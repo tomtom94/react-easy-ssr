@@ -1,13 +1,10 @@
 import { HelmetServerState } from 'react-helmet-async'
 
-const renderFullPage = (
-  html: string,
+export const pageFirstPart = (
   css: string,
   fontAwesomeCss: string,
   styleTags: string,
-  store: string,
-  helmet: Partial<HelmetServerState>,
-  scriptTags: string
+  helmet: Partial<HelmetServerState>
 ): string => `<!DOCTYPE html>
 <html ${helmet?.htmlAttributes?.toString()}>
   <head>
@@ -29,10 +26,10 @@ const renderFullPage = (
   </head>
   <body>
     <noscript>Sorry, your browser does not support JavaScript!</noscript>
-    <div id="root">${html}</div>
+    <div id="root">`
+
+export const pageSecondPart = (store: string, scriptTags: string): string => `</div>
     <script>window.__PRELOADED_STATE__ = ${store}</script>
     ${scriptTags}
   </body>
 </html>`
-
-export default renderFullPage
