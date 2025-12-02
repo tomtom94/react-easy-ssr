@@ -82,7 +82,7 @@ app.use(async (req: Request, res: Response) => {
     const sheet = new ServerStyleSheet()
     const staticContext = { statusCode: 200 }
 
-    const jsx = (helmetContext = { helmet: {} }) => (
+    const jsx = (helmetContext = {}) => (
       <StaticContextProvider staticContext={staticContext}>
         <StaticRouter location={req.url}>
           <Provider store={store}>
@@ -94,7 +94,7 @@ app.use(async (req: Request, res: Response) => {
       </StaticContextProvider>
     )
 
-    const helmetContext: { helmet: Partial<HelmetServerState> } = { helmet: {} }
+    const helmetContext: { helmet?: HelmetServerState } = {}
     const generateId = createGenerateId()
     const sheets = new SheetsRegistry()
 

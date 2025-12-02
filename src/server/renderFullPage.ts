@@ -4,7 +4,7 @@ export const pageFirstPart = (
   css: string,
   fontAwesomeCss: string,
   styleTags: string,
-  helmet: Partial<HelmetServerState>
+  helmet?: HelmetServerState
 ): string => `<!DOCTYPE html>
 <html ${helmet?.htmlAttributes?.toString()}>
   <head>
