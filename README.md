@@ -119,9 +119,9 @@ Then open `http://localhost:80`
 
 ### Components
 
-The main rule is we don't use a frontend framework. All components come from wherever we need it, but we are not stick to one. No `material-ui` and no `bootstrap` installed etc...
+The main rule is we don't use a frontend framework. All components come from wherever we need them, but we are not limited to just one source. No `material-ui` and no `bootstrap` installed etc...
 
-`react-jss`, `style-components` and `fontawesome` modules are installed if ever you wanna use it.
+`react-jss`, `style-components` and `fontawesome` modules are installed if ever you wanna use them.
 
 The main goal is to care of them during the SSR in order to avoid a FOUC (Flash Of Unstyled Components)
 
@@ -129,7 +129,7 @@ Please note we don't use classical CSS style, we use [JSS](https://cssinjs.org/r
 
 Either you install `material-ui` plus `tailwind` and you make all your css components with it (which is recommended if you do this for big company), or you get free and just install `react-jss` like we did.
 
-Let's see how we manage it on our client side entry point [index.tsx](https://github.com/tomtom94/react-easy-ssr/blob/master/src/index.tsx).
+Let's see how we manage it in our client side entry point [index.tsx](https://github.com/tomtom94/react-easy-ssr/blob/master/src/index.tsx).
 
 ```React
 useEffect(() => {
