@@ -24,11 +24,11 @@ Checkout this app in live [https://reacteasyssrjckf9fbl-reacteasyssrfront.functi
     - [With Node.js](#with-nodejs)
     - [With Docker](#with-docker)
 - [Must know about the app](#must-know-about-the-app)
-  - [Continuous Integration and Continuous Delivery](#continuous-integration-and-continuous-delivery)
-  - [Checks to do sometimes](#checks-to-do-sometimes)
   - [Components](#components)
   - [Data-fetching and SSR](#data-fetching-and-ssr)
   - [ES6 Imports possible in JSX](#es6-imports-possible-in-jsx)
+  - [Continuous Integration and Continuous Delivery](#continuous-integration-and-continuous-delivery)
+  - [Checks to do sometimes](#checks-to-do-sometimes)
 - [Notes](#notes)
 
 ## Motivations
@@ -117,46 +117,41 @@ Then open `http://localhost:80`
 
 ## Must know about the app
 
-### Continuous Integration and Continuous Delivery
-
-When pushing or merging on master branch, you can trigger Github Actions with a commit message that includes `#major`, `#minor` or `#patch`.
-
-Example of commit message in order to start a deployment :
-
-```git
-git commit -m "#major this is a big commit"
-```
-
-```git
-git commit -m "#minor this is a medium commit"
-```
-
-```git
-git commit -m "#patch this is a tiny commit"
-```
-
-### Checks to do sometimes
-
-- Check typescript `npm run tsc`
-- Check eslint `npm run lint`
-- Check prettier `npm run prettier`
-
 ### Components
 
-The main rule is we don't use a frontend framework. All components come from wherever we need it, but we are not stick to one. No need of `material-ui`, no need of `bootstrap` etc... We don't use many components that generate their own css stylesheet, because we need to control this carefully in order to make the famous SSR.
+The main rule is we don't use a frontend framework. All components come from wherever we need it, but we are not stick to one. No `material-ui` and no `bootstrap` installed etc...
 
-`style-components` and `fontawesome` modules are also installed if ever you wanna use it. And yes we care of them for the SSR also.
+`react-jss`, `style-components` and `fontawesome` modules are installed if ever you wanna use it.
 
-Please note we don't use classical CSS style. We use [JSS](https://cssinjs.org/react-jss) (it means js in css). `material-ui` module also uses `react-jss` this is why we didn't installed `material-ui` else it would be stupid to generate twice the `react-jss` stylesheet on the SSR, and inefficiente to make an ultra fast App.
+The main goal is to care of them during the SSR in order to avoid a FOUC (Flash Of Unstyled Components)
 
-Either you install `material-ui` plus `tailwind` and you make all your css components with it (which is recommended if you do this for big company), or you get free and install `react-jss` like we did.
+Please note we don't use classical CSS style, we use [JSS](https://cssinjs.org/react-jss) (it means js in css). `material-ui` module also uses `react-jss` this is why we didn't installed `material-ui` else it would be stupid to generate twice the `react-jss` stylesheet on the SSR, and inefficiente to make an ultra fast App.
+
+Either you install `material-ui` plus `tailwind` and you make all your css components with it (which is recommended if you do this for big company), or you get free and just install `react-jss` like we did.
+
+Let's see how we manage it on our client side entry point [index.tsx](https://github.com/tomtom94/react-easy-ssr/blob/master/src/index.tsx).
+
+```React
+useEffect(() => {
+  const jssStyles = document.querySelector('#jss-server-side')
+  if (jssStyles?.parentNode) {
+    jssStyles.parentNode.removeChild(jssStyles)
+  }
+  const fontAwesomeCssStyles = document.querySelector('#fontawesome-server-side')
+  if (fontAwesomeCssStyles?.parentNode) {
+    fontAwesomeCssStyles.parentNode.removeChild(fontAwesomeCssStyles)
+  }
+}, [])
+```
+
+We simply kill them from the DOM, no need of them once the server page is displayed.
 
 ### Data-fetching and SSR
 
 Let's see how we fetch our data to feed our redux store. You can find this code in the `<Movies />` [component](https://github.com/tomtom94/react-easy-ssr/blob/master/src/views/Movies/index.tsx).
 
 ```react
-  const { data, error, isLoading, isSuccess, isError } = useGetMoviesQuery(undefined)
+const { data, error, isLoading, isSuccess, isError } = useGetMoviesQuery(undefined)
 ```
 
 Its hook is gonna be used by either the SSR and CSR, however the second one won't fetch if the first already did.
@@ -210,6 +205,30 @@ Webpack setup only allows us to import files with ES6 in type
 - .css (remember `react-jss` generates its own stylesheet via its own plugins, not via webpack loaders)
 
 You can add more Webpack `loader` to your project...
+
+### Continuous Integration and Continuous Delivery
+
+When pushing or merging on master branch, you can trigger Github Actions with a commit message that includes `#major`, `#minor` or `#patch`.
+
+Example of commit message in order to start a deployment :
+
+```git
+git commit -m "#major this is a big commit"
+```
+
+```git
+git commit -m "#minor this is a medium commit"
+```
+
+```git
+git commit -m "#patch this is a tiny commit"
+```
+
+### Checks to do sometimes
+
+- Check typescript `npm run tsc`
+- Check eslint `npm run lint`
+- Check prettier `npm run prettier`
 
 ## Notes
 

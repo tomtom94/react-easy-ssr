@@ -20,8 +20,7 @@
     "dev": "node scripts/dev.js",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "tsc": "tsc",
-    "prettier": "prettier --check \"**/*.ts*\" \"**/*.js*\"",
-    "install:clean": "rm -rf node_modules/ && rm -rf dist/ && rm -rf package-lock.json && npm install"
+    "prettier": "prettier --check \"**/*.ts*\" \"**/*.js*\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -44,19 +43,18 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "global": "^4.4.0",
-    "isomorphic-fetch": "^3.0.0",
     "jss-plugin-vendor-prefixer": "^10.9.0",
     "postcss": "^7.0.39",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.3",
-    "react-helmet-async": "^1.3.0",
+    "react-helmet-async": "^2.0.5",
     "react-jss": "^10.9.0",
     "react-redux": "^9.2.0",
     "react-router": "^6.9.0",
     "react-router-dom": "^6.9.0",
     "serialize-javascript": "^6.0.0",
-    "styled-components": "^5.3.6",
+    "styled-components": "^6.1.19",
     "ua-parser-js": "^1.0.33"
   },
   "devDependencies": {
@@ -75,9 +73,7 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@types/react-router-dom": "^5.3.3",
-    "@types/redux-logger": "^3.0.9",
     "@types/serialize-javascript": "^5.0.2",
-    "@types/styled-components": "^4.4.0",
     "@types/ua-parser-js": "^0.7.36",
     "@types/webpack-env": "^1.18.0",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
