@@ -22,6 +22,7 @@ import { paths } from '../../scripts/utils'
 import StaticContextProvider from './StaticContext'
 import { moviesApiSlice } from 'store/features/moviesApiSlice'
 import { pageFirstPart, pageSecondPart } from './renderFullPage'
+import indexRoutes from 'views/routes'
 
 const PORT = process.env.PORT || 3000
 
@@ -41,16 +42,23 @@ if (process.env.NODE_ENV === 'production') {
 
 if (process.env.NODE_ENV === 'development' || (!process.env.STATIC_FILES_URL && process.env.NODE_ENV === 'production')) {
   /**
-   * This middleware is only used in development mode
-   * In production mode we separate static files from the main Express.js frontend server
-   * By separating them, you discharge tensions on this Express.js frontend server
-   * It now depends what kind of router you are using, Nginx my favorite, Traefik. The best
-   * thing to do is to create a domain alias static, and make a CNAME rediction to it, like
-   * for example https://static.mywebsite.com/15.bundle-832a294529dcad5060bd.js
-   * and now the static bundle file 15.bundle-832a294529dcad5060bd.js is served.
+   * This middleware is only used in development mode.
+   * In production mode, we separate static files from the main Express.js frontend server.
+   * By separating them, you reduce the load on this Express.js frontend server.
+   * It now depends on what kind of router you are using—Nginx (my favorite), Traefik, etc.
+   * The best thing to do is to create a domain alias (e.g., static) and set up a CNAME record pointing to it,
+   * like https://static.mywebsite.com/15.bundle-832a294529dcad5060bd.js.
+   * Now, the static bundle file 15.bundle-832a294529dcad5060bd.js is served directly.
    */
   app.use(paths.publicPath, express.static(path.join(paths.clientBuild, paths.publicPath)))
 }
+
+const extractor = new ChunkExtractor({
+  statsFile: path.join(paths.clientBuild, paths.publicPath, 'loadable-stats.json'),
+  entrypoints: ['bundle']
+})
+
+indexRoutes.forEach((indexRoute) => indexRoute.Component.preload()) // avoid side effect due to split code on server side
 
 app.use(async (req: Request, res: Response) => {
   try {
@@ -74,10 +82,6 @@ app.use(async (req: Request, res: Response) => {
       }
     }
 
-    const extractor = new ChunkExtractor({
-      statsFile: path.join(paths.clientBuild, paths.publicPath, 'loadable-stats.json'),
-      entrypoints: ['bundle']
-    })
     const store = makeStore(initialState)
     const sheet = new ServerStyleSheet()
     const staticContext = { statusCode: 200 }
@@ -99,17 +103,17 @@ app.use(async (req: Request, res: Response) => {
     const sheets = new SheetsRegistry()
 
     /**
-     * Step 1 we are gonna execute all the React hook by doing the first renderToString.
+     * Step 1 trigger all React hooks during the initial renderToString call.
      */
     renderToString(jsx())
 
     /**
-     * Step 2 you must wait as much apiSlices as you have in your configureStore.
+     * Step 2 wait for as many apiSlices as are configured in your store.
      */
     await Promise.all(store.dispatch(moviesApiSlice.util.getRunningQueriesThunk()))
 
     /**
-     * Step 3 finally we are able to render all the html from React with the data inside thanks to this call to renderToPipeableStream.
+     * Step 3 render all the HTML from React with the populated data using renderToPipeableStream.
      */
     const { pipe, abort } = renderToPipeableStream(
       <JssProvider jss={jss} registry={sheets} generateId={generateId} classNamePrefix="app-">
@@ -139,15 +143,6 @@ app.use(async (req: Request, res: Response) => {
           res.status(500).send('Shell error')
         },
         onAllReady() {
-          /**
-           * Step 4 Due to side effect of split code on server side, reset queries stuck in pending status not detected in step 2.
-           * This happens only when the App just started once the first page is opened by the server.
-           * Split code from @loadable/component gets the server blind from the query hooks inside the page.
-           * Hooks would be triggered only in step 3, which is something we don't want because we were waiting for them in step 2.
-           */
-          if (Object.values(store.getState().moviesApi.queries).some((query) => query?.status === 'pending')) {
-            store.dispatch(moviesApiSlice.util.resetApiState())
-          }
           const scriptTags = extractor.getScriptTags()
 
           res.write(pageSecondPart(serialize(store.getState()), scriptTags))
