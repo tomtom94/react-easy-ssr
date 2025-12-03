@@ -3,13 +3,13 @@ FROM node:23.5.0-alpine
 USER root
 
 RUN mkdir -p /usr/src/app
-
 WORKDIR /usr/src/app
 
-ENV NPM_CONFIG_LOGLEVEL warn
-ENV PORT 80
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
 
-RUN apk add --update npm
+ENV NPM_CONFIG_LOGLEVEL=warn
+ENV PORT=80
 
 COPY . .
 
