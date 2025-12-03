@@ -33,7 +33,9 @@ Checkout this app in live [https://reacteasyssrjckf9fbl-reacteasyssrfront.functi
 
 ## Motivations
 
-All this project is turned about SSR Server Side Rendering. And this is not an easy task. This boilerplate repository allows to overcome this work.
+This project is about Server-Side Rendering (SSR). Building an isomorphic application that runs on both the server and the client is not an easy task. This boilerplate repository helps simplify and streamline that process.
+
+<img src="illustration-SSR.png" width="auto" alt="jss">
 
 ## Getting started
 
