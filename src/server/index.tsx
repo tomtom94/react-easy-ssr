@@ -5,7 +5,6 @@ import { ChunkExtractor } from '@loadable/server'
 import { Provider } from 'react-redux'
 import path from 'path'
 import compression from 'compression'
-import cors from 'cors'
 import { HelmetProvider, HelmetServerState } from 'react-helmet-async'
 import express, { Request, Response } from 'express'
 import { dom } from '@fortawesome/fontawesome-svg-core'
@@ -30,7 +29,7 @@ const app = express()
 
 app.enable('trust proxy')
 
-app.use(cors())
+app.disable('x-powered-by')
 
 app.use(compression())
 
