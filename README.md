@@ -156,25 +156,25 @@ Let's see how we fetch our data to feed our redux store. You can find this code 
 const { data, error, isLoading, isSuccess, isError } = useGetMoviesQuery(undefined)
 ```
 
-Its hook is gonna be used by either the SSR and CSR, however the second one won't fetch if the first already did.
+Its hook is gonna be used by either the SSR or CSR, however the second one won't fetch if the first already did.
 
-This way your App is able to fetch data on the server & client side independantly.
+This way our App is able to fetch data on the server & client side independantly.
 
-Let's see how it's been done in your express [server](https://github.com/tomtom94/react-easy-ssr/blob/master/src/server/index.tsx).
+Let's see how it's been done in our express [server](https://github.com/tomtom94/react-easy-ssr/blob/master/src/server/index.tsx).
 
 ```node
 /**
- * Step 1 we are gonna execute all the React hook by doing the first renderToString.
+ * Step 1 trigger all React hooks during the initial renderToString call.
  */
 renderToString(jsx())
 
 /**
- * Step 2 you must wait as much apiSlices as you have in your configureStore.
+ * Step 2 wait for as many apiSlices as are configured in your store.
  */
 await Promise.all(store.dispatch(moviesApiSlice.util.getRunningQueriesThunk()))
 
 /**
- * Step 3 finally we are able to render all the html from React with the data inside thanks to this call to renderToPipeableStream.
+ * Step 3 render all the HTML from React with the populated data using renderToPipeableStream.
  */
 const { pipe, abort } = renderToPipeableStream(
   <JssProvider jss={jss} registry={sheets} generateId={generateId} classNamePrefix="app-">
