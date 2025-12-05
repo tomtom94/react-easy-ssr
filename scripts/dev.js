@@ -5,15 +5,12 @@ const express = require('express')
 const webpackDevMiddleware = require('webpack-dev-middleware')
 const webpackHotMiddleware = require('webpack-hot-middleware')
 const webpackConfig = require('../webpack')('development')
-const cors = require('cors')
 
 const { compilerListener, paths, compilation } = require('./utils')
 
 const PORT = 3001
 
-const app = express()
-
-const start = async () => {
+const dev = async () => {
   try {
     rimraf.sync(paths.dist)
 
@@ -30,7 +27,7 @@ const start = async () => {
     const clientCompiler = multiCompiler.compilers.find((compiler) => compiler.options.target === 'web')
     const serverCompiler = multiCompiler.compilers.find((compiler) => compiler.options.target === 'node')
 
-    app.use(cors())
+    const app = express()
 
     app.use(
       webpackDevMiddleware(clientCompiler, {
@@ -88,4 +85,4 @@ const start = async () => {
   }
 }
 
-start()
+dev()
