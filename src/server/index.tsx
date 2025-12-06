@@ -15,12 +15,13 @@ import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 import { UAParser } from 'ua-parser-js'
 import CleanCSS from 'clean-css'
-import { apiSlices, makeStore, RootState } from '../store'
+import { makeStore, RootState } from '../store'
 import App from '../App'
 import { paths } from '../../scripts/utils'
 import StaticContextProvider from './StaticContext'
 import { pageFirstPart, pageSecondPart } from './renderFullPage'
 import indexRoutes from 'views/routes'
+import { apiSlices } from 'store/reducers'
 
 const PORT = process.env.PORT || 3000
 

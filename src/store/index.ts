@@ -1,21 +1,27 @@
 import type { Action, ThunkAction } from '@reduxjs/toolkit'
-import { combineSlices, configureStore } from '@reduxjs/toolkit'
-import { mainSlice } from './features/mainSlice'
-import { moviesApiSlice } from './features/moviesApiSlice'
+import { configureStore } from '@reduxjs/toolkit'
+import rootReducer, { apiSlices } from './reducers'
+import loggerMiddleware from './features/logger'
 
-export const apiSlices = [moviesApiSlice]
-
-const rootReducer = combineSlices(mainSlice, ...apiSlices)
 export type RootState = ReturnType<typeof rootReducer>
 
 export const makeStore = (preloadedState?: RootState) => {
-  return configureStore({
+  const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => {
-      return getDefaultMiddleware().concat(apiSlices.map((apiSlice) => apiSlice.middleware))
+      return getDefaultMiddleware().concat([
+        ...apiSlices.map((apiSlice) => apiSlice.middleware),
+        ...(process.env.NODE_ENV === 'development' ? [loggerMiddleware] : [])
+      ])
     },
     preloadedState
   })
+
+  if (process.env.NODE_ENV === 'development' && module.hot) {
+    module.hot.accept('./reducers', () => store.replaceReducer(rootReducer))
+  }
+
+  return store
 }
 
 export type AppStore = ReturnType<typeof makeStore>
