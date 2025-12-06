@@ -3,14 +3,16 @@ import { combineSlices, configureStore } from '@reduxjs/toolkit'
 import { mainSlice } from './features/mainSlice'
 import { moviesApiSlice } from './features/moviesApiSlice'
 
-const rootReducer = combineSlices(mainSlice, moviesApiSlice)
+export const apiSlices = [moviesApiSlice]
+
+const rootReducer = combineSlices(mainSlice, ...apiSlices)
 export type RootState = ReturnType<typeof rootReducer>
 
 export const makeStore = (preloadedState?: RootState) => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => {
-      return getDefaultMiddleware().concat(moviesApiSlice.middleware)
+      return getDefaultMiddleware().concat(apiSlices.map((apiSlice) => apiSlice.middleware))
     },
     preloadedState
   })

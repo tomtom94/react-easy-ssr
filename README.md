@@ -181,7 +181,7 @@ renderToString(jsx())
 /**
  * Step 2 wait for as many apiSlices as are configured in your store.
  */
-await Promise.all(store.dispatch(moviesApiSlice.util.getRunningQueriesThunk()))
+await Promise.all(apiSlices.flatMap((apiSlice) => store.dispatch(apiSlice.util.getRunningQueriesThunk())))
 
 /**
  * Step 3 render all the HTML from React with the populated data using renderToPipeableStream.

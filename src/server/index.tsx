@@ -15,7 +15,7 @@ import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 import { UAParser } from 'ua-parser-js'
 import CleanCSS from 'clean-css'
-import { makeStore, RootState } from '../store'
+import { apiSlices, makeStore, RootState } from '../store'
 import App from '../App'
 import { paths } from '../../scripts/utils'
 import StaticContextProvider from './StaticContext'
@@ -109,7 +109,7 @@ app.use(async (req: Request, res: Response) => {
     /**
      * Step 2 wait for as many apiSlices as are configured in your store.
      */
-    await Promise.all(store.dispatch(moviesApiSlice.util.getRunningQueriesThunk()))
+    await Promise.all(apiSlices.flatMap((apiSlice) => store.dispatch(apiSlice.util.getRunningQueriesThunk())))
 
     /**
      * Step 3 render all the HTML from React with the populated data using renderToPipeableStream.
