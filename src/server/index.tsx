@@ -19,7 +19,6 @@ import { apiSlices, makeStore, RootState } from '../store'
 import App from '../App'
 import { paths } from '../../scripts/utils'
 import StaticContextProvider from './StaticContext'
-import { moviesApiSlice } from 'store/features/moviesApiSlice'
 import { pageFirstPart, pageSecondPart } from './renderFullPage'
 import indexRoutes from 'views/routes'
 
