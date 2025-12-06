@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet-async'
 
 import Grid from '../../components/Grid'
 import homeStyle from '../../assets/jss/views/homeStyle'
+import { useAppDispatch, useAppSelector } from 'store/hooks'
+import { selectTimezone, setTimezone } from 'store/features/mainSlice'
 
 type Props = {
   children?: ReactNode
@@ -10,9 +12,13 @@ type Props = {
 
 const Home: FC<Props> = ({ children, ...props }) => {
   const classes = homeStyle(props)
+  const dispatch = useAppDispatch()
+  const timezone = useAppSelector(selectTimezone)
 
   const title = 'Home page'
   const description = 'Welcome'
+
+  const allowedTimezones = [...new Set([timezone, 'Europe/Paris', 'Asia/Tokyo', 'America/New_York'])]
 
   return (
     <>
@@ -29,6 +35,18 @@ const Home: FC<Props> = ({ children, ...props }) => {
               <h1 className={classes.subtitle}>{description}</h1>
               <div className={classes.page}>
                 <p>Thanks to give me a Github star for this project.</p>
+                <br />
+                <select
+                  name="timezone"
+                  value={timezone || ''}
+                  onChange={(event) => dispatch(setTimezone({ timezone: event.target.value }))}
+                >
+                  {allowedTimezones.map((allowedTimezone) => (
+                    <option key={allowedTimezone} value={allowedTimezone || ''}>
+                      {allowedTimezone}
+                    </option>
+                  ))}
+                </select>
               </div>
             </Grid>
           </Grid>

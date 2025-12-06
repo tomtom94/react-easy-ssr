@@ -17,9 +17,16 @@ export const initialState: InitialState = {
 export const mainSlice = createSlice({
   name: 'main',
   initialState,
-  reducers: {},
-  selectors: {}
+  reducers: {
+    setTimezone: (state, action) => {
+      const { timezone } = action.payload
+      state.timezone = timezone
+    }
+  },
+  selectors: {
+    selectTimezone: (state) => state.timezone
+  }
 })
 
-// export const {} = mainSlice.actions
-// export const {} = mainSlice.selectors
+export const { setTimezone } = mainSlice.actions
+export const { selectTimezone } = mainSlice.selectors
